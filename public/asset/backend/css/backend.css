@@ -1,0 +1,18 @@
+.translate-x-negative-full {
+    --tw-translate-x: -100%!important;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.transition-transform {
+    transition-property: transform;
+    transition-timing-function: ease-out;
+    transition-duration: 750ms!important;}
+
+
+
+    html, body {
+        width: 100%;
+        height: 100vh;
+        font-family: 'Cairo', sans-serif!important;
+       font-weight: 700!important;
+    }
