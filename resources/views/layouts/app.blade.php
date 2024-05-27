@@ -40,7 +40,7 @@
 
         <link rel="stylesheet" href="{{ asset('asset/backend/css/backend.css') }}"/>
 
-
+{{-- @livewireStyles --}}
 
     </head>
     <body class="bg-gray-50 dark:bg-gray-800">
@@ -63,7 +63,7 @@
 
 
 
-
+{{-- @livewireScripts --}}
 
 
     </body>
@@ -126,28 +126,27 @@
     });
     </script>
 
-
-
-<script data-navigate-once>
-
-
-    document.addEventListener('livewire:navigated', () => {
-
-
-        initFlowbite();
-
-            });
-
-
-    </script>
-
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-
+<script  >
+document.addEventListener("DOMContentLoaded", function () {
     initFlowbite();
 
 });
 
-</script>
+
+
+
+            document.addEventListener('livewire:navigated', () => {
+
+
+                initFlowbite();
+
+
+                    },{ once: true });
+
+
+            </script>
+
+
+
+
 </html>

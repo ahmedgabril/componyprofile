@@ -2,6 +2,8 @@
 
 namespace App\Livewire;
 
+
+use Livewire\Attributes\Lazy;
 use Livewire\Component;
 use App\Models\catogery;
 use Livewire\Attributes\On;
@@ -26,12 +28,17 @@ public $name_en;
 public $paginate = 10;
 public $name_ar;
 
-#[Url(except: '',keep: true,history: true)]
+#[Url(except: ' ',keep: true,history: true)]
 public $search = '';
 public function updatingSearch()
 {
     $this->resetPage();
+
 }
+
+
+
+
 // public function placeholder()
 // {
 
@@ -56,7 +63,7 @@ public function rules()
 
 
             'catogeries'=> catogery::where('name->en', 'like', '%'.$this->search.'%')
-            ->orWhere('name->ar','like', '%'.$this->search.'%')
+
             -> orderBy('id', $this->sortdir)->paginate($this->paginate),
 
 
@@ -74,16 +81,16 @@ public function rules()
                'ar' => $this->name_ar
             ],
         ]);
-
+        $this->resetvalue();
         $this->dispatch('categoryAdded'); // Emit an event for closing the modal
 
-        $this->reset();
+
     }
 
 
-
+                #[On('editcatogery')]
         public function editcatogery($catogeryid) {
-            $this->catogery_id =$catogeryid;
+            $this->catogery_id = $catogeryid;
             $getcatogery = catogery::find($catogeryid);
 
 
@@ -111,28 +118,42 @@ public function rules()
             $getres->update([
                 'name' => [
                     'en' => $this->name_en,
-                    'nl' =>$this->name_ar
+                    'ar' =>$this->name_ar
                 ],
             ]);
-
+            $this->dispatch('close-modal','handelcat');
             $this->dispatch('catogery-updated');
 
             }
 
         #[On('confirmdel')]
-        public function confirmdel($categoryId) {
+        public function confirmdel($category_id) {
 
 
-      $delcat = catogery::find($categoryId);
+
+
+      $delcat = catogery::find($category_id);
       $delcat->delete();
 
-$this->dispatch('catogerydeleted');
+   $this->dispatch('catogerydeleted');
         }
 
-    public function deleteconfirm($id) {
+    public function deleteconfirm($catid) {
 
-        $this->dispatch('deletecat', $id);
+
+
+        $this->dispatch('deletecat', $catid);
 
 
     }
+
+public function resetvalue() {
+
+
+
+ $this->resetValidation();
+ $this->resetErrorBag();
+$this->name_ar = '';
+$this->name_en = '';
+}
 }

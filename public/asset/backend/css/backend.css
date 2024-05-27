@@ -6,7 +6,7 @@
 .transition-transform {
     transition-property: transform;
     transition-timing-function: ease-out;
-    transition-duration: 750ms!important;}
+    transition-duration: 350ms!important;}
 
 
 

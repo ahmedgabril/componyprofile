@@ -50,7 +50,7 @@ return [
     |
     */
 
-    'lazy_placeholder' =>  'components.placeholder' ,
+    'lazy_placeholder' => null ,
 
     /*
     |---------------------------------------------------------------------------

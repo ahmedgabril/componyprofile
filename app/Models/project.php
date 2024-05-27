@@ -10,6 +10,6 @@ class project extends Model
 {
     use HasFactory;
     use HasTranslations;
-
+public  $guarded  = [];
     public $translatable = ['name','title','shortdes','des',];
 }

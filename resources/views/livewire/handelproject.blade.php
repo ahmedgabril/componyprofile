@@ -85,7 +85,7 @@ class=" mb-5 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:o
     <div class=" grid  md:grid-cols-4 lg:grid-cols-5 sm:grid-cols-1 gap-4 ">
 
 
-    @forelse($catogeries as $item)
+    @forelse($projects as $item)
 
 
             <div class=" " wire:key="{{$item->id}}">
@@ -141,7 +141,7 @@ class=" mb-5 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:o
 
 
 </div>
-<div class="my-6 p-4">{{$catogeries->links( data: ['scrollTo' => false])}}</div>
+<div class="my-6 p-4">{{$projects->links( data: ['scrollTo' => false])}}</div>
 
 
 
@@ -167,27 +167,26 @@ class=" mb-5 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:o
 <script>
 
 
-Livewire.on('catogery-updated',()=>{
+Livewire.on('proj-updated',()=>{
 
     Swal.fire({
   position: "top-start",
   icon: "success",
-
-  title: "{{__('swal.updatetitle') }}"
+title: "{{__('swal.updatetitle') }}"
   showConfirmButton: false,
   timer: 1500
 });
 
-const getmodal = document.getElementById('update-catogery');
+// const getmodal = document.getElementById('update-catogery');
 
 
-getmodal.click();
+// getmodal.click();
 
 
 });
-window.addEventListener('deletecat', (event) => {
+window.addEventListener('deleteproj', (event) => {
 
-    const categoryId = event.detail;
+    const projId = event.detail;
     Swal.fire({
   title: "{{__('swal.swaltitle') }}" ,
   text: "{{ __('swal.swaltext') }}",
@@ -195,12 +194,12 @@ window.addEventListener('deletecat', (event) => {
   showCancelButton: true,
   confirmButtonColor: "#3085d6",
   cancelButtonColor: "#d33",
-  confirmButtonText: "{{ __('catogery.swalconfirmButtonText')}} ",
+  confirmButtonText: "{{ __('swal.swalconfirmButtonText')}} ",
 }).then((result) => {
   if (result.isConfirmed) {
 
 
-    Livewire.dispatch('confirmdel',categoryId);
+    Livewire.dispatch('confirmdel',projId);
 
   }
 });
@@ -208,7 +207,7 @@ window.addEventListener('deletecat', (event) => {
     });
 
 
-    Livewire.on('catogerydeleted', (event) => {
+    Livewire.on('projdeleted', (event) => {
 
  Swal.fire({
     title: "{{__('swal.swaldeletetitle') }}" ,
@@ -233,11 +232,11 @@ window.addEventListener('deletecat', (event) => {
         showConfirmButton: false,
     });
 
-        const modal = document.getElementById('closemodaladd');
+        // const modal = document.getElementById('closemodaladd');
 
-                if (modal) {
-            modal.click();
-        }
+        //         if (modal) {
+        //     modal.click();
+        // }
 
 
     });

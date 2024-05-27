@@ -3,6 +3,7 @@
 use Livewire\Livewire;
 use App\Livewire\Handelcat;
 use App\Livewire\Handelprofile;
+use App\Livewire\Handelproject;
 use App\Livewire\Handelsetting;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -17,9 +18,7 @@ Route::group([
 
 
 
-        Livewire::setUpdateRoute(function ($handle) {
-            return Route::post('/custom/livewire/update', $handle);
-        });
+
     Route::view('/', 'welcome');
 
 
@@ -31,6 +30,7 @@ Route::group([
 
     // Use Livewire components
     Route::get('handelcat', Handelcat::class)->name('handelcat');
+    Route::get('handelproject', Handelproject::class)->name('handelproject');
     Route::get('handelpro', Handelprofile::class)->name('handelpro');
     Route::get('handelsetting', Handelsetting::class)->name('handelsetting');
 
@@ -42,6 +42,11 @@ Route::group([
         auth()->logout();
         return redirect('/login');
     })->name('logout');
+
+
+    Livewire::setUpdateRoute(function ($handle) {
+        return Route::post('/custom/livewire/update', $handle);
+    });
 
 });
 
