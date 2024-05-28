@@ -40,7 +40,7 @@ class=" mb-5 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:o
 
 
 
-    <div class="container mx-auto p-6 rounded-md bg-gray-200 dark:bg-gray-800 my-16 mb-5 shadow-md">
+    <div class="container mx-auto p-6 rounded-md bg-gray-300 dark:bg-gray-800 my-16 mb-5 shadow-lg">
 
 
 
@@ -167,35 +167,30 @@ class=" mb-5 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:o
 <script>
 
 
-Livewire.on('catogery-updated',()=>{
+Livewire.on('catogery-updated',() => {
 
     Swal.fire({
   position: "top-start",
   icon: "success",
 
-  title: "{{__('swal.updatetitle') }}"
+  title: "{{__('swal.updatetitle') }}",
+
+  timer: 1500,
   showConfirmButton: false,
-  timer: 1500
+    });
 });
 
-const getmodal = document.getElementById('update-catogery');
-
-
-getmodal.click();
-
-
-});
 window.addEventListener('deletecat', (event) => {
 
     const categoryId = event.detail;
     Swal.fire({
-  title: "{{__('swal.swaltitle') }}" ,
+  title: "{{ __('swal.swaltitle') }}" ,
   text: "{{ __('swal.swaltext') }}",
   icon: "warning",
   showCancelButton: true,
   confirmButtonColor: "#3085d6",
   cancelButtonColor: "#d33",
-  confirmButtonText: "{{ __('catogery.swalconfirmButtonText')}} ",
+  confirmButtonText: "{{ __('swal.swalconfirmButtonText')}} ",
 }).then((result) => {
   if (result.isConfirmed) {
 
@@ -211,12 +206,12 @@ window.addEventListener('deletecat', (event) => {
     Livewire.on('catogerydeleted', (event) => {
 
  Swal.fire({
-    title: "{{__('swal.swaldeletetitle') }}" ,
-  text: "{{ __('swal.swaldeletetext') }}",
+      title: "{{__('swal.swaldeletetitle') }}" ,
+      text: "{{ __('swal.swaldeletetext') }}",
       icon: "success",
       timer: 1700,
       showConfirmButton: false,
-    });
+        });
     });
 
 
@@ -225,7 +220,7 @@ window.addEventListener('deletecat', (event) => {
     Livewire.on('categoryAdded', () => {
 
         Swal.fire({
-            title: "{{__('swal.swaladddata') }}" ,
+        title: "{{__('swal.swaladddata') }}" ,
         icon: 'success',
         timer: 3000,
         toast: true,

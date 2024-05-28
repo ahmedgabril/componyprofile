@@ -2,7 +2,9 @@
 
 namespace App\Livewire;
 
+use App\Models\catogery;
 use App\Models\project;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
@@ -20,9 +22,53 @@ class Handelproject extends Component
 
     public $sortdir = 'desc';
     public $project_id;
-    public $name_en;
+    public $catogery_id;
+    public $youtube_url;
+    public $github_link;
+    public $project_link;
+    #[Validate([
+        'images' => 'sometimes:image|max:1024',
+        'images.*' => [
+            'sometimes:image|max:1024',
+
+
+        ],
+    ])]
+    public $images = [];
+    #[Validate('required|image|max:1024')]
+    public $imgsumnail;
+    #[Validate([
+        'name' => 'required',
+        'name.*' => [
+            'required',
+            'min:5',
+            'max:65'
+
+        ],
+    ])]
+    public $name = [];
+    #[Validate([
+        'shortdes' => 'required',
+        'shortdes.*' => [
+            'required',
+            'min:20',
+            'max:255'
+
+        ],
+    ])]
+    public $shortdes = [];
+
+    #[Validate([
+        'des' => 'required',
+        'des.*' => [
+            'required',
+            'min:20',
+
+        ],
+    ])]
+    public $des = [];
     public $paginate = 10;
-    public $name_ar;
+
 
     #[Url(except: ' ',keep: true,history: true)]
     public $search = '';
@@ -39,36 +85,50 @@ class Handelproject extends Component
         return view('livewire.handelproject',[
 
 
-            'projects'=> project::where('name->en', 'like', '%'.$this->search.'%')
-
-            -> orderBy('id', $this->sortdir)->paginate($this->paginate),
-
         ]);
     }
 
 
+    #[Computed]
+    public function getproject_id(){
+
+       return catogery::get();
+
+    }
+
+        #[Computed]
+        public function getprojects(){
+
+           return project::where('name->en', 'like', '%'.$this->search.'%')
+            ->orWhere('name->ar','like', '%'.$this->search.'%')
+            -> orderBy('id', $this->sortdir)->paginate($this->paginate);
+        }
 
 
-    public function addcatogery()  {
+
+
+    public function addproject()  {
 
         $this->validate();
     project::create([
         'name' => [
-           'en' => $this->name_en,
-           'ar' => $this->name_ar
+           'en' => $this->name['en'],
+           'ar' => $this->name['ar'],
         ],
-        'title' => [
-            'en' => $this->title_en,
-            'ar' => $this->title_ar
-         ],
+
          'shortdes' => [
-            'en' => $this->shortdes_en,
-            'ar' => $this->shortdes_ar
+            'en' => $this->shortdes['en'],
+            'ar' => $this->shortdes['ar']
          ],
          'des' => [
-            'en' => $this->des_en,
-            'ar' => $this->des_ar
+            'en' => $this->des['en'],
+            'ar' => $this->des['ar']
          ],
+         'project_link' => $this->project_link,
+         'catogery_id' => $this->catogery_id,
+         'youtube_url' => $this->youtube_url,
+         'github_link' => $this->github_link,
+
     ]);
 
 
@@ -146,7 +206,15 @@ $this->dispatch('projdeleted');
 
         $this->resetValidation();
         $this->resetErrorBag();
-        // $this->name_ar = '';
-        // $this->name_en = '';
+        $this->name[] = '';
+        $this->shortdes[] = '';
+        $this->des[] = '';
+        $this->imgsumnail = '';
+        $this->images = [];
+        $this->youtube_url = '';
+        $this->github_link = '';
+        $this->projcet_id='';
+        $this->project_link='';
+
        }
    }

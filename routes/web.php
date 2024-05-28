@@ -38,17 +38,17 @@ Route::group([
         ->middleware(['auth'])
         ->name('profile');
 
-    Route::get('logout', function () {
-        auth()->logout();
-        return redirect('/login');
-    })->name('logout');
+    // Route::get('logout', function () {
+    //     auth()->logout();
+    //     return redirect('/login');
+    // })->name('logout');
 
 
     Livewire::setUpdateRoute(function ($handle) {
         return Route::post('/custom/livewire/update', $handle);
     });
-
+    require __DIR__.'/auth.php';
 });
 
 
-require __DIR__.'/auth.php';
+

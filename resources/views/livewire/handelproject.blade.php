@@ -4,15 +4,26 @@
 
     <div class="container mx-auto   my-16 shadow-md">
 
-        <h2 class="text-gray-800 dark:text-white p-4 mx-auto">{{ __('catogery.mangecat') }}   </h2>
+        <h2 class="text-gray-800 dark:text-white p-4 mx-auto">{{ __('projects.mangeproj') }}   </h2>
     </div>
     <div class="container mx-auto   my-16 p-5 ">
+        <button x-data
+        x-data @click="$dispatch('open-modal','handel-add-proj')"
+        class=" mb-5 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
 
 
-<x-modal name="handelcat" title="{{ __('catogery.addcatoegery') }} " resetdata="{{'resetvalue'}}" >
+        {{ __('projects.addproj') }}
 
-    <x-catogery.update-modal/>
-        <!-- Component content here -->
+
+        </button>
+
+
+
+<x-modal name="handel-add-proj" maxWidth="5xl" title="{{ __('projects.addproj') }} " postion="top" resetdata="{{'resetvalue'}}" >
+
+
+<x-project.modal-add/>
+
 
 
 
@@ -20,27 +31,14 @@
 
 </div>
  <!-- Modal toggle -->
-<button data-modal-target="catogery-modal" data-modal-toggle="catogery-modal"
-class=" mb-5 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-
-
-{{ __('catogery.addcatoegery') }}
-
-
-</button>
-
-
-
- <!-- Main modal -->
-<x-catogery.add-modal>
-
-</x-catogery.add-modal>
 
 
 
 
 
-    <div class="container mx-auto p-6 rounded-md bg-gray-200 dark:bg-gray-800 my-16 mb-5 shadow-md">
+
+
+    <div class="container mx-auto p-6 rounded-md bg-gray-300 dark:bg-gray-800 my-16 mb-5 shadow-lg">
 
 
 
@@ -85,7 +83,7 @@ class=" mb-5 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:o
     <div class=" grid  md:grid-cols-4 lg:grid-cols-5 sm:grid-cols-1 gap-4 ">
 
 
-    @forelse($projects as $item)
+    @forelse($this->getprojects as $item)
 
 
             <div class=" " wire:key="{{$item->id}}">
@@ -99,7 +97,7 @@ class=" mb-5 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:o
 
                             <svg class="w-6 h-6 text-green-800 dark:text-green-700"   wire:click.prevent="editcatogery({{ $item->id }})"
 
-                                x-data @click="$dispatch('open-modal','handelcat')"
+                                x-data @click="$dispatch('open-modal','handelproj')"
 
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778"/>
@@ -141,7 +139,7 @@ class=" mb-5 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:o
 
 
 </div>
-<div class="my-6 p-4">{{$projects->links( data: ['scrollTo' => false])}}</div>
+<div class="my-6 p-4">{{$this->getprojects->links( data: ['scrollTo' => false])}}</div>
 
 
 
@@ -172,7 +170,7 @@ Livewire.on('proj-updated',()=>{
     Swal.fire({
   position: "top-start",
   icon: "success",
-title: "{{__('swal.updatetitle') }}"
+  title: "{{__('swal.updatetitle') }}"
   showConfirmButton: false,
   timer: 1500
 });

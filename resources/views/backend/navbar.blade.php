@@ -1,6 +1,22 @@
 <div>
 
+    <?php
 
+    use App\Livewire\Actions\Logout;
+    use Livewire\Volt\Component;
+
+    new class extends Component
+    {
+        /**
+         * Log the current user out of the application.
+         */
+        public function logout(Logout $logout): void
+        {
+            $logout();
+
+            $this->redirect('/', navigate: true);
+        }
+    }; ?>
 
     <nav class="bg-white border-gray-200 dark:bg-gray-800"  >
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -94,9 +110,7 @@
                   <li>
                     <a href="{{ route('handelpro') }}"  wire:navigate class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">{{ __('profile') }}</a>
                   </li>
-                  <li>
-                    <a href="{{ route('logout') }}" wire:navigate  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">{{ __('Logout') }}</a>
-                  </li>
+                  <livewire:layout.navigation />
                 </ul>
               </div>
 

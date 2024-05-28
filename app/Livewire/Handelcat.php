@@ -63,6 +63,7 @@ public function rules()
 
 
             'catogeries'=> catogery::where('name->en', 'like', '%'.$this->search.'%')
+            ->orWhere('name->ar','like', '%'.$this->search.'%')
 
             -> orderBy('id', $this->sortdir)->paginate($this->paginate),
 
