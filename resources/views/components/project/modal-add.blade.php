@@ -1,6 +1,6 @@
 <div class="container mx-auto p-4 ">
 
-    <form wire:submit.prevent="addproject" id="catogery-update-form">
+    <form wire:submit.prevent="addproject" id="catogery-update-form" enctype="multipart/form-data">
 
         <div class=" grid lg:grid-cols-3 sm:grid-cols-1 md:grid-cols-3 gap-4 ">
 
@@ -24,9 +24,9 @@
 
 
 
-               <div>
+               <div class="w-full mx-auto">
 
-                    <form class="max-w-sm mx-auto">
+
                         <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">catogery name</label>
                         <select id="countries" wire:model.live="catogery_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             @if($this->getproject_id)
@@ -41,7 +41,7 @@
 
                         </select>
                         <div class="text-red-700">@error('catogery_id') {{ $message }} @enderror</div>
-                    </form>
+
 
 
              </div>
@@ -94,6 +94,7 @@
                 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Write your thoughts here..."></textarea>
 
+                <div class="text-red-700">@error('shortdes.en') {{ $message }} @enderror</div>
 
             </div>
 
@@ -105,6 +106,7 @@
                 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Write your thoughts here..."></textarea>
 
+                <div class="text-red-700">@error('shortdes.ar') {{ $message }} @enderror</div>
             </div>
    </div>
 
@@ -116,18 +118,19 @@
 
     <div>
         <label for="message2" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">des en</label>
-        <textarea id="message2" wire:model="des.en" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50
+        <textarea id="message2" wire:model.live="des.en" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50
         rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700
         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         placeholder="Write your thoughts here..."></textarea>
 
+        <div class="text-red-700">@error('des.en') {{ $message }} @enderror</div>
 
     </div>
 
 
     <div>
         <label for="message3" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">des ar</label>
-        <textarea id="message3" rows="4" wire:model="des.ar"  class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50
+        <textarea id="message3" rows="4" wire:model.live="des.ar"  class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50
         rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700
         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         placeholder="Write your thoughts here..."></textarea>
@@ -137,21 +140,59 @@
 
 <div class="grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 gap-4 my-4">
 
-    <div>
+    <div x-data ="{src: null }">
+        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="image-sumnail">Upload sumnail</label>
 
-   <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload sumnail</label>
-   <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
+    <img x-on:click="$refs.sumnail.click()" :src= "src ? src :'/img/uploadimg.jpg' "   width="250" height="250"/>
+
+   <input  x-ref="sumnail" accept="image/*" class=" w-full text-sm hidden text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400
+    focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" wire:model="imgsumnail"
+
+  @change=" src = URL.createObjectURL($event.target.files[0])"
+     id="isumnail" type="file">
 
 
+     @error('imgsumnail') <span class="text-danger ">{{ $message }}</span> @enderror
 
     </div>
 
 
     <div>
 
-   <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload images</label>
-   <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
 
+        <div class="uplodefile">
+
+
+            {{-- @if ($this->images && is_array($this->images) || is_object($this->images))
+            <div class="grid grid-cols-4 gap-4">
+
+                    @foreach($this->images as $key => $screen)
+                        <div class=" " style="position: relative">
+
+                            <a  href="#"
+                               style="  position: absolute;
+                            margin-right: 5px;
+                            margin-top: 6px;
+                        background-color: red;"
+                                wire:click.prevent="removeimg('{{$key}}')" class="btn-close" >x</a>-
+                            <img src="{{  $screen->temporaryUrl() }}" class="" height="200" width="200"/>
+                        </div>
+                    @endforeach
+
+          </div>
+
+          @endif --}}
+    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload file</label>
+    <input
+    class="block w-full text-sm text-gray-900 border  border-gray-300 rounded-lg
+
+    cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600
+    dark:placeholder-gray-400"
+    id="file_input" wire:model="images" type="file" multiple accept="image/*">
+
+    @error('images.*') <span class="text-danger ">{{ $message }}</span> @enderror
+
+    </div>
 
     </div>
 </div>

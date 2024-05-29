@@ -5,9 +5,11 @@ namespace App\Livewire;
 use App\Models\catogery;
 use App\Models\project;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\Rule;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
+use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
@@ -15,18 +17,27 @@ use Livewire\Attributes\Validate;
 class Handelproject extends Component
 {
 
+    use WithFileUploads;
     use WithPagination;
     #[Layout('layouts.app')]
 
-    #[Validate]
+
 
     public $sortdir = 'desc';
     public $project_id;
+    #[Rule('required|int')]
     public $catogery_id;
+
+
+  #[Rule('nullable|url')]
     public $youtube_url;
+
+
+    #[Rule('nullable|url')]
     public $github_link;
+    #[Rule('nullable|url')]
     public $project_link;
-    #[Validate([
+    #[Rule([
         'images' => 'sometimes:image|max:1024',
         'images.*' => [
             'sometimes:image|max:1024',
@@ -35,9 +46,11 @@ class Handelproject extends Component
         ],
     ])]
     public $images = [];
-    #[Validate('required|image|max:1024')]
+
+
+    #[Rule('required|image|max:1024')]
     public $imgsumnail;
-    #[Validate([
+    #[Rule([
         'name' => 'required',
         'name.*' => [
             'required',
@@ -45,9 +58,10 @@ class Handelproject extends Component
             'max:65'
 
         ],
+
     ])]
     public $name = [];
-    #[Validate([
+    #[Rule([
         'shortdes' => 'required',
         'shortdes.*' => [
             'required',
@@ -58,7 +72,7 @@ class Handelproject extends Component
     ])]
     public $shortdes = [];
 
-    #[Validate([
+    #[Rule([
         'des' => 'required',
         'des.*' => [
             'required',
@@ -109,7 +123,23 @@ class Handelproject extends Component
 
     public function addproject()  {
 
-        $this->validate();
+
+
+
+        $valdat = $this->validate();
+
+        if(!empty($this->images)) {
+            foreach ($this->images as $key => $photos) {
+                $this->images[$key] = $photos->store('images','public');
+
+
+
+            }
+        }
+
+   $this->images = json_encode($this->images);
+
+
     project::create([
         'name' => [
            'en' => $this->name['en'],
@@ -128,6 +158,8 @@ class Handelproject extends Component
          'catogery_id' => $this->catogery_id,
          'youtube_url' => $this->youtube_url,
          'github_link' => $this->github_link,
+         'imgsumnail'=> $this->imgsumnail->store('imgsumnail','public'),
+         'images'=>  $this->images,
 
     ]);
 
@@ -137,6 +169,7 @@ class Handelproject extends Component
 
 
     $this->resetvalue();
+    $this->dispatch('close-modal','handel-add-proj');
     $this->dispatch('projAdded'); // Emit an event for closing the modal
 
 

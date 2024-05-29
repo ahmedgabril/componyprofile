@@ -91,7 +91,7 @@
                 <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
 
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-wrap  " wire:key="$item->id">
-                        {{ $item->name }}  </h5>
+                        {{ $item->getTranslations('name') }}  </h5>
                         <div class="flex justify-center">
 
 
@@ -165,20 +165,16 @@
 <script>
 
 
-Livewire.on('proj-updated',()=>{
+Livewire.on('proj-updated',() =>{
 
     Swal.fire({
   position: "top-start",
   icon: "success",
-  title: "{{__('swal.updatetitle') }}"
+  title: "{{__('swal.updatetitle') }}",
   showConfirmButton: false,
   timer: 1500
-});
+   });
 
-// const getmodal = document.getElementById('update-catogery');
-
-
-// getmodal.click();
 
 
 });
@@ -208,8 +204,8 @@ window.addEventListener('deleteproj', (event) => {
     Livewire.on('projdeleted', (event) => {
 
  Swal.fire({
-    title: "{{__('swal.swaldeletetitle') }}" ,
-  text: "{{ __('swal.swaldeletetext') }}",
+       title: "{{__('swal.swaldeletetitle') }}" ,
+      text: "{{ __('swal.swaldeletetext') }}",
       icon: "success",
       timer: 1700,
       showConfirmButton: false,
@@ -219,7 +215,7 @@ window.addEventListener('deleteproj', (event) => {
 
 
 
-    Livewire.on('categoryAdded', () => {
+    Livewire.on('projAdded', () => {
 
         Swal.fire({
             title: "{{__('swal.swaladddata') }}" ,
@@ -229,12 +225,6 @@ window.addEventListener('deleteproj', (event) => {
         position: 'top-right',
         showConfirmButton: false,
     });
-
-        // const modal = document.getElementById('closemodaladd');
-
-        //         if (modal) {
-        //     modal.click();
-        // }
 
 
     });
