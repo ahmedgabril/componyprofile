@@ -1,6 +1,6 @@
 
 
-<div>
+<div class=" overflow-y-auto">
 
     <div class="container mx-auto   my-16 shadow-md">
 
@@ -29,16 +29,26 @@
 
 </x-modal>
 
+
+
 </div>
  <!-- Modal toggle -->
 
 
 
+ <x-modal name="updateproj" maxWidth="5xl" title=" Update Project" postion="top" resetdata="{{'resetvalue'}}" >
+
+
+    <x-project.modal-update/>
 
 
 
 
-    <div class="container mx-auto p-6 rounded-md bg-gray-300 dark:bg-gray-800 my-16 mb-5 shadow-lg">
+    </x-modal>
+
+
+
+    <div class="container mx-auto p-6 rounded-md bg-gray-300 dark:bg-gray-800 my-16 mb-8 shadow-lg">
 
 
 
@@ -86,41 +96,50 @@
     @forelse($this->getprojects as $item)
 
 
-            <div class=" " wire:key="{{$item->id}}">
+    <div class=" card-pro h-96 mb-4   bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700" wire:key="{{$item->id}}" >
+        <a href="#">
+            <img class="rounded-t-lg w-full object-cover " src="{{ asset('storage/'.$item->imgsumnail) }}" alt="sumnail" style="height: 200px" wire:key="{{$item->id}}"/>
+        </a>
+        <div class="p-5">
+            <a href="#">
+                <h5 class="mb-2 text-2xl  mt-4 font-bold tracking-tight text-gray-900 dark:text-white capitalize text-center break-words">{{$item->name}}</h5>
 
-                <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            </a>
+            {{-- <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 text-wrap capitalize indent-1  truncate">{{$item->des}}</p> --}}
 
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-wrap  " wire:key="$item->id">
-                        {{ $item->getTranslations('name') }}  </h5>
-                        <div class="flex justify-center">
-
-
-                            <svg class="w-6 h-6 text-green-800 dark:text-green-700"   wire:click.prevent="editcatogery({{ $item->id }})"
-
-                                x-data @click="$dispatch('open-modal','handelproj')"
-
-                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778"/>
-                              </svg>
+        </div>
 
 
 
 
 
+        <div class="flex  justify-around items-center mb-5 mt-10">
 
 
+         <div class="flex cursor-pointer">
+               <svg class="w-6 h-6 text-green-800 dark:text-green-700"   wire:click.prevent="editproj({{ $item->id }})"
 
-                            <svg  class="w-[19px] h-[19px] text-red-700 dark:text-red-800"
+            x-data @click="$dispatch('open-modal','updateproj')"
 
-                            wire:click.prevent="deleteconfirm({{ $item->id }})"
-                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                                <path fill-rule="evenodd" d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z" clip-rule="evenodd"/>
-                              </svg>
+        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778"/>
+          </svg>
 
-                        </div>
 
-                </a>
+        <svg  class="w-[19px] h-[19px] text-red-700 dark:text-red-800"
+
+        wire:click.prevent="deleteconfirm({{ $item->id }},'{{$item->name}}')"
+        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd" d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z" clip-rule="evenodd"/>
+          </svg>
+
+                </div>
+            <div>
+
+                <span class="text-gray-500 text-sm text-justify">{{$item->created_at->diffForHumans(null, true). ' '.'ago'}}</span>
             </div>
+                        </div>
+    </div>
 
     @empty
     <div class="flex items-center   p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
@@ -129,7 +148,7 @@
         </svg>
         <span class="sr-only">Info</span>
         <div class="">
-          <span class="font-medium">Danger alert!</span> catogeries not found.
+          <span class="font-medium">Danger alert!</span> projects not found
         </div>
       </div>
     @endforelse
@@ -180,7 +199,8 @@ Livewire.on('proj-updated',() =>{
 });
 window.addEventListener('deleteproj', (event) => {
 
-    const projId = event.detail;
+    const data = event.detail;
+    // const projname = event.detail['proname'];
     Swal.fire({
   title: "{{__('swal.swaltitle') }}" ,
   text: "{{ __('swal.swaltext') }}",
@@ -193,7 +213,7 @@ window.addEventListener('deleteproj', (event) => {
   if (result.isConfirmed) {
 
 
-    Livewire.dispatch('confirmdel',projId);
+    Livewire.dispatch('confirmdel',{ data : data});
 
   }
 });
@@ -226,6 +246,16 @@ window.addEventListener('deleteproj', (event) => {
         showConfirmButton: false,
     });
 
+
+    });
+
+
+
+    window.addEventListener('close-modal',() => {
+
+    //    @this.getimgpath = "";
+    //    @this.imgsumnail = "";
+        Livewire.dispatch('resetvalue')
 
     });
 

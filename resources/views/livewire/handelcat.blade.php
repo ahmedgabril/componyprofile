@@ -1,6 +1,6 @@
 
 
-<div>
+<div class="overflow-y-auto">
 
     <div class="container mx-auto   my-16 shadow-md">
 
@@ -88,7 +88,7 @@ class=" mb-5 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:o
     @forelse($catogeries as $item)
 
 
-            <div class=" " wire:key="{{$item->id}}">
+            <div class="" wire:key="{{$item->id}}" >
 
                 <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
 

@@ -2,17 +2,18 @@
 
 namespace App\Livewire;
 
-use App\Models\catogery;
 use App\Models\project;
-use Livewire\Attributes\Computed;
-use Livewire\Attributes\Rule;
 use Livewire\Component;
+use App\Models\catogery;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
-use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use Livewire\Attributes\Rule;
+use Livewire\WithFileUploads;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\Validate;
+use Illuminate\Support\Facades\Storage;
 
 class Handelproject extends Component
 {
@@ -22,9 +23,10 @@ class Handelproject extends Component
     #[Layout('layouts.app')]
 
 
-
+public $getlocal;
     public $sortdir = 'desc';
-    public $project_id;
+    public $getimgpath ;
+    public $projcet_id;
     #[Rule('required|int')]
     public $catogery_id;
 
@@ -127,10 +129,11 @@ class Handelproject extends Component
 
 
         $valdat = $this->validate();
+        $this->getlocal = app()->getLocale() == "en" ? $this->name['en']: $this->name['ar'];
 
         if(!empty($this->images)) {
             foreach ($this->images as $key => $photos) {
-                $this->images[$key] = $photos->store('images','public');
+                $this->images[$key] = $photos->store('images/'.$this->getlocal,'public');
 
 
 
@@ -158,7 +161,7 @@ class Handelproject extends Component
          'catogery_id' => $this->catogery_id,
          'youtube_url' => $this->youtube_url,
          'github_link' => $this->github_link,
-         'imgsumnail'=> $this->imgsumnail->store('imgsumnail','public'),
+         'imgsumnail'=> $this->imgsumnail->store('imgsumnail/'.$this->getlocal,'public'),
          'images'=>  $this->images,
 
     ]);
@@ -177,14 +180,34 @@ class Handelproject extends Component
 
 
 #[On('editproj')]
-public function editcatogery($proj_id) {
+public function editproj($proj_id) {
+
+
+
     $this->projcet_id = $proj_id;
     $getproj = project::find($proj_id);
 
 
-    $this->name_ar = implode($getproj->getTranslations('name', ['ar']),) ;
+    $this->name['ar'] = implode($getproj->getTranslations('name', ['ar']),) ;
+    $this->name['en'] = $getproj->getTranslation('name', 'en');
 
-    $this->name_en = implode($getproj->getTranslations('name', ['en']),) ;
+
+    $this->des['en'] = $getproj->getTranslation('des', 'en');
+
+    $this->des['ar'] = $getproj->getTranslation('des', 'ar') ;
+
+    $this->shortdes['en'] = $getproj->getTranslation('shortdes', 'en');
+
+    $this->shortdes['ar'] = $getproj->getTranslation('shortdes', 'ar') ;
+    $this->catogery_id = $getproj->catogery_id;
+    $this->youtube_url = $getproj->youtube_url;
+    $this->github_link = $getproj->github_link;
+    $this->project_link = $getproj->project_link;
+    $this->imgsumnail = $getproj->imgsumnail;
+    $this->images =  json_decode($getproj->images,true);
+
+
+    // implode($getproj->getTranslations('name', ['en']),) ;
 
 
 
@@ -198,56 +221,127 @@ public function editcatogery($proj_id) {
 public function updateproj() {
 
     $this->validate([
-       'name_en' => 'required|min:5|max:255',
-       'name_ar' => 'required|min:5|max:255',
+
+
+        'imgsumnail'=> 'required',
+    ]);
+
+
+    $getres=  project::findOrFail($this->projcet_id);
+
+
+    // $this->getlocal = app()->getLocale() == "en" ? $this->name['en']: $this->name['ar'];
+
+
+    if( !empty($this->imgsumnail) && $this->imgsumnail !==  $getres->imgsumnail){
+
+
+
+        Storage::deleteDirectory('public/imgsumnail/'.$getres->name);
+
+
+       $this->getimgpath =  $this->imgsumnail->store('imgsumnail/'.$getres->name,'public');
+
+        }else{
+
+            $this->getimgpath =  $getres->imgsumnail;
+        }
+
+
+
+
+
+
+ if( $this->images !==  json_decode($getres->images,true)) {
+
+    Storage::deleteDirectory('public/images/'.$getres->name);
+
+
+        foreach ($this->images as $key => $photos) {
+
+            $this->images[$key] = $photos->store('images/'.$getres->name,'public');
+
+
+
+
+        }
+
+
+
+}
+
+  $this->images = json_encode($this->images);
+
+
+   $getres->update([
+    'name' => [
+        'en' => $this->name['en'],
+        'ar' => $this->name['ar'],
+     ],
+
+      'shortdes' => [
+         'en' => $this->shortdes['en'],
+         'ar' => $this->shortdes['ar']
+      ],
+      'des' => [
+         'en' => $this->des['en'],
+         'ar' => $this->des['ar']
+      ],
+      'project_link' => $this->project_link,
+      'catogery_id' => $this->catogery_id,
+      'youtube_url' => $this->youtube_url,
+      'github_link' => $this->github_link,
+      'imgsumnail'=> $this->getimgpath,
+      'images'=>  $this->images,
 
    ]);
-  $getres=  project::findOrFail($this->catogery_id);
-   $getres->update([
-       'name' => [
-           'en' => $this->name_en,
-           'ar' =>$this->name_ar
-       ],
-   ]);
-   $this->dispatch('close-modal','handelproj');
+
+   $this->dispatch('close-modal','updateproj');
    $this->dispatch('proj-updated');
+   $this->resetvalue();
 
    }
 
     #[On('confirmdel')]
-    public function confirmdel($proj_id) {
+    public function confirmdel($data) {
+
+
+     $proj = project::find($data['projid']);
+
+     Storage::deleteDirectory('public/images/'.$data['proname']);
+     Storage::deleteDirectory('public/imgsumnail/'.$data['proname']);
+
+
+        $proj->delete();
+
+        $this->dispatch('projdeleted');
+            }
+    public function deleteconfirm($proj_id, $projname) {
 
 
 
+        $this->dispatch('deleteproj',projid : $proj_id , proname: $projname);
 
-  $proj = project::find($proj_id);
- $proj->delete();
 
-$this->dispatch('projdeleted');
     }
-    public function deleteconfirm($proj_id) {
-
-
-
-        $this->dispatch('deleteproj', $proj_id);
-
-
-    }
+            #[On('resetvalue')]
         public function resetvalue() {
 
 
 
-        $this->resetValidation();
-        $this->resetErrorBag();
-        $this->name[] = '';
-        $this->shortdes[] = '';
-        $this->des[] = '';
+
+        $this->name = [];
+        $this->shortdes = [];
+        $this->des = [];
         $this->imgsumnail = '';
         $this->images = [];
         $this->youtube_url = '';
         $this->github_link = '';
-        $this->projcet_id='';
+        $this->catogery_id='';
         $this->project_link='';
+        $this->getimgpath = '';
+        $this->resetValidation();
+        $this->resetErrorBag();
 
        }
    }

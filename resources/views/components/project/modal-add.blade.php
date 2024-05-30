@@ -182,16 +182,18 @@
           </div>
 
           @endif --}}
-    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload file</label>
-    <input
-    class="block w-full text-sm text-gray-900 border  border-gray-300 rounded-lg
+                <div class="">
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload multiple images</label>
+                    <input
+                    class="block w-full text-sm text-gray-900 border  border-gray-300 rounded-lg
 
-    cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600
-    dark:placeholder-gray-400"
-    id="file_input" wire:model="images" type="file" multiple accept="image/*">
+                    cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600
+                    dark:placeholder-gray-400"
+                    id="file_input" wire:model="images" type="file" multiple accept="image/*">
 
-    @error('images.*') <span class="text-danger ">{{ $message }}</span> @enderror
+                    @error('images.*') <span class="text-danger ">{{ $message }}</span> @enderror
 
+                </div>
     </div>
 
     </div>
@@ -215,7 +217,7 @@
 </button>
  <button
    type="button"
-
+   {{-- wire:click.prevent = "resetvalue" --}}
    x-data @click="$dispatch('close-modal','handel-add-proj')"
    class="inline-block rounded bg-red-700 px-6 pb-2 pt-2.5 mt-2 text-xs font-medium uppercase leading-normal text-white
      dark:text-white transition duration-150 ease-in-out hover:bg-red-600 focus:bg-primary-accent-200 focus:outline-none focus:ring-0
