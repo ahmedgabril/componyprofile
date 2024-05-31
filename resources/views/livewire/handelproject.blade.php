@@ -62,7 +62,7 @@
 <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4 p-2">
 
 
-      <x-search-input wire_model="search" input_id="table-search" placeholder="{{__('catogery.search')}}" />
+      <x-search-input wire_model="search" input_id="table-search1" placeholder="{{__('catogery.search')}}" />
 
 
 
@@ -186,6 +186,11 @@
 
 Livewire.on('proj-updated',() =>{
 
+
+
+
+
+
     Swal.fire({
   position: "top-start",
   icon: "success",
@@ -223,6 +228,8 @@ window.addEventListener('deleteproj', (event) => {
 
     Livewire.on('projdeleted', (event) => {
 
+
+
  Swal.fire({
        title: "{{__('swal.swaldeletetitle') }}" ,
       text: "{{ __('swal.swaldeletetext') }}",
@@ -253,8 +260,8 @@ window.addEventListener('deleteproj', (event) => {
 
     window.addEventListener('close-modal',() => {
 
-    //    @this.getimgpath = "";
-    //    @this.imgsumnail = "";
+
+
         Livewire.dispatch('resetvalue')
 
     });

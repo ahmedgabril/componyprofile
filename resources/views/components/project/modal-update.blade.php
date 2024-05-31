@@ -140,20 +140,46 @@
 
 <div class="grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 gap-4 my-4">
 
-    <div x-data ="{src: null }">
+    <div x-data = "{src:''} " >
         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="image-sumnail">change img sumnail</label>
 
-    <img x-on:click="$refs.sumnail.click()" src= "{{asset("storage/".$this->imgsumnail)}} "   width="250" height="250"/>
 
-   <input  x-ref="sumnail" accept="image/*" class=" w-full text-sm hidden text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400
-    focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" wire:model="imgsumnail"
+        @if($this->imgsumnail_temp && $this->imgsumnail == null)
 
-  @change=" src = URL.createObjectURL($event.target.files[0])"
-     id="isumnail" type="file">
+        <div class="mb-3 col-md-6" style="position: relative">
+
+
+
+
+            <img   class="" src="{{asset('storage/'.$this->imgsumnail_temp)}}" height="200" width="400">
+
+
+
+        </div>
+
+
+    @endif
+
+<div class="" >
+
+  @if($this->sumnail_status)
+
+  <img x-on:click="$refs.sumnail.click()" :src=" src "   width="250" height="250"/>
+
+  @endif
+
+   <input x-ref="sumnail" accept="image/*" class=" w-full text-sm hidden text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400
+    focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+    wire:change="changstatus"
+    wire:model="imgsumnail"
+    id="image-sumnail" type="file"
+    @change=" src = URL.createObjectURL($event.target.files[0])"
+
+    />
 
 
      @error('imgsumnail') <span class="text-danger ">{{ $message }}</span> @enderror
-
+    </div>
     </div>
 
 
@@ -175,7 +201,7 @@
                             margin-top: 6px;
                         background-color: red;"
                                 wire:click.prevent="removeimg('{{$key}}')" class="btn-close" >x</a>- --}}
-                            <img src="{{asset('storage/'.$screen) }}" class=" object-cover h-36 w-full" height="150" width="150"/>
+                            <img   src="{{asset('storage/'.$screen) }}" class=" object-cover h-36 w-full" height="150" width="150"/>
                         </div>
                     @endforeach
 
@@ -207,6 +233,7 @@
 
 
  <button
+
  type="submit"
    form="project-update-form"
  class="ms-1 inline-block rounded bg-success px-6 mx-5 pb-2 mt-2 pt-2.5 text-sm
@@ -228,3 +255,16 @@
 
 </div>
     </div>
+
+{{-- @script
+
+
+<script>
+
+
+  </script>
+
+
+
+
+@endscript --}}

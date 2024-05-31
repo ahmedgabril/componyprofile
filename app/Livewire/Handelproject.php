@@ -22,8 +22,9 @@ class Handelproject extends Component
     use WithPagination;
     #[Layout('layouts.app')]
 
-
-public $getlocal;
+  public $sumnail_status= false;
+     public $getlocal;
+     public $imgsumnail_temp;
     public $sortdir = 'desc';
     public $getimgpath ;
     public $projcet_id;
@@ -94,7 +95,10 @@ public $getlocal;
 
     }
 
+  public function changstatus(){
 
+    $this->sumnail_status = true;
+  }
 
     public function render()
     {
@@ -114,10 +118,10 @@ public $getlocal;
 
         #[Computed]
         public function getprojects(){
+        return      project::where('name', 'like', '%'.$this->search.'%')
+        // ->orWhere('name->ar','like', '%'.$this->search.'%')
+        -> orderBy('id', $this->sortdir)->paginate($this->paginate);
 
-           return project::where('name->en', 'like', '%'.$this->search.'%')
-            ->orWhere('name->ar','like', '%'.$this->search.'%')
-            -> orderBy('id', $this->sortdir)->paginate($this->paginate);
         }
 
 
@@ -203,7 +207,7 @@ public function editproj($proj_id) {
     $this->youtube_url = $getproj->youtube_url;
     $this->github_link = $getproj->github_link;
     $this->project_link = $getproj->project_link;
-    $this->imgsumnail = $getproj->imgsumnail;
+    $this->imgsumnail_temp = $getproj->imgsumnail;
     $this->images =  json_decode($getproj->images,true);
 
 
@@ -220,10 +224,12 @@ public function editproj($proj_id) {
 
 public function updateproj() {
 
+
+
     $this->validate([
 
+            'imgsumnail'=> 'sometimes:image|max:1024',
 
-        'imgsumnail'=> 'required',
     ]);
 
 
@@ -244,7 +250,7 @@ public function updateproj() {
 
         }else{
 
-            $this->getimgpath =  $getres->imgsumnail;
+            $this->getimgpath =   $this->imgsumnail_temp;
         }
 
 
@@ -291,15 +297,17 @@ public function updateproj() {
       'catogery_id' => $this->catogery_id,
       'youtube_url' => $this->youtube_url,
       'github_link' => $this->github_link,
-      'imgsumnail'=> $this->getimgpath,
+      'imgsumnail'=> $this->getimgpath == null ? $this->imgsumnail_temp: $this->getimgpath,
       'images'=>  $this->images,
 
    ]);
 
    $this->dispatch('close-modal','updateproj');
    $this->dispatch('proj-updated');
-   $this->resetvalue();
 
+
+   $this->resetvalue();
+   $this->sumnail_status = false;
    }
 
     #[On('confirmdel')]
@@ -333,13 +341,12 @@ public function updateproj() {
         $this->name = [];
         $this->shortdes = [];
         $this->des = [];
-        $this->imgsumnail = '';
+        $this->imgsumnail = null;
         $this->images = [];
         $this->youtube_url = '';
         $this->github_link = '';
         $this->catogery_id='';
         $this->project_link='';
-        $this->getimgpath = '';
         $this->resetValidation();
         $this->resetErrorBag();
 
