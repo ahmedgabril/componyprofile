@@ -37,8 +37,9 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-
         <link rel="stylesheet" href="{{ asset('asset/backend/css/backend.css') }}"/>
+        <script src="{{asset('asset/backend/js/ckedtior.js')}}"></script>
+        {{-- <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script> --}}
 
 {{-- @livewireStyles --}}
 
@@ -73,9 +74,6 @@
 
 
 
-
-        // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-       // On page load or when changing themes, best to add inline in `head` to avoid FOUC
        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         } else {

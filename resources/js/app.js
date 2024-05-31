@@ -2,7 +2,6 @@ import './bootstrap';
 import 'flowbite';
 import Swal from 'sweetalert2';
 
-
 import {
 
     Modal,
@@ -15,5 +14,8 @@ import {
 
   window.Swal = Swal;
 
+
+
+// main.js
 
 

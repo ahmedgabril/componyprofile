@@ -129,7 +129,7 @@ class Handelproject extends Component
 
     public function addproject()  {
 
-
+dd($this->des);
 
 
         $valdat = $this->validate();

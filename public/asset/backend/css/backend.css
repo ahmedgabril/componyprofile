@@ -21,3 +21,16 @@
         padding-right: 0.75rem;
         padding-left: 30px;
     }
+    #container {
+        width: 1000px;
+        margin: 20px auto;
+    }
+    .ck-editor__editable[role="textbox"] {
+        /* Editing area */
+        min-height: 450px;
+    }
+    .ck-content .image {
+        /* Block images */
+        max-width: 80%;
+        margin: 20px auto;
+    }
