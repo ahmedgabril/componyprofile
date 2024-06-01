@@ -12,4 +12,12 @@ class project extends Model
     use HasTranslations;
 public  $guarded  = [];
     public $translatable = ['name','shortdes','des',];
+
+public function catogery(){
+
+return $this->belongsTo(catogery::class);
+
+
+ }
+
 }

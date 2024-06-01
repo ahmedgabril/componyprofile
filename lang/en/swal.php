@@ -11,5 +11,7 @@ return  [
     "swaldeletetext"=> "Your catogery has been deleted.",
     "swaladddata"=> "Data has been successfully",
     "updatetitle"=> "data  has been updated",
+    "dangeralert"=> "Danger alert",
+    "notfound"=> "data not found",
 
 ];

@@ -84,7 +84,7 @@ class Handelproject extends Component
         ],
     ])]
     public $des = [];
-    public $paginate = 10;
+    public $paginate = 5;
 
 
     #[Url(except: ' ',keep: true,history: true)]
@@ -118,7 +118,7 @@ class Handelproject extends Component
 
         #[Computed]
         public function getprojects(){
-        return      project::where('name', 'like', '%'.$this->search.'%')
+        return      project::with('catogery')->where('name', 'like', '%'.$this->search.'%')
         // ->orWhere('name->ar','like', '%'.$this->search.'%')
         -> orderBy('id', $this->sortdir)->paginate($this->paginate);
 
@@ -129,7 +129,6 @@ class Handelproject extends Component
 
     public function addproject()  {
 
-dd($this->des);
 
 
         $valdat = $this->validate();
@@ -210,7 +209,7 @@ public function editproj($proj_id) {
     $this->imgsumnail_temp = $getproj->imgsumnail;
     $this->images =  json_decode($getproj->images,true);
 
-
+$this->dispatch('edit-des');
     // implode($getproj->getTranslations('name', ['en']),) ;
 
 

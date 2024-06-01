@@ -117,7 +117,14 @@
 
 
          <div class="flex cursor-pointer">
-               <svg class="w-6 h-6 text-green-800 dark:text-green-700"   wire:click.prevent="editproj({{ $item->id }})"
+         <a href="http://127.0.0.1:8000/en/handelcat?search={{$item->catogery->name}}" wire:navigate class=" text-orange-600 mx-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+              </svg>
+
+         </a>
+
+               <svg class="w-6 h-7 text-green-800 dark:text-green-700"   wire:click.prevent="editproj({{ $item->id }})"
 
             x-data @click="$dispatch('open-modal','updateproj')"
 
@@ -126,12 +133,14 @@
           </svg>
 
 
-        <svg  class="w-[19px] h-[19px] text-red-700 dark:text-red-800"
+        <svg  class="w-[20px] h-[26px] text-red-700 dark:text-red-800"
 
         wire:click.prevent="deleteconfirm({{ $item->id }},'{{$item->name}}')"
-        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 24 24">
             <path fill-rule="evenodd" d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z" clip-rule="evenodd"/>
           </svg>
+
+
 
                 </div>
             <div>
@@ -148,7 +157,7 @@
         </svg>
         <span class="sr-only">Info</span>
         <div class="">
-          <span class="font-medium">Danger alert!</span> projects not found
+          <span class="font-medium">{{__('swal.dangeralert')}} !!</span> {{__('swal.notfound')}}
         </div>
       </div>
     @endforelse
@@ -242,19 +251,6 @@ window.addEventListener('deleteproj', (event) => {
 
 
 
-    Livewire.on('projAdded', () => {
-
-        Swal.fire({
-            title: "{{__('swal.swaladddata') }}" ,
-        icon: 'success',
-        timer: 3000,
-        toast: true,
-        position: 'top-right',
-        showConfirmButton: false,
-    });
-
-
-    });
 
 
 
