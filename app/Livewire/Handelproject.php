@@ -131,7 +131,42 @@ class Handelproject extends Component
         }
 
 
+        public function removeimg($key ,$path) {
 
+
+                Storage::deleteDirectory('public/'.$path);
+                $getpath = project::where('id', $this->projcet_id)->value('images');
+
+                // Decode the JSON data (assuming it's stored as JSON)
+                $imagesArray = json_decode($getpath, true);
+
+                // Check if the desired path exists in the array
+                if (in_array($path, $imagesArray)) {
+                    // Remove the path from the array
+                    $updatedArray = array_diff($imagesArray, [$path]);
+
+                    // Update the database record with the modified array
+                    project::where('id', $this->projcet_id)->update(['images' => json_encode($updatedArray)]);
+                    unset($this->images[$key]);
+                }
+
+                        // $this->images = json_encode($this->images);
+
+
+
+
+                //array_splice($this->screenshots,$key);
+
+                //unset($this->images[$key])
+
+
+
+
+
+
+
+
+            }
 
     public function addproject()  {
 
@@ -218,11 +253,6 @@ public function editproj($proj_id) {
 $this->dispatch('edit-des');
     // implode($getproj->getTranslations('name', ['en']),) ;
 
-
-
-
-
-
 }
 
 
@@ -258,11 +288,6 @@ public function updateproj() {
             $this->getimgpath =   $this->imgsumnail_temp;
         }
 
-
-
-
-
-
  if( $this->images !==  json_decode($getres->images,true)) {
 
     Storage::deleteDirectory('public/images/'.$getres->name);
@@ -273,11 +298,7 @@ public function updateproj() {
             $this->images[$key] = $photos->store('images/'.$getres->name,'public');
 
 
-
-
         }
-
-
 
 }
 

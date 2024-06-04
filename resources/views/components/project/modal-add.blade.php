@@ -246,12 +246,15 @@ let editoren;
 
 
     DecoupledEditor
-        .create( document.querySelector( '#addproeditor' ),
+        .create( document.querySelector( '#addproeditor' ),{
         ckfinder:{
 
             uploadUrl:"{{route('ckeditor.upload',['_token'=> csrf_token()])}}",
 
-        }, )
+        }
+
+
+    })
         .then( editor => {
             editoren = editor;
             const toolbarContainer = document.querySelector( '#addpro-container' );
@@ -267,12 +270,15 @@ let editoren;
 
 
         DecoupledEditor
-        .create( document.querySelector( '#desarmain' ),
+        .create( document.querySelector( '#desarmain' ),{
         ckfinder:{
 
             uploadUrl:"{{route('ckeditor.upload',['_token'=> csrf_token()])}}",
 
-        }, )
+        }
+
+
+    })
         .then( editor => {
 
             editorar = editor;
@@ -294,7 +300,6 @@ document.querySelector( '#submit' ).addEventListener( 'click', () => {
     @this.des['en'] = editoren.getData();
 
 
-    // ...
 } );
 
 

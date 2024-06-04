@@ -53,7 +53,7 @@
 
 
             <!-- Page Content -->
-            <main>
+            <main class="pt-14 overflow-y-auto">
                 {{$slot}}
 
             </main>

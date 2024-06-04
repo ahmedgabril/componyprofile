@@ -1,12 +1,12 @@
 <div class="container mx-auto p-4 ">
 
-    <form wire:submit.prevent="updateproj" id="project-update-form" enctype="multipart/form-data">
+    <form wire:submit.prevent="updateserv" id="serveies-update-form" >
 
         <div class=" grid lg:grid-cols-3 sm:grid-cols-1 md:grid-cols-3 gap-4 ">
 
 
             <div>
-                <label for="cat_en"  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('projects.name.en')}}</label>
+                <label for="cat_en"  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('serveies.name.en')}}</label>
                 <input type="text"  wire:model.live ="name.en"  id="cat_en" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400
                   dark:text-white" placeholder="name.en"  />
@@ -15,7 +15,7 @@
             </div>
 
               <div>
-                <label for="cat_ar" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> {{__('projects.name.ar')}}</label>
+                <label for="cat_ar" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> {{__('serveies.name.ar')}}</label>
                 <input type="text" wire:model.live="name.ar"   id="cat_ar" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600
                 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name.ar"  />
@@ -24,56 +24,8 @@
 
 
 
-               <div class="w-full mx-auto">
-
-
-                        <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> {{__('projects.catogery-name')}}</label>
-                        <select id="countries" wire:model.live="catogery_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            @if($this->getproject_id)
-                            <option  selected>....</option>
-                        @foreach ($this->getproject_id as $item)
-
-                        <option value="{{$item->id}}">{{$item->name}}</option>
-                        @endforeach
-
-                        @endif
-
-
-                        </select>
-                        <div class="text-red-700">@error('catogery_id') {{ $message }} @enderror</div>
-
-
-
-             </div>
-
-
-        </div>
-
-
-
-
-        <div class=" grid lg:grid-cols-3 sm:grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-
-
-            <div>
-                <label for="cat_en"  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('projects.project_link')}}</label>
-                <input type="text"  wire:model.live ="project_link"  id="cat_en" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
-                 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400
-                  dark:text-white" placeholder="project_link"  />
-                  <div class="text-red-700">@error("project_link") {{ $message }} @enderror</div>
-
-            </div>
-
               <div>
-                <label for="cat_ar" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('projects.github_link')}}</label>
-                <input type="text" wire:model.live="github_link"   id="cat_ar" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
-                focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600
-                dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="github_link"  />
-               <div class="text-red-700">@error('github_link') {{ $message }} @enderror</div>
-              </div>
-
-              <div>
-                <label for="cat_ar" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('projects.youtube_url')}}</label>
+                <label for="cat_ar" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('serveies.youtube_url')}}</label>
                 <input type="text" wire:model.live="youtube_url"   id="cat_ar" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600
                 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="youtube_url"  />
@@ -81,14 +33,17 @@
               </div>
 
 
-
         </div>
+
+
+
+
 
 
        <div class="grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 gap-4 my-4">
 
             <div>
-                <label for="message0" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('projects.short-des_en')}}</label>
+                <label for="message0" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('serveies.short-des_en')}}</label>
                 <textarea id="message0" rows="4" wire:model="shortdes.en" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50
                 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700
                 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -117,10 +72,10 @@
    <div class="grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 gap-4 my-4">
 
     <div wire:ignore>
-        <label for="updateproeditor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('projects.des-ar')}}</label>
+        <label for="updateserveditor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('serveies.des-ar')}}</label>
 
-        <div id="updatepro-container"></div>
-        <div id="updateproeditor" wire:model.live="des.en" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50
+        <div id="updateserv-container"></div>
+        <div id="updateserveditor" wire:model.live="des.en" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50
         rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700
         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         placeholder="Write your thoughts here..."></div>
@@ -131,9 +86,9 @@
 
 
     <div  wire:ignore>
-        <label for="updatedesarmain" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('projects.des-en')}}</label>
-        <div id="updatedesar-container"></div>
-        <div id="updatedesarmain"  wire:model.live="des.ar"  class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50
+        <label for="updatedesarserv" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('serveies.des-en')}}</label>
+        <div id="updatedesarserv-container"></div>
+        <div id="updatedesarserv"  wire:model.live="des.ar"  class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50
         rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700
         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         placeholder="Write your thoughts here..."></div>
@@ -144,7 +99,7 @@
 <div class="grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 gap-4 my-4">
 
     <div x-data = "{src:''} " >
-        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="image-sumnail">{{__('projects.imgsumnail')}}</label>
+        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="image-sumnail">{{__('serveies.imgsumnail')}}</label>
 
 
         @if($this->imgsumnail_temp && $this->imgsumnail == null)
@@ -196,20 +151,21 @@
             <div class="grid grid-cols-4 gap-4">
 
                     @foreach($this->images as $key => $screen)
-                        <div class=" " style="position: relative">
+                        <div class=" " style="position: relative" wire:key="{{$key}}">
+
                             <a  href="#"
-                            style="  position: absolute;
-                         margin-right: 5px;
-                         margin-top: 6px;
-                 "
-                             wire:click.prevent="removeimg( {{$key}} , '{{$screen}}' )" class="btn-close" >   <svg  class="w-[20px] h-[26px] text-red-600 dark:text-red-600"
+                               style="  position: absolute;
+                            margin-right: 5px;
+                            margin-top: 6px;
+                    "
+                                wire:click.prevent="removeimg( {{$key}} , '{{$screen}}' )" class="btn-close" >   <svg  class="w-[20px] h-[26px] text-red-600 dark:text-red-600"
 
 
-                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 24 24">
-                                 <path fill-rule="evenodd" d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z" clip-rule="evenodd"/>
-                               </svg>
+                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd" d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z" clip-rule="evenodd"/>
+                                  </svg>
 
-                     </a>
+                        </a>
                             <img   src="{{asset('storage/'.$screen) }}" class=" object-cover h-36 w-full" height="150" width="150"/>
                         </div>
                     @endforeach
@@ -244,8 +200,8 @@
  <button
 
  type="submit"
- id="update-submit"
-   form="project-update-form"
+ id="update-serv-submit"
+   form="serveies-update-form"
  class="ms-1 inline-block rounded bg-success px-6 mx-5 pb-2 mt-2 pt-2.5 text-sm
  font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out
   hover:bg-green-900 hover:shadow-primary-2 focus:bg-green-800 focus:shadow-success-2 focus:outline-none focus:ring-0
@@ -256,7 +212,7 @@
    type="button"
 
    {{-- wire:click.prevent = "resetvalue" --}}
-   x-data @click="$dispatch('close-modal','updateproj')"
+   x-data @click="$dispatch('close-modal','update-serveies')"
    class="inline-block rounded bg-red-700 px-6 pb-2 pt-2.5 mt-2 text-xs font-medium uppercase leading-normal text-white
      dark:text-white transition duration-150 ease-in-out hover:bg-red-600 focus:bg-primary-accent-200 focus:outline-none focus:ring-0
       active:bg-primary-accent-200 dark:bg-red-700 dark:hover:bg-red-900 dark:focus:bg-red-900 dark:active:bg-red-400">
@@ -274,20 +230,20 @@
 
 
         DecoupledEditor
-            .create( document.querySelector( '#updateproeditor' ),{
+            .create( document.querySelector( '#updateserveditor' ),{
         ckfinder:{
 
             uploadUrl:"{{route('ckeditor.upload',['_token'=> csrf_token()])}}",
 
-        }
+        },
 
     })
             .then( editor => {
                 Updateeditoren = editor;
-                const toolbarContainer = document.querySelector( '#updatepro-container' );
+                const toolbarContainer = document.querySelector( '#updateserv-container' );
 
                 toolbarContainer.appendChild( editor.ui.view.toolbar.element );
-            } )
+            })
             .catch( error => {
                 console.error( error );
             } );
@@ -297,19 +253,18 @@
 
 
             DecoupledEditor
-            .create( document.querySelector( '#updatedesarmain' ),{
+            .create( document.querySelector( '#updatedesarserv' ),{
         ckfinder:{
 
             uploadUrl:"{{route('ckeditor.upload',['_token'=> csrf_token()])}}",
 
         }
 
-
     })
             .then( editor => {
 
                 Updateeditorar = editor;
-                const toolbarContainer = document.querySelector( '#updatedesar-container' );
+                const toolbarContainer = document.querySelector( '#updatedesarserv-container' );
 
                 toolbarContainer.appendChild( editor.ui.view.toolbar.element );
             } )
@@ -324,7 +279,7 @@
 
 
 
-    document.querySelector( '#update-submit' ).addEventListener( 'click', () => {
+    document.querySelector( '#update-serv-submit' ).addEventListener( 'click', () => {
         @this.des['ar'] = Updateeditorar.getData();
         @this.des['en'] = Updateeditoren.getData();
 
@@ -342,7 +297,7 @@
 
 });
 
-    Livewire.on('proj-updated',() =>{
+    Livewire.on('serv-updated',() =>{
 
 
 

@@ -12,6 +12,7 @@ use Livewire\WithFileUploads;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Validate;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class Hndelserveies extends Component
@@ -26,11 +27,13 @@ class Hndelserveies extends Component
     #[Layout('layouts.app')]
 
   public $sumnail_status= false;
+
      public $getlocal;
+
      public $imgsumnail_temp;
     public $sortdir = 'desc';
     public $getimgpath ;
-    public $projcet_id;
+    public $serveies_id;
 
 
 
@@ -124,7 +127,7 @@ class Hndelserveies extends Component
 
         if(!empty($this->images)) {
             foreach ($this->images as $key => $photos) {
-                $this->images[$key] = $photos->store('images/'.$this->getlocal,'public');
+     $this->images[$key] = $photos->store('images/'.$this->getlocal,'public');
 
 
 
@@ -167,15 +170,48 @@ class Hndelserveies extends Component
 }
 
 
+public function removeimg($key ,$path) {
+
+
+    Storage::deleteDirectory('public/'.$path);
+    $getpath = serves::where('id', $this->serveies_id)->value('images');
+
+    // Decode the JSON data (assuming it's stored as JSON)
+    $imagesArray = json_decode($getpath, true);
+
+    // Check if the desired path exists in the array
+    if (in_array($path, $imagesArray)) {
+        // Remove the path from the array
+        $updatedArray = array_diff($imagesArray, [$path]);
+
+        // Update the database record with the modified array
+        serves::where('id', $this->serveies_id)->update(['images' => json_encode($updatedArray)]);
+        unset($this->images[$key]);
+    }
+
+            // $this->images = json_encode($this->images);
 
 
 
-#[On('editproj')]
+
+    //array_splice($this->screenshots,$key);
+
+    //unset($this->images[$key])
+
+
+
+
+
+
+
+
+}
+#[On('editserv')]
 public function editserv($proj_id) {
 
 
 
-    $this->projcet_id = $proj_id;
+    $this->serveies_id = $proj_id;
     $getproj = serves::find($proj_id);
 
 
@@ -218,7 +254,7 @@ public function updateserv () {
     ]);
 
 
-    $getres=  serves::findOrFail($this->projcet_id);
+    $getres=  serves::findOrFail($this->serveies_id);
 
 
     // $this->getlocal = app()->getLocale() == "en" ? $this->name['en']: $this->name['ar'];
@@ -298,21 +334,21 @@ public function updateserv () {
     public function confirmdel($data) {
 
 
-     $proj = serves::find($data['projid']);
+     $serv = serves::find($data['servid']);
 
      Storage::deleteDirectory('public/images/'.$data['proname']);
      Storage::deleteDirectory('public/imgsumnail/'.$data['proname']);
 
 
-        $proj->delete();
+     $serv->delete();
 
         $this->dispatch('servdeleted');
             }
-    public function deleteconfirm($proj_id, $projname) {
+    public function deleteconfirm($serv_id, $servname) {
 
 
 
-        $this->dispatch('deleteserv',projid : $proj_id , proname: $projname);
+        $this->dispatch('deleteserv',servid : $serv_id ,servname: $servname);
 
 
     }

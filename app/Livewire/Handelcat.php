@@ -33,7 +33,7 @@ use WithPagination;
 public $sortdir = 'desc';
 
 public $catogery_id;
-public $sumnail_status = false;
+public $icon_status = false;
 public $getlocal;
 #[Rule([
     'name' => 'required',
@@ -48,8 +48,10 @@ public $getlocal;
 public $name = [];
 public $paginate = 10;
 
-#[Rule('required|image|max:1024')]
+#[Validate('required|image|max:1024')]
 public $icon;
+public $icon_temp;
+public $get_icon_path;
 #[Url(except: ' ',keep: true,history: true)]
 public $search = '';
 public function updatingSearch()
@@ -61,7 +63,7 @@ public function updatingSearch()
 
 public function chang_icon_status(){
 
-    $this->sumnail_status = true;
+    $this->icon_status = true;
   }
 
 
@@ -108,7 +110,7 @@ public function chang_icon_status(){
         ]);
         $this->resetvalue();
         $this->dispatch('categoryAdded'); // Emit an event for closing the modal
-
+        $this->dispatch('close-modal','addcat');
 
     }
 
@@ -127,26 +129,42 @@ public function chang_icon_status(){
     $this->name['en'] = $getcatogery->getTranslation('name','en') ;
 
 
-        $this->icon =  $getcatogery->icon;
+        $this->icon_temp =  $getcatogery->icon;
 
 
 
         }
             public function updatecatogery() {
 
-             $this->validate();
 
            $getres=  catogery::findOrFail($this->catogery_id);
+
+
+           if( !empty($this->icon) && $this->icon !==  $getres->icon){
+
+
+
+            Storage::deleteDirectory('public/icon/'.$getres->name);
+
+
+           $this->get_icon_path =  $this->icon->store('icon/'.$getres->name,'public');
+
+            }else{
+
+                $this->get_icon_path =   $this->icon_temp;
+            }
+
+
             $getres->update([
                 'name' => [
                     'en' => $this->name['en'],
                     'ar' =>$this->name['ar']
                 ],
-                'icon'=> $this->icon->store('icon/'.$this->getlocal,'public'),
+                'icon'=>  $this->get_icon_path == null ? $this->icon_temp: $this->get_icon_path,
 
             ]);
             $this->resetvalue();
-            $this->sumnail_status = false;
+            $this->icon_status = false;
             $this->dispatch('close-modal','handelcat');
             $this->dispatch('catogery-updated');
 

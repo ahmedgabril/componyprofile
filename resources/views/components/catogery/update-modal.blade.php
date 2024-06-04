@@ -21,16 +21,17 @@
           </div>
           <div x-data ="{src: null }">
 
+            <label class="block mb-2 mt-4 text-sm font-medium text-gray-900 dark:text-white" for="image-icons">{{__('catogery.icon')}}</label>
 
-          @if($this->icon && $this->sumnail_status == false)
+
+          @if($this->icon_temp &&  $this->icon == null  )
 
           <div class="mb-3 mt-4" >
 
 
-            <label class="block mb-2 mt-4 text-sm font-medium text-gray-900 dark:text-white" for="image-icons">{{__('catogery.icon')}}</label>
 
 
-              <img    class="" src="{{asset('storage/'.$this->icon)}}" height="200" width="250">
+              <img    class="" src="{{asset('storage/'.$this->icon_temp)}}" height="200" width="250">
 
 
 
@@ -39,7 +40,7 @@
 
       @endif
 
-          @if($this->sumnail_status)
+          @if($this->icon_status)
 
 
         <img x-on:click="$refs.icon.click()" :src= "src ? src :'' "   width="250" height="250"/>

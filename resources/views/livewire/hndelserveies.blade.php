@@ -1,10 +1,10 @@
 
 
-<div class=" overflow-y-auto mb-6">
+<div class="  mb-6 ">
 
     <div class="container mx-auto   my-16 shadow-md">
 
-        <h2 class="text-gray-800 dark:text-white p-4 mx-auto">{{ __('serveies.mangeserv') }}   </h2>
+        <h2 class="text-gray-600 dark:text-white p-4 mx-auto">{{ __('serveies.mangeserv') }}   </h2>
     </div>
     <div class="container mx-auto   my-16 p-5 ">
         <button x-data
@@ -35,10 +35,10 @@
 
 
 
- <x-modal name="update-erveies" maxWidth="5xl" title="{{__('serveies.updatebtn')}}" postion="top" resetdata="{{'resetvalue'}}" >
+ <x-modal name="update-serveies" maxWidth="5xl" title="{{__('serveies.updatebtn')}}" postion="top" resetdata="{{'resetvalue'}}" >
 
 
-    {{-- <x-project.modal-update/> --}}
+    <x-serveies.update-ser/>
 
 
 

@@ -16,10 +16,10 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('title')->nullable();
-            $table->string('shortdes')->nullable();
-            $table->text('des')->nullable();
+            $table->text('shortdes')->nullable();
+            $table->longText('des')->nullable();
             $table->text('imgsumnail')->nullable();
-            $table->text('images')->nullable();
+            $table->longText('images')->nullable();
             $table->string('project_link')->nullable();
             $table->string('github_link')->nullable();
             $table->string('youtube_url')->nullable();

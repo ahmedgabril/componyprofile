@@ -1,24 +1,7 @@
 <div>
 
-    <?php
 
-    use App\Livewire\Actions\Logout;
-    use Livewire\Volt\Component;
-
-    new class extends Component
-    {
-        /**
-         * Log the current user out of the application.
-         */
-        public function logout(Logout $logout): void
-        {
-            $logout();
-
-            $this->redirect('/', navigate: true);
-        }
-    }; ?>
-
-    <nav class="bg-white border-gray-200 dark:bg-gray-800"  >
+    <nav class="bg-white border-gray-200 dark:bg-gray-800 fixed left-0 z-50 w-full"  >
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
 
           <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">

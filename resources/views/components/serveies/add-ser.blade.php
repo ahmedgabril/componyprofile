@@ -128,26 +128,20 @@
 
         <div class="uplodefile">
 
-
-            {{-- @if ($this->images && is_array($this->images) || is_object($this->images))
+{{--
+            @if ($this->images)
             <div class="grid grid-cols-4 gap-4">
-
-                    @foreach($this->images as $key => $screen)
-                        <div class=" " style="position: relative">
-
-                            <a  href="#"
-                               style="  position: absolute;
-                            margin-right: 5px;
-                            margin-top: 6px;
-                        background-color: red;"
-                                wire:click.prevent="removeimg('{{$key}}')" class="btn-close" >x</a>-
-                            <img src="{{  $screen->temporaryUrl() }}" class="" height="200" width="200"/>
-                        </div>
-                    @endforeach
-
-          </div>
-
-          @endif --}}
+                @foreach($this->images as $key => $screen)
+                    <div style="position: relative">
+                        <!-- Close button to remove the image -->
+                        <a href="#" style="position: absolute; margin-right: 5px; margin-top: 6px; background-color: red;"
+                           wire:click.prevent="removeimg('{{ $key }}')" class="btn-close">x</a>
+                        <!-- Display the image -->
+                        <img src="{{ $screen->temporaryUrl() }}" height="200" width="200"/>
+                    </div>
+                @endforeach
+            </div>
+        @endif --}}
                 <div class="">
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">{{__('serveies.images')}}</label>
                     <input
@@ -203,22 +197,22 @@ let editoren;
 DecoupledEditor
     .create( document.querySelector( '#desen' ), {
 
-        ckfinder:{
+        // Configure the toolbar
 
-            uploadUrl:"{{route('ckeditor.upload',['_token'=> csrf_token()])}}",
-
+        ckfinder: {
+            uploadUrl: "{{route('ckeditor.upload', ['_token' => csrf_token() ])}}",
         },
+        // Add heading options to the editor configuration
+
     })
     .then( editor => {
         editoren = editor;
         const toolbarContainer = document.querySelector( '#desen-container' );
-
         toolbarContainer.appendChild( editor.ui.view.toolbar.element );
     })
     .catch( error => {
         console.error( error );
     });
-
 
 
 
