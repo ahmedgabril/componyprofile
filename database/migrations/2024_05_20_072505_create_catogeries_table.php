@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('catogeries', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->tinyText('icon')->nullable();
+
             $table->timestamps();
         });
     }

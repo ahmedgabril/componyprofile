@@ -7,9 +7,18 @@
         <h2 class="text-gray-800 dark:text-white p-4 mx-auto">{{ __('catogery.mangecat') }}   </h2>
     </div>
     <div class="container mx-auto   my-16 p-5 ">
+        <button
+        x-data @click="$dispatch('open-modal','addcat')"
+        class=" mb-5 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
 
 
-<x-modal name="handelcat" title="{{ __('catogery.addcatoegery') }} " resetdata="{{'resetvalue'}}" >
+        {{ __('catogery.addcatoegery') }}
+
+
+        </button>
+
+
+<x-modal name="handelcat" title="{{ __('catogery.updatecat') }} " resetdata="{{'resetvalue'}}" >
 
     <x-catogery.update-modal/>
         <!-- Component content here -->
@@ -20,21 +29,19 @@
 
 </div>
  <!-- Modal toggle -->
-<button data-modal-target="catogery-modal" data-modal-toggle="catogery-modal"
-class=" mb-5 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+
+<x-modal name="addcat" title="{{ __('catogery.addcatoegery') }} " resetdata="{{'resetvalue'}}" >
+
+    <x-catogery.add-modal/>
+        <!-- Component content here -->
 
 
-{{ __('catogery.addcatoegery') }}
 
-
-</button>
-
-
+</x-modal>
 
  <!-- Main modal -->
-<x-catogery.add-modal>
 
-</x-catogery.add-modal>
+
 
 
 
@@ -88,36 +95,43 @@ class=" mb-5 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:o
     @forelse($catogeries as $item)
 
 
-            <div class="" wire:key="{{$item->id}}" >
+            <div class="" wire:key="{{$item->id}}">
 
                 <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
 
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-wrap  " wire:key="$item->id">
                         {{ $item->name }}  </h5>
-                        <div class="flex justify-center">
+                        <div class="flex  justify-around">
 
+                                    <div class="flex mt-4">
+                                        <svg class="w-7 h-7 text-green-800 dark:text-green-700"   wire:click.prevent="editcatogery({{ $item->id }})"
 
-                            <svg class="w-6 h-6 text-green-800 dark:text-green-700"   wire:click.prevent="editcatogery({{ $item->id }})"
+                                            x-data @click="$dispatch('open-modal','handelcat')"
 
-                                x-data @click="$dispatch('open-modal','handelcat')"
-
-                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778"/>
-                              </svg>
-
-
-
+                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778"/>
+                                        </svg>
 
 
 
 
 
-                            <svg  class="w-[19px] h-[19px] text-red-700 dark:text-red-800"
 
-                            wire:click.prevent="deleteconfirm({{ $item->id }})"
-                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                                <path fill-rule="evenodd" d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z" clip-rule="evenodd"/>
-                              </svg>
+
+
+                                        <svg  class="w-[28px] h-[28px] text-red-700 dark:text-red-800"
+
+                                        wire:click.prevent="deleteconfirm({{ $item->id }})"
+                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                            <path fill-rule="evenodd" d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z" clip-rule="evenodd"/>
+                                        </svg>
+
+                                    </div>
+
+                                <div class="mt-4">
+                                    <img  class=" object-cover rounded-lg"  src="{{"/storage/".$item->icon}}" width="65" height="65" alt="icon"/>
+
+                                </div>
 
                         </div>
 
@@ -228,15 +242,18 @@ window.addEventListener('deletecat', (event) => {
         showConfirmButton: false,
     });
 
-        const modal = document.getElementById('closemodaladd');
-
-                if (modal) {
-            modal.click();
-        }
 
 
     });
 
+
+    window.addEventListener('close-modal',() => {
+
+
+
+        Livewire.dispatch('resetvalue')
+
+        });
 
 
 

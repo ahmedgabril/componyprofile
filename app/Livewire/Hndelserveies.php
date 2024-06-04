@@ -2,9 +2,8 @@
 
 namespace App\Livewire;
 
-use App\Models\project;
+use App\Models\serves;
 use Livewire\Component;
-use App\Models\catogery;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
@@ -15,8 +14,12 @@ use Livewire\Attributes\Computed;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Storage;
 
-class Handelproject extends Component
+class Hndelserveies extends Component
 {
+
+
+
+
 
     use WithFileUploads;
     use WithPagination;
@@ -28,31 +31,59 @@ class Handelproject extends Component
     public $sortdir = 'desc';
     public $getimgpath ;
     public $projcet_id;
-    #[Validate('required|int')]
-    public $catogery_id;
+
 
 
   #[Validate('nullable|url')]
     public $youtube_url;
 
 
-    #[Rule('nullable|url')]
-    public $github_link;
-    #[Validate('nullable|url')]
-    public $project_link;
-    #[Validate]
 
+    #[Validate([
+        'images' => 'sometimes:image|max:1024',
+        'images.*' => [
+            'sometimes:image|max:1024',
+
+
+        ],
+    ])]
     public $images = [];
 
 
-    #[Validate('required|image|max:1024')]
+    #[Rule('required|image|max:1024')]
     public $imgsumnail;
-    #[Validate]
+    #[Validate([
+        'name' => 'required',
+        'name.*' => [
+            'required',
+            'min:5',
+            'max:65'
+
+        ],
+
+    ])]
     public $name = [];
-    #[Validate]
+    #[Validate([
+        'shortdes' => 'required',
+        'shortdes.*' => [
+            'required',
+            'min:20',
+            'max:255'
+
+        ],
+    ])]
     public $shortdes = [];
 
-    #[Validate]
+    #[Validate([
+        'des' => 'required',
+        'des.*' => [
+            'required',
+            'min:20',
+
+        ],
+
+
+    ])]
     public $des = [];
     public $paginate = 5;
 
@@ -65,42 +96,6 @@ class Handelproject extends Component
 
     }
 
-
-    public function rules()
-    {
-        return [
-            'shortdes' => 'required',
-            'shortdes.*' => [
-                'required',
-                'min:20',
-                'max:255'
-
-            ],
-            'name' => 'required',
-            'name.*' => [
-                'required',
-                'min:5',
-                'max:65'
-
-            ],
-
-
-            'images' => 'sometimes:image|max:1024',
-            'images.*' => [
-                'sometimes:image|max:1024',
-
-
-            ],
-
-            'des' => 'required',
-            'des.*' => [
-                'required',
-                'min:20',
-
-            ],
-        ];
-    }
-
   public function changstatus(){
 
     $this->sumnail_status = true;
@@ -108,36 +103,23 @@ class Handelproject extends Component
 
     public function render()
     {
-        return view('livewire.handelproject',[
-
-
-        ]);
+        return view('livewire.hndelserveies');
     }
 
 
     #[Computed]
-    public function getproject_id(){
-
-       return catogery::get();
+    public function getserveies(){
+    return      serves::where('name', 'like', '%'.$this->search.'%')
+    -> orderBy('id', $this->sortdir)->paginate($this->paginate);
 
     }
 
-        #[Computed]
-        public function getprojects(){
-        return      project::with('catogery')->where('name', 'like', '%'.$this->search.'%')
-        // ->orWhere('name->ar','like', '%'.$this->search.'%')
-        -> orderBy('id', $this->sortdir)->paginate($this->paginate);
 
-        }
+    public function addserveies()  {
 
 
 
-
-    public function addproject()  {
-
-
-
-        $valdat = $this->validate();
+        $validated = $this->validate();
         $this->getlocal = app()->getLocale() == "en" ? $this->name['en']: $this->name['ar'];
 
         if(!empty($this->images)) {
@@ -152,7 +134,7 @@ class Handelproject extends Component
    $this->images = json_encode($this->images);
 
 
-    project::create([
+       serves::create([
         'name' => [
            'en' => $this->name['en'],
            'ar' => $this->name['ar'],
@@ -166,10 +148,7 @@ class Handelproject extends Component
             'en' => $this->des['en'],
             'ar' => $this->des['ar']
          ],
-         'project_link' => $this->project_link,
-         'catogery_id' => $this->catogery_id,
          'youtube_url' => $this->youtube_url,
-         'github_link' => $this->github_link,
          'imgsumnail'=> $this->imgsumnail->store('imgsumnail/'.$this->getlocal,'public'),
          'images'=>  $this->images,
 
@@ -181,23 +160,26 @@ class Handelproject extends Component
 
 
     $this->resetvalue();
-    $this->dispatch('close-modal','handel-add-proj');
-    $this->dispatch('projAdded'); // Emit an event for closing the modal
+    $this->dispatch('close-modal','add-serveies');
+    $this->dispatch('serv-aadded'); // Emit an event for closing the modal
 
 
 }
 
 
+
+
+
 #[On('editproj')]
-public function editproj($proj_id) {
+public function editserv($proj_id) {
 
 
 
     $this->projcet_id = $proj_id;
-    $getproj = project::find($proj_id);
+    $getproj = serves::find($proj_id);
 
 
-    $this->name['ar'] = implode($getproj->getTranslations('name', ['ar']),) ;
+    $this->name['ar'] =$getproj->getTranslation('name','ar');
     $this->name['en'] = $getproj->getTranslation('name', 'en');
 
 
@@ -208,15 +190,15 @@ public function editproj($proj_id) {
     $this->shortdes['en'] = $getproj->getTranslation('shortdes', 'en');
 
     $this->shortdes['ar'] = $getproj->getTranslation('shortdes', 'ar') ;
-    $this->catogery_id = $getproj->catogery_id;
+
     $this->youtube_url = $getproj->youtube_url;
-    $this->github_link = $getproj->github_link;
-    $this->project_link = $getproj->project_link;
+
+
     $this->imgsumnail_temp = $getproj->imgsumnail;
     $this->images =  json_decode($getproj->images,true);
 
-$this->dispatch('edit-des');
-    // implode($getproj->getTranslations('name', ['en']),) ;
+    $this->dispatch('edit-des');
+
 
 
 
@@ -225,9 +207,7 @@ $this->dispatch('edit-des');
 
 }
 
-
-
-public function updateproj() {
+public function updateserv () {
 
 
 
@@ -238,7 +218,7 @@ public function updateproj() {
     ]);
 
 
-    $getres=  project::findOrFail($this->projcet_id);
+    $getres=  serves::findOrFail($this->projcet_id);
 
 
     // $this->getlocal = app()->getLocale() == "en" ? $this->name['en']: $this->name['ar'];
@@ -298,17 +278,16 @@ public function updateproj() {
          'en' => $this->des['en'],
          'ar' => $this->des['ar']
       ],
-      'project_link' => $this->project_link,
-      'catogery_id' => $this->catogery_id,
+
       'youtube_url' => $this->youtube_url,
-      'github_link' => $this->github_link,
+
       'imgsumnail'=> $this->getimgpath == null ? $this->imgsumnail_temp: $this->getimgpath,
       'images'=>  $this->images,
 
    ]);
 
-   $this->dispatch('close-modal','updateproj');
-   $this->dispatch('proj-updated');
+   $this->dispatch('close-modal','update-serveies');
+   $this->dispatch('serv-updated');
 
 
    $this->resetvalue();
@@ -319,7 +298,7 @@ public function updateproj() {
     public function confirmdel($data) {
 
 
-     $proj = project::find($data['projid']);
+     $proj = serves::find($data['projid']);
 
      Storage::deleteDirectory('public/images/'.$data['proname']);
      Storage::deleteDirectory('public/imgsumnail/'.$data['proname']);
@@ -327,33 +306,31 @@ public function updateproj() {
 
         $proj->delete();
 
-        $this->dispatch('projdeleted');
+        $this->dispatch('servdeleted');
             }
     public function deleteconfirm($proj_id, $projname) {
 
 
 
-        $this->dispatch('deleteproj',projid : $proj_id , proname: $projname);
+        $this->dispatch('deleteserv',projid : $proj_id , proname: $projname);
 
 
     }
-            #[On('resetvalue')]
-        public function resetvalue() {
+
+    #[On('resetvalue')]
+    public function resetvalue() {
 
 
 
 
-        $this->name = [];
-        $this->shortdes = [];
-        $this->des = [];
-        $this->imgsumnail = null;
-        $this->images = [];
-        $this->youtube_url = '';
-        $this->github_link = '';
-        $this->catogery_id='';
-        $this->project_link='';
-        $this->resetValidation();
-        $this->resetErrorBag();
+    $this->name = [];
+    $this->shortdes = [];
+    $this->des = [];
+    $this->imgsumnail = null;
+    $this->images = [];
+    $this->youtube_url = '';
+    $this->resetValidation();
+    $this->resetErrorBag();
 
-       }
    }
+}

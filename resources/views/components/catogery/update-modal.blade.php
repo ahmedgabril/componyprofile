@@ -5,26 +5,65 @@
 
         <div>
             <label for="cat_en"  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('catogery.catname_en') }}</label>
-            <input type="text"  wire:model.live ="name_en"  id="cat_en" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+            <input type="text"  wire:model.live ="name.en"  id="cat_en" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
              focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400
               dark:text-white" placeholder="{{ __('catogery.catname_en') }}"  />
-              <div class="text-red-700">@error('name_en') {{ $message }} @enderror</div>
+              <div class="text-red-700">@error('name.en') {{ $message }} @enderror</div>
 
         </div>
 
           <div>
             <label for="cat_ar" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('catogery.catname_ar') }}</label>
-            <input type="text" wire:model.live="name_ar"   id="cat_ar" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+            <input type="text" wire:model.live="name.ar"   id="cat_ar" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
             focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600
             dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="{{ __('catogery.catname_ar') }}"  />
-           <div class="text-red-700">@error('name_ar') {{ $message }} @enderror</div>
+           <div class="text-red-700">@error('name.ar') {{ $message }} @enderror</div>
+          </div>
+          <div x-data ="{src: null }">
 
 
+          @if($this->icon && $this->sumnail_status == false)
+
+          <div class="mb-3 mt-4" >
+
+
+            <label class="block mb-2 mt-4 text-sm font-medium text-gray-900 dark:text-white" for="image-icons">{{__('catogery.icon')}}</label>
+
+
+              <img    class="" src="{{asset('storage/'.$this->icon)}}" height="200" width="250">
+
+
+
+          </div>
+
+
+      @endif
+
+          @if($this->sumnail_status)
+
+
+        <img x-on:click="$refs.icon.click()" :src= "src ? src :'' "   width="250" height="250"/>
+        @endif
+       <input
+       wire:change="chang_icon_status"
+
+       x-ref="icon" accept="image/*" class=" w-full text-sm hidden text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400
+        focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" wire:model="icon"
+
+      @change=" src = URL.createObjectURL($event.target.files[0])"
+         id="image-icons" type="file">
+
+
+         @error('icon') <span class="text-danger ">{{ $message }}</span> @enderror
+
+
+
+    </div>
         </form>
 
  <!-- Modal footer -->
  <div
- class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 p-4 dark:border-white/10">
+ class="flex flex-shrink-0 flex-wrap items-center justify-center rounded-b-md border-t-2 border-neutral-100 p-4 dark:border-white/10">
  <button
    type="button"
 

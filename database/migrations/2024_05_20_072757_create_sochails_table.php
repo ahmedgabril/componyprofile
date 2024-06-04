@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('sochails', function (Blueprint $table) {
             $table->id();
+            $table->string('youtube');
+            $table->string('facebook');
+            $table->string('linkedin');
+            $table->string('whatsup');
+            $table->string('tictok');
+            $table->string('twitter');
+            $table->string('gmail');
+            $table->string('telgram');
+
+
             $table->timestamps();
         });
     }

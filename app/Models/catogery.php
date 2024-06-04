@@ -11,7 +11,7 @@ class catogery extends Model
 {
     use HasFactory;
     use HasTranslations;
-    public $fillable = ['name', 'fallback_locale'];
+    public $fillable = ['name', 'fallback_locale','icon'];
 
     public $translatable = ['name'];
 

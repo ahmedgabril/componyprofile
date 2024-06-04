@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('serves', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->nullable();
+            $table->string('price')->nullable();
+            $table->string('shortdes')->nullable();
+            $table->text('des')->nullable();
+            $table->text('imgsumnail')->nullable();
+            $table->text('images')->nullable();
+            $table->string('youtube_url')->nullable();
             $table->timestamps();
         });
     }

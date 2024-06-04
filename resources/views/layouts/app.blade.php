@@ -41,7 +41,7 @@
         <script src="{{asset('asset/backend/js/ckedtior.js')}}"></script>
         {{-- <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script> --}}
 
-{{-- @livewireStyles --}}
+@livewireStyles
 
     </head>
     <body class="bg-gray-50 dark:bg-gray-800">
@@ -64,7 +64,7 @@
 
 
 
-{{-- @livewireScripts --}}
+@livewireScripts
 
 
     </body>

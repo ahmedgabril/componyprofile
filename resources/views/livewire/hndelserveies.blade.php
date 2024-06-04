@@ -4,26 +4,25 @@
 
     <div class="container mx-auto   my-16 shadow-md">
 
-        <h2 class="text-gray-800 dark:text-white p-4 mx-auto">{{ __('projects.mangeproj') }}   </h2>
+        <h2 class="text-gray-800 dark:text-white p-4 mx-auto">{{ __('serveies.mangeserv') }}   </h2>
     </div>
     <div class="container mx-auto   my-16 p-5 ">
         <button x-data
-        x-data @click="$dispatch('open-modal','handel-add-proj')"
+        x-data @click="$dispatch('open-modal','add-serveies')"
         class=" mb-5 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
 
 
-        {{ __('projects.addproj') }}
+        {{ __('serveies.addserv') }}
 
 
         </button>
 
 
 
-<x-modal name="handel-add-proj" maxWidth="5xl" title="{{ __('projects.addproj') }} " postion="top" resetdata="{{'resetvalue'}}" >
+<x-modal name="add-serveies" maxWidth="5xl" title="{{ __('serveies.addserv') }} " postion="top" resetdata="{{'resetvalue'}}" >
 
 
-<x-project.modal-add/>
-
+<x-serveies.add-ser/>
 
 
 
@@ -36,10 +35,10 @@
 
 
 
- <x-modal name="updateproj" maxWidth="5xl" title=" Update Project" postion="top" resetdata="{{'resetvalue'}}" >
+ <x-modal name="update-erveies" maxWidth="5xl" title="{{__('serveies.updatebtn')}}" postion="top" resetdata="{{'resetvalue'}}" >
 
 
-    <x-project.modal-update/>
+    {{-- <x-project.modal-update/> --}}
 
 
 
@@ -93,7 +92,7 @@
     <div class=" grid  md:grid-cols-4 lg:grid-cols-5 sm:grid-cols-1 gap-4 ">
 
 
-    @forelse($this->getprojects as $item)
+    @forelse($this->getserveies as $item)
 
 
     <div class=" card-pro h-96 mb-4   bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700" wire:key="{{$item->id}}" >
@@ -117,16 +116,13 @@
 
 
          <div class="flex cursor-pointer">
-         <a href="http://127.0.0.1:8000/en/handelcat?search={{$item->catogery->name}}" wire:navigate class=" text-orange-600 mx-2">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" stroke-width="1.5" stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
-              </svg>
+
 
          </a>
 
-               <svg class="w-6 h-7 text-green-800 dark:text-green-700"   wire:click.prevent="editproj({{ $item->id }})"
+               <svg class="w-6 h-7 text-green-800 dark:text-green-700"   wire:click.prevent="editserv({{ $item->id }})"
 
-            x-data @click="$dispatch('open-modal','updateproj')"
+            x-data @click="$dispatch('open-modal','update-serveies')"
 
         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778"/>
@@ -167,7 +163,7 @@
 
 
 </div>
-<div class="my-6 p-4">{{$this->getprojects->links( data: ['scrollTo' => false])}}</div>
+<div class="my-6 p-4">{{$this->getserveies->links( data: ['scrollTo' => false])}}</div>
 
 
 
@@ -193,7 +189,7 @@
 <script>
 
 
-Livewire.on('proj-updated',() =>{
+Livewire.on('serv-updated',() =>{
 
 
 
@@ -211,7 +207,7 @@ Livewire.on('proj-updated',() =>{
 
 
 });
-window.addEventListener('deleteproj', (event) => {
+window.addEventListener('deleteserv', (event) => {
 
     const data = event.detail;
     // const projname = event.detail['proname'];
@@ -235,7 +231,7 @@ window.addEventListener('deleteproj', (event) => {
     });
 
 
-    Livewire.on('projdeleted', (event) => {
+    Livewire.on('servdeleted', (event) => {
 
 
 

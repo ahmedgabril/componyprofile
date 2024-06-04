@@ -4,8 +4,11 @@ return [
 
 "dashboard" => "Dashboard",
 "categories" => "Categories",
-"handelcat" => "Handelcat",
-"handelproject" => "HandelProjects",
-"projctes"=> "P[rojects",
+"handelcat" => "Handel cat",
+"handelproject" => "Handel Projects",
+"projctes"=> "Projects",
+"serveies"=> "Serveies",
+"handlserveies"=> "Mange Serveies",
+
 
 ];

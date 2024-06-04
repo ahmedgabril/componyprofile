@@ -149,7 +149,7 @@
 
         @if($this->imgsumnail_temp && $this->imgsumnail == null)
 
-        <div class="mb-3 col-md-6" style="position: relative">
+        <div class="mb-3 mt-2" style="position: relative">
 
 
 
@@ -266,9 +266,14 @@
     let Updateeditorar;
     let updateeditoren;
 
-    document.addEventListener('livewire:navigated', () => {
+
         DecoupledEditor
-            .create( document.querySelector( '#updateproeditor' ) )
+            .create( document.querySelector( '#updateproeditor' ),
+        ckfinder:{
+
+            uploadUrl:"{{route('ckeditor.upload',['_token'=> csrf_token()])}}",
+
+        }, )
             .then( editor => {
                 Updateeditoren = editor;
                 const toolbarContainer = document.querySelector( '#updatepro-container' );
@@ -284,7 +289,12 @@
 
 
             DecoupledEditor
-            .create( document.querySelector( '#updatedesarmain' ) )
+            .create( document.querySelector( '#updatedesarmain' ),
+        ckfinder:{
+
+            uploadUrl:"{{route('ckeditor.upload',['_token'=> csrf_token()])}}",
+
+        }, )
             .then( editor => {
 
                 Updateeditorar = editor;
@@ -298,43 +308,10 @@
 
 
 
-    },{ once: true });
-
-
-
-    document.addEventListener('DOMContentLoaded',() => {
-
-          DecoupledEditor
-            .create( document.querySelector( '#updateproeditor' ) )
-            .then( editor => {
-                Updateeditoren = editor;
-                const toolbarContainer = document.querySelector( '#updatepro-container' );
-
-                toolbarContainer.appendChild( editor.ui.view.toolbar.element );
-            } )
-            .catch( error => {
-                console.error( error );
-            } );
 
 
 
 
-
-             DecoupledEditor
-            .create( document.querySelector( '#updatedesarmain' ) )
-            .then( editor => {
-                Updateeditorar = editor;
-                const toolbarContainer = document.querySelector( '#updatedesar-container' );
-
-                toolbarContainer.appendChild( editor.ui.view.toolbar.element );
-            } )
-            .catch( error => {
-                console.error( error );
-            } );
-
-
-
-    });
 
     document.querySelector( '#update-submit' ).addEventListener( 'click', () => {
         @this.des['ar'] = editorar.getData();

@@ -3,31 +3,53 @@
 namespace App\Livewire;
 
 
-use Livewire\Attributes\Lazy;
 use Livewire\Component;
 use App\Models\catogery;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
+use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use Livewire\Attributes\Lazy;
+use Livewire\Attributes\Rule;
 
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
+use Illuminate\Support\Facades\Storage;
 
 
 class Handelcat extends Component
 {
 
-use WithPagination;
-  #[Layout('layouts.app')]
 
-  #[Validate]
+
+
+use WithFileUploads;
+use WithPagination;
+
+
+
+#[Layout('layouts.app')]
 
 public $sortdir = 'desc';
-public $catogery_id;
-public $name_en;
-public $paginate = 10;
-public $name_ar;
 
+public $catogery_id;
+public $sumnail_status = false;
+public $getlocal;
+#[Rule([
+    'name' => 'required',
+    'name.*' => [
+        'required',
+        'min:5',
+        'max:65'
+
+    ],
+
+])]
+public $name = [];
+public $paginate = 10;
+
+#[Rule('required|image|max:1024')]
+public $icon;
 #[Url(except: ' ',keep: true,history: true)]
 public $search = '';
 public function updatingSearch()
@@ -37,6 +59,10 @@ public function updatingSearch()
 }
 
 
+public function chang_icon_status(){
+
+    $this->sumnail_status = true;
+  }
 
 
 // public function placeholder()
@@ -45,13 +71,6 @@ public function updatingSearch()
 
 //     return view('components.placeholder');
 // }
-public function rules()
-{
-    return [
-        'name_en' => 'required|min:5|max:255',
-        'name_ar' => 'required|min:5|max:255',
-    ];
-}
 
     public function render()
     {
@@ -62,8 +81,8 @@ public function rules()
 
 
 
-            'catogeries'=> catogery::where('name->en', 'like', '%'.$this->search.'%')
-            ->orWhere('name->ar','like', '%'.$this->search.'%')
+            'catogeries'=> catogery::where('name', 'like', '%'.$this->search.'%')
+
 
             -> orderBy('id', $this->sortdir)->paginate($this->paginate),
 
@@ -75,12 +94,17 @@ public function rules()
 
     public function addcatogery()  {
 
-            $this->validate();
+
+        $valdat = $this->validate();
+        $this->getlocal = app()->getLocale() == "en" ? $this->name['en']: $this->name['ar'];
+
         catogery::create([
             'name' => [
-               'en' => $this->name_en,
-               'ar' => $this->name_ar
-            ],
+                'en' => $this->name['en'],
+                'ar' => $this->name['ar'],
+             ],
+
+            'icon'=> $this->icon->store('icon/'.$this->getlocal,'public'),
         ]);
         $this->resetvalue();
         $this->dispatch('categoryAdded'); // Emit an event for closing the modal
@@ -95,33 +119,34 @@ public function rules()
             $getcatogery = catogery::find($catogeryid);
 
 
-            $this->name_ar = implode($getcatogery->getTranslations('name', ['ar']),) ;
+    $this->name['ar'] = $getcatogery->getTranslation('name','ar') ;
 
 
 
 
-    $this->name_en = implode($getcatogery->getTranslations('name', ['en']),) ;
+    $this->name['en'] = $getcatogery->getTranslation('name','en') ;
 
 
-
+        $this->icon =  $getcatogery->icon;
 
 
 
         }
             public function updatecatogery() {
 
-             $this->validate([
-                'name_en' => 'required|min:5|max:255',
-                'name_ar' => 'required|min:5|max:255',
+             $this->validate();
 
-            ]);
            $getres=  catogery::findOrFail($this->catogery_id);
             $getres->update([
                 'name' => [
-                    'en' => $this->name_en,
-                    'ar' =>$this->name_ar
+                    'en' => $this->name['en'],
+                    'ar' =>$this->name['ar']
                 ],
+                'icon'=> $this->icon->store('icon/'.$this->getlocal,'public'),
+
             ]);
+            $this->resetvalue();
+            $this->sumnail_status = false;
             $this->dispatch('close-modal','handelcat');
             $this->dispatch('catogery-updated');
 
@@ -130,10 +155,10 @@ public function rules()
         #[On('confirmdel')]
         public function confirmdel($category_id) {
 
+            $delcat = catogery::find($category_id);
+       Storage::deleteDirectory('public/icon/'.$delcat->name);
 
 
-
-      $delcat = catogery::find($category_id);
       $delcat->delete();
 
    $this->dispatch('catogerydeleted');
@@ -147,14 +172,15 @@ public function rules()
 
 
     }
-
+    #[On('resetvalue')]
 public function resetvalue() {
 
 
 
  $this->resetValidation();
  $this->resetErrorBag();
-$this->name_ar = '';
-$this->name_en = '';
+$this->name = [];
+
+$this->icon = '';
 }
 }
