@@ -11,14 +11,10 @@ class catogery extends Model
 {
     use HasFactory;
     use HasTranslations;
-    public $fillable = ['name', 'fallback_locale','icon'];
+    public $fillable = ['name', 'icon'];
 
     public $translatable = ['name'];
 
-    public function getFallbackLocale() : string
-    {
-        return $this->fallback_locale;
-    }
 
     public function project(): HasOne
     {

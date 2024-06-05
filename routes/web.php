@@ -1,5 +1,6 @@
 
 <?php
+use App\Livewire\Handelfacts;
 use Livewire\Livewire;
 use App\Livewire\Handelcat;
 use App\Livewire\Handelprofile;
@@ -35,6 +36,7 @@ Route::group([
     Route::get('handelcat', Handelcat::class)->name('handelcat');
     Route::get('handelproject', Handelproject::class)->name('handelproject');
     Route::get('handelserveies', Hndelserveies::class)->name('handelserveies');
+    Route::get('handelfact', Handelfacts::class)->name('handelfact');
     Route::get('handelpro', Handelprofile::class)->name('handelpro');
     Route::get('handelsetting', Handelsetting::class)->name('handelsetting');
 

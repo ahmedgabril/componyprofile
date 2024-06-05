@@ -4,11 +4,11 @@
 
     <div class="container mx-auto   my-16 shadow-md">
 
-        <h2 class="text-gray-800 dark:text-white p-4 mx-auto">{{ __('catogery.mangecat') }}   </h2>
+        <h2 class="text-gray-800 dark:text-white p-4 mx-auto">{{ __('catogery.mangecat') }}   handel-fact</h2>
     </div>
     <div class="container mx-auto   my-16 p-5 ">
         <button
-        x-data @click="$dispatch('open-modal','addcat')"
+        x-data @click="$dispatch('open-modal','addfact')"
         class=" mb-5 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
 
 
@@ -18,10 +18,10 @@
         </button>
 
 
-<x-modal name="handelcat" title="{{ __('catogery.updatecat') }} " resetdata="{{'resetvalue'}}" >
+<x-modal name="updatefact" title="{{ __('catogery.updatecat') }} " resetdata="{{'resetvalue'}}" >
 
-    <x-catogery.update-modal/>
-        <!-- Component content here -->
+
+    <x-fact.update-fact/>
 
 
 
@@ -30,9 +30,9 @@
 </div>
  <!-- Modal toggle -->
 
-<x-modal name="addcat" title="{{ __('catogery.addcatoegery') }} " resetdata="{{'resetvalue'}}" >
+<x-modal name="addfact" title="{{ __('catogery.addcatoegery') }} " resetdata="{{'resetvalue'}}" >
 
-    <x-catogery.add-modal/>
+    <x-fact.add-fact/>
         <!-- Component content here -->
 
 
@@ -92,7 +92,7 @@
     <div class=" grid  md:grid-cols-4 lg:grid-cols-5 sm:grid-cols-1 gap-4 ">
 
 
-    @forelse($catogeries as $item)
+    @forelse($facts as $item)
 
 
             <div class="" wire:key="{{$item->id}}">
@@ -104,9 +104,9 @@
                         <div class="flex  justify-around">
 
                                     <div class="flex mt-4">
-                                        <svg class="w-7 h-7 text-green-800 dark:text-green-700"   wire:click.prevent="editcatogery({{ $item->id }})"
+                                        <svg class="w-7 h-7 text-green-800 dark:text-green-700"   wire:click.prevent="editfact({{ $item->id }})"
 
-                                            x-data @click="$dispatch('open-modal','handelcat')"
+                                            x-data @click="$dispatch('open-modal','updatefact')"
 
                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778"/>
@@ -128,8 +128,9 @@
 
                                     </div>
 
-                                <div class="mt-4">
-                                    <img  class=" object-cover rounded-lg"  src="{{"/storage/".$item->icon}}" width="65" height="65" alt="icon"/>
+                                <div class="mt-4 flex">
+                            <div> {!! $item->icon !!}</div>
+                                  <span class="text-sm text-gray-500 mr-2 " style="font-size: 8px">{{$item->created_at->diffForHumans(null, true). ' '.'ago'}}</span>
 
                                 </div>
 
@@ -145,7 +146,8 @@
         </svg>
         <span class="sr-only">Info</span>
         <div class="">
-          <span class="font-medium">{{__('swal.dangeralert')}} !! </span>{{__('swal.notfound')}}
+            <span class="font-medium">{{__('swal.dangeralert')}} !! </span>{{__('swal.notfound')}}
+
         </div>
       </div>
     @endforelse
@@ -155,7 +157,7 @@
 
 
 </div>
-<div class="my-6 p-4">{{$catogeries->links( data: ['scrollTo' => false])}}</div>
+<div class="my-6 p-4">{{$facts->links( data: ['scrollTo' => false])}}</div>
 
 
 
@@ -181,7 +183,7 @@
 <script>
 
 
-Livewire.on('catogery-updated',() => {
+Livewire.on('fact-updated',() => {
 
     Swal.fire({
   position: "top-start",
@@ -194,9 +196,9 @@ Livewire.on('catogery-updated',() => {
     });
 });
 
-window.addEventListener('deletecat', (event) => {
+window.addEventListener('deletefact', (event) => {
 
-    const categoryId = event.detail;
+    const fact_id = event.detail;
     Swal.fire({
   title: "{{ __('swal.swaltitle') }}" ,
   text: "{{ __('swal.swaltext') }}",
@@ -209,7 +211,7 @@ window.addEventListener('deletecat', (event) => {
   if (result.isConfirmed) {
 
 
-    Livewire.dispatch('confirmdel',categoryId);
+    Livewire.dispatch('confirmdel',fact_id);
 
   }
 });
@@ -217,7 +219,7 @@ window.addEventListener('deletecat', (event) => {
     });
 
 
-    Livewire.on('catogerydeleted', (event) => {
+    Livewire.on('factdeleted', (event) => {
 
  Swal.fire({
       title: "{{__('swal.swaldeletetitle') }}" ,
@@ -231,7 +233,7 @@ window.addEventListener('deletecat', (event) => {
 
 
 
-    Livewire.on('categoryAdded', () => {
+    Livewire.on('factAdded', () => {
 
         Swal.fire({
         title: "{{__('swal.swaladddata') }}" ,
