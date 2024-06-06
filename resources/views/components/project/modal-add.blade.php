@@ -151,7 +151,7 @@
 <div class="grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 gap-4 my-4">
 
     <div x-data ="{src: null }">
-        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="image-sumnail">{{__('projects.imgsumnail')}}</label>
+        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white cursor-pointer" for="image-sumnail">{{__('projects.imgsumnail')}}</label>
 
     <img x-on:click="$refs.sumnail.click()" :src= "src ? src :'/img/uploadimg.jpg' "   width="250" height="250"/>
 
@@ -159,7 +159,7 @@
     focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" wire:model="imgsumnail"
 
   @change=" src = URL.createObjectURL($event.target.files[0])"
-     id="isumnail" type="file">
+     id="image-sumnail" type="file">
 
 
      @error('imgsumnail') <span class="text-danger ">{{ $message }}</span> @enderror
@@ -228,7 +228,7 @@
 </button>
  <button
    type="button"
-   {{-- wire:click.prevent = "resetvalue" --}}
+
    x-data @click="$dispatch('close-modal','handel-add-proj')"
    class="inline-block rounded bg-red-700 px-6 pb-2 pt-2.5 mt-2 text-xs font-medium uppercase leading-normal text-white
      dark:text-white transition duration-150 ease-in-out hover:bg-red-600 focus:bg-primary-accent-200 focus:outline-none focus:ring-0

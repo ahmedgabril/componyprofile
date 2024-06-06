@@ -33,21 +33,15 @@ Route::group([
         Route::post('/upload',[HomeController::class,'upload'])->name('ckeditor.upload');
 
     // Use Livewire components
-    Route::get('handelcat', Handelcat::class)->name('handelcat');
-    Route::get('handelproject', Handelproject::class)->name('handelproject');
-    Route::get('handelserveies', Hndelserveies::class)->name('handelserveies');
-    Route::get('handelfact', Handelfacts::class)->name('handelfact');
-    Route::get('handelpro', Handelprofile::class)->name('handelpro');
-    Route::get('handelsetting', Handelsetting::class)->name('handelsetting');
+    Route::get('handelcat', Handelcat::class)->middleware(['auth'])->name('handelcat');
+    Route::get('handelproject', Handelproject::class)->middleware(['auth'])->name('handelproject');
+    Route::get('handelserveies', Hndelserveies::class)->middleware(['auth'])->name('handelserveies');
+    Route::get('handelfact', Handelfacts::class)->middleware(['auth'])->name('handelfact');
+    Route::get('handelpro', Handelprofile::class)->middleware(['auth'])->name('handelpro');
+    Route::get('handelsetting', Handelsetting::class)->middleware(['auth'])->name('handelsetting');
 
-    Route::view('profile', 'profile')
-        ->middleware(['auth'])
-        ->name('profile');
+    Route::view('profile', 'profile')->middleware(['auth']) ->name('profile');
 
-    // Route::get('logout', function () {
-    //     auth()->logout();
-    //     return redirect('/login');
-    // })->name('logout');
 
 
     Livewire::setUpdateRoute(function ($handle) {

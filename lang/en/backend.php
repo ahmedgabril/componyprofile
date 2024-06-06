@@ -9,6 +9,7 @@ return [
 "projctes"=> "Projects",
 "serveies"=> "Serveies",
 "handlserveies"=> "Mange Serveies",
+"handelsetting"=> "Mange Setting",
 
 
 ];

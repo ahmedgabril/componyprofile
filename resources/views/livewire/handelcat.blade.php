@@ -4,7 +4,7 @@
 
     <div class="container mx-auto   my-16 shadow-md">
 
-        <h2 class="text-gray-800 dark:text-white p-4 mx-auto">{{ __('catogery.mangecat') }}   </h2>
+        <h2 class="text-gray-500 dark:text-white p-4 mx-auto">{{ __('catogery.mangecat') }}   </h2>
     </div>
     <div class="container mx-auto   my-16 p-5 ">
         <button

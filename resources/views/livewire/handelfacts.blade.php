@@ -4,7 +4,7 @@
 
     <div class="container mx-auto   my-16 shadow-md">
 
-        <h2 class="text-gray-800 dark:text-white p-4 mx-auto">{{ __('catogery.mangecat') }}   handel-fact</h2>
+        <h2 class="text-gray-500 dark:text-white p-4 mx-auto">{{ __('fact.mangefact') }}  </h2>
     </div>
     <div class="container mx-auto   my-16 p-5 ">
         <button
@@ -12,13 +12,13 @@
         class=" mb-5 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
 
 
-        {{ __('catogery.addcatoegery') }}
+        {{ __('fact.addfact') }}
 
 
         </button>
 
 
-<x-modal name="updatefact" title="{{ __('catogery.updatecat') }} " resetdata="{{'resetvalue'}}" >
+<x-modal name="updatefact" title="{{ __('fact.updatefact') }} " resetdata="{{'resetvalue'}}" >
 
 
     <x-fact.update-fact/>
@@ -30,7 +30,7 @@
 </div>
  <!-- Modal toggle -->
 
-<x-modal name="addfact" title="{{ __('catogery.addcatoegery') }} " resetdata="{{'resetvalue'}}" >
+<x-modal name="addfact" title="{{ __('fact.addfact') }} " resetdata="{{'resetvalue'}}" >
 
     <x-fact.add-fact/>
         <!-- Component content here -->
@@ -91,7 +91,12 @@
 
     <div class=" grid  md:grid-cols-4 lg:grid-cols-5 sm:grid-cols-1 gap-4 ">
 
+        {{-- @if($imgtest)
+        <img src="{{$imgtest->temporaryUrl()}}"/>
 
+        @endif
+
+<input type="file" wire:model="imgtest"/> --}}
     @forelse($facts as $item)
 
 
@@ -129,7 +134,7 @@
                                     </div>
 
                                 <div class="mt-4 flex">
-                            <div> {!! $item->icon !!}</div>
+                            <div class="dark:text-gray-300"> {!! $item->icon !!}</div>
                                   <span class="text-sm text-gray-500 mr-2 " style="font-size: 8px">{{$item->created_at->diffForHumans(null, true). ' '.'ago'}}</span>
 
                                 </div>

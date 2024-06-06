@@ -4,7 +4,7 @@
 
     <div class="container mx-auto   my-16 shadow-md">
 
-        <h2 class="text-gray-600 dark:text-white p-4 mx-auto">{{ __('serveies.mangeserv') }}   </h2>
+        <h2 class="text-gray-500 dark:text-white p-4 mx-auto">{{ __('serveies.mangeserv') }}   </h2>
     </div>
     <div class="container mx-auto   my-16 p-5 ">
         <button x-data

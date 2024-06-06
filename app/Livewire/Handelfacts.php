@@ -19,7 +19,7 @@ class Handelfacts extends Component
 
 
 
-        use WithFileUploads;
+         use WithFileUploads;
         use WithPagination;
 
         #[Layout("layouts.app")]
@@ -29,6 +29,8 @@ class Handelfacts extends Component
         public $fact_id;
         #[Validate('required')]
         public $number;
+
+        // public $imgtest;
 
                 #[Rule([
                     'name' => 'required',
@@ -43,7 +45,7 @@ class Handelfacts extends Component
         public $name = [];
         public $paginate = 10;
 
-        #[Validate('required')]
+        #[Validate('required|string')]
         public $icon;
 
 

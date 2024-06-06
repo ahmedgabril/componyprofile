@@ -1,7 +1,7 @@
 @props([
     'name',
-    'title',
-    'resetdata',
+    'title'=>null,
+    'resetdata'=>null,
     'show' => false,
     'maxWidth' => '2xl',
     'postion' => 'center',

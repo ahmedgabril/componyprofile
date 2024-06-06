@@ -91,7 +91,7 @@
                     <a href="{{ route('handelsetting') }}" wire:navigate  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">{{ __('setting') }}</a>
                   </li>
                   <li>
-                    <a href="{{ route('handelpro') }}"  wire:navigate class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">{{ __('profile') }}</a>
+                    <a href="{{ route('profile') }}"  wire:navigate class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">{{ __('profile') }}</a>
                   </li>
                   <livewire:layout.navigation />
                 </ul>

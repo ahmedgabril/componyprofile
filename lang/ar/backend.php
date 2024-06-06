@@ -9,4 +9,5 @@ return [
 "projctes"=> "المشاريع",
 "serveies"=> "الخدمات",
 "handlserveies"=> "اداره الخدمات",
+"handelsetting"=> "الاعدادت",
 ];
