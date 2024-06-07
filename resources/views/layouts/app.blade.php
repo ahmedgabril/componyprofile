@@ -31,8 +31,11 @@
 
 
 <link rel="icon" type="image/png" href="https://flowbite-admin-dashboard.vercel.app/favicon.ico">
-
-
+<link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet" />
+<link
+    href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
+    rel="stylesheet"
+/>
 
 
         <!-- Scripts -->
@@ -57,18 +60,25 @@
                 {{$slot}}
 
             </main>
+
+
+                {{-- <input type="file" id="test"  /> --}}
+
+
+
         </div>
 
 
 
 
+        @livewireScripts
 
 
-@livewireScripts
 
 
-    </body>
 
+        <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+        <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
 
     <script>
 
@@ -146,5 +156,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+</body>
 
 </html>

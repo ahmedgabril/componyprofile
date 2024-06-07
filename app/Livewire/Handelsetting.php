@@ -33,7 +33,6 @@ class Handelsetting extends Component
 
     public function mount()  {
        $getdata =  setting::first();
-        $this->logo = $getdata->logo;
         $this->shortdes = $getdata->shortdes;
         $this->hearoimg = $getdata->hearoimg;
         $this->hearotitle = $getdata->hearotitle;
@@ -54,7 +53,7 @@ class Handelsetting extends Component
 
             public function changstatus(){
 
-dd($this->logo);
+
            $this->logo_status = true;
 
 
@@ -64,6 +63,7 @@ dd($this->logo);
     public function uploadlogo() {
 
         // $this->validate();
+
         if(!empty($this->logo) ){
 
 
@@ -84,6 +84,7 @@ dd($this->logo);
 
         ]);
         $this->dispatch('logo-updated');
+        $this->logo ="";
 
         $this->logo_status = false;
 
