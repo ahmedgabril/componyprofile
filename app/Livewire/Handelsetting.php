@@ -84,7 +84,8 @@ class Handelsetting extends Component
 
         ]);
         $this->dispatch('logo-updated');
-        $this->logo ="";
+
+
 
         $this->logo_status = false;
 

@@ -36,22 +36,22 @@
     </ul>
 </div>
 
+<div>
+
+    @if($getlogotemp && $logo == null)
+    <img  src= "{{asset('storage/'.$getlogotemp)}}" class=" rounded-md mb-4"   width="250" height="250" alt="logo"/>
+    @endif
+</div>
+
+<div>
 
 
-<div >
-
-    <div>
-
-        @if($getlogotemp && $logo == null)
-        <img  src= "{{asset('storage/'.$getlogotemp)}}" class=" rounded-md mb-4"   width="250" height="250" alt="logo"/>
-        @endif
-    </div>
-    <div class=" p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="tablogo"    >
+    <div class=" p-4 rounded-lg bg-gray-50 dark:bg-gray-800"     >
 
 
 
 
-         <div wire:ignore>
+         <div >
 
 
                 {{-- <label class="ms-1 inline-block rounded bg-success px-6 mx-5 mb-3 pb-2 mt-2 pt-2.5 text-sm
@@ -71,24 +71,31 @@
 
 
 
-            <div x-data ="{src: null }"
+            <div class="" id="imgcon" x-data ="{src: null }" wire:ignore
 
 
             x-init="
 
 
             FilePond.registerPlugin(FilePondPluginImagePreview);
+
             FilePond.setOptions({
                 server: {
+
+
                     process: (fieldName, file, metadata, load, error, progress, abort, transfer, options) => {
 
                    @this.upload('logo',file,load)
+
+
                     },
 
-                  revert:(filename,load) => {
+
+                  revert:(filename, load, error) => {
                     @this.removeUpload('logo',filename,load)
 
                   },
+
 
                 },
             });
@@ -102,31 +109,27 @@
 
 
 
-                {{-- @if($this->logo_status)
-
-                <img x-on:click="$refs.sumnail.click()" :src=" src"  class=" rounded-md"  width="220" height="220"/>
-
-                @endif --}}
 
 
-          <input type="file" id="imglogo" x-ref="inputlogo" wire:model="logo" />
 
-             @error('logo') <span class="text-danger ">{{ $message }}</span> @enderror
+          <input type="file" id="imglogo" x-ref="inputlogo" accept="image/.*" wire:model="logo"  />
 
-             <button
 
-             type="button"
-             id="update-submit"
-             wire:click.prevent="uploadlogo"
-             class="ms-1 inline-block rounded bg-success px-6 mx-5 pb-2 mt-2 pt-2.5 text-sm
-             font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out
-              hover:bg-green-900 hover:shadow-primary-2 focus:bg-green-800 focus:shadow-success-2 focus:outline-none focus:ring-0
-               active:bg-green-600 active:shadow-primary-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong">
-               {{__('projects.updatebtn')}}
-            </button>
+
 
             </div>
+            @error('logo') <span class="text-danger ">{{ $message }}</span> @enderror
+            <button
 
+            type="button"
+            id="update-submit"
+            wire:click.prevent="uploadlogo"
+            class="ms-1 inline-block rounded bg-success px-6 mx-5 pb-2 mt-2 pt-2.5 text-sm
+            font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out
+             hover:bg-green-900 hover:shadow-primary-2 focus:bg-green-800 focus:shadow-success-2 focus:outline-none focus:ring-0
+              active:bg-green-600 active:shadow-primary-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong">
+              {{__('projects.updatebtn')}}
+           </button>
 
          </div>
 
@@ -157,7 +160,13 @@
 
 Livewire.on('logo-updated',() => {
 
-    allowImagePreview:false;
+
+ const colsebtn = document.querySelector('.filepond--action-revert-item-processing');
+
+ colsebtn.click();
+
+
+
         Swal.fire({
         position: "center",
         icon: "success",
@@ -169,7 +178,6 @@ Livewire.on('logo-updated',() => {
 
 
         });
-
 
 
 
