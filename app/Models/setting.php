@@ -10,7 +10,7 @@ class setting extends Model
 {
     use HasFactory;
     use HasTranslations;
-    public $fillable = ['compony-name','shortdes','hearotitle','logo','hearoimg'];
+    public $fillable = ['compony_name','shortdes','hearotitle','logo','hearoimg'];
 
-    public $translatable = ['compony-name','shortdes','hearotitle'];
+    public $translatable = ['compony_name','shortdes','hearotitle'];
 }
