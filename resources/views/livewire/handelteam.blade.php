@@ -4,7 +4,7 @@
 
     <div class="container mx-auto   my-16 shadow-md">
 
-        <h2 class="text-gray-500 dark:text-white p-4 mx-auto">{{ __('fact.mangefact') }}  </h2>
+        <h2 class="text-gray-500 dark:text-white p-4 mx-auto">{{ __('team.mangeteam') }}  </h2>
     </div>
     <div class="container mx-auto   my-16 p-5 ">
         <button
@@ -12,14 +12,14 @@
         class=" mb-5 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
 
 
-        {{ __('fact.addfact') }}
+        {{ __('team.addteam') }}
 
 
         </button>
 
  <!-- Modal toggle -->
 
- <x-modal name="addteam"   title="{{ __('fact.addfact') }} " resetdata="{{'resetvalue'}}" >
+ <x-modal name="addteam"   title="{{ __('team.addteam') }} " resetdata="{{'resetvalue'}}" >
 
 
 <x-teams.add-team/>
@@ -28,7 +28,7 @@
 </x-modal>
 
  <!-- Main modal -->
-<x-modal name="updateteam"   postion="top" title="{{ __('fact.updatefact') }} " resetdata="{{'resetvalue'}}" >
+<x-modal name="updateteam"   postion="top" title="{{ __('team.updateteam') }} " resetdata="{{'resetvalue'}}" >
 
 
     <x-teams.update-team/>
@@ -103,10 +103,10 @@
 
                             <div class=" block">
 
-                                <h5 class="mb-2 mt-3 text-2xl font-bold tracking-tight text-gray-600 dark:text-white text-wrap text-center " >
+                                <h5 class="mb-2 mt-3 text-xl font-medium  tracking-tight text-gray-800 dark:text-white text-wrap text-center " >
                                     {{ $item->name }}  </h5>
 
-                                    <span class=" flex justify-center text-sm font-bold tracking-tight text-gray-600 dark:text-white text-wrap text-center mt-2">  {{ $item->gob }}</span>
+                                    <span class=" flex justify-center text-sm font-bold tracking-tight text-gray-500 dark:text-gray-400 text-wrap text-center mt-2">  {{ $item->gob }}</span>
                             </div>
 
 
@@ -206,14 +206,17 @@
                 process: (fieldName, file, metadata, load, error, progress, abort, transfer, options) => {
 
                @this.upload('avatar',file,load);
-            //    @this.upload('hearoimg',file,load);
+
 
                 },
 
 
-              revert:(filename, load) => {
-                @this.removeUpload('avatar',filename,load)
-                // @this.removeUpload('hearoimg',filename,load)
+                revert:(filename, load) => {
+                @this.removeUpload('avatar',load);
+
+                load();
+
+
 
               },
 
@@ -228,6 +231,70 @@
 
 
 
+  Livewire.on('teamadded',() => {
+
+const colsebtn = document.querySelector('.filepond--action-revert-item-processing');
+const colsebtnrmove = document.querySelector('.filepond--action-remove-item');
+
+        if(colsebtn){
+
+        colsebtn.click();
+
+
+
+        colsebtnrmove.click();
+
+
+
+        }
+
+
+
+    Swal.fire({
+    position: "center",
+    icon: "success",
+    title: "{{__('swal.updatetitle') }}",
+    showConfirmButton: false,
+    timer: 1500
+    });
+
+
+
+    });
+
+
+
+    Livewire.on('team-updated',() => {
+
+
+
+  const colsebtn = document.querySelector('.filepond--action-revert-item-processing');
+ const colsebtnrmove = document.querySelector('.filepond--action-remove-item');
+
+        if(colsebtn){
+
+        colsebtn.click();
+
+
+
+        colsebtnrmove.click();
+
+
+
+        }
+
+
+    Swal.fire({
+    position: "center",
+    icon: "success",
+    title: "{{__('swal.updatetitle') }}",
+    showConfirmButton: false,
+    timer: 1500
+    });
+
+
+
+    });
 
 
 
@@ -267,13 +334,6 @@ Swal.fire({
 
 window.addEventListener('close-modal',() => {
 
-    const colsebtn = document.querySelector('.filepond--action-revert-item-processing');
-
-
-if(colsebtn){
-
-colsebtn.click();
-}
 
 
 Livewire.dispatch('resetvalue')

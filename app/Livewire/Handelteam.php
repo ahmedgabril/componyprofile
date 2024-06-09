@@ -88,7 +88,7 @@ class Handelteam extends Component
 
     public function addteam(){
 
-
+        $this->validate();
         $this->getlocal = app()->getLocale() == "en" ? $this->name['en']: $this->name['ar'];
 
 
@@ -184,7 +184,7 @@ public function updateteam() {
    $this->dispatch('team-updated');
    $this->dispatch('close-modal','updateteam');
 
-//    $this->resetvalue();
+   $this->resetvalue();
 
    }
 
