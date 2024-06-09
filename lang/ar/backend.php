@@ -9,5 +9,8 @@ return [
 "projctes"=> "المشاريع",
 "serveies"=> "الخدمات",
 "handlserveies"=> "اداره الخدمات",
-"handelsetting"=> "الاعدادت",
+"handelsetting"=> "الضبط العام",
+"logout"=> "تسجيل الخروج",
+"profilelink"=> "الصفحه الشخصيه",
+"handelteam"=> "اداره فريق العمل",
 ];

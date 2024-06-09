@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('sochails', function (Blueprint $table) {
             $table->id();
-            $table->string('youtube');
-            $table->string('facebook');
-            $table->string('linkedin');
-            $table->string('whatsup');
-            $table->string('tictok');
-            $table->string('twitter');
-            $table->string('gmail');
-            $table->string('telgram');
+            $table->string('youtube')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('linkedin')->nullable();
+            $table->string('whatsup')->nullable();
+            $table->string('tictok')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('gmail')->nullable();
+            $table->string('telgram')->nullable();
 
 
             $table->timestamps();

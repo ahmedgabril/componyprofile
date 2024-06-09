@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('settings', function (Blueprint $table) {
+        Schema::create('abouts', function (Blueprint $table) {
             $table->id();
-            $table->string('hearotitle')->nullable();
-            $table->string('compony_name')->nullable();
-            $table->text('adderss')->nullable();
-            $table->string('logo')->nullable();
-            $table->string('hearoimg')->nullable();
-            $table->string('shortdes')->nullable();
+            $table->longText('des')->nullable();
+            $table->text('questions')->nullable();
 
+            $table->text('answer')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('settings');
+        Schema::dropIfExists('abouts');
     }
 };

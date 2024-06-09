@@ -1,6 +1,6 @@
 
 
-<div class="overflow-y-auto">
+<div class="overflow-y-auto mt-16">
 
     <div class="container mx-auto   my-16 shadow-md">
 
@@ -8,7 +8,7 @@
     </div>
     <div class="container mx-auto   my-16 p-5 ">
         <button
-        x-data @click="$dispatch('open-modal','addfact')"
+        x-data @click="$dispatch('open-modal','addteam')"
         class=" mb-5 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
 
 
@@ -17,29 +17,28 @@
 
         </button>
 
+ <!-- Modal toggle -->
 
-<x-modal name="updatefact" title="{{ __('fact.updatefact') }} " resetdata="{{'resetvalue'}}" >
+ <x-modal name="addteam"   title="{{ __('fact.addfact') }} " resetdata="{{'resetvalue'}}" >
 
 
-    <x-fact.update-fact/>
+<x-teams.add-team/>
+
+
+</x-modal>
+
+ <!-- Main modal -->
+<x-modal name="updateteam"   postion="top" title="{{ __('fact.updatefact') }} " resetdata="{{'resetvalue'}}" >
+
+
+    <x-teams.update-team/>
 
 
 
 </x-modal>
 
 </div>
- <!-- Modal toggle -->
 
-<x-modal name="addfact" title="{{ __('fact.addfact') }} " resetdata="{{'resetvalue'}}" >
-
-    <x-fact.add-fact/>
-        <!-- Component content here -->
-
-
-
-</x-modal>
-
- <!-- Main modal -->
 
 
 
@@ -91,27 +90,32 @@
 
     <div class=" grid  md:grid-cols-4 lg:grid-cols-5 sm:grid-cols-1 gap-4 ">
 
-        {{-- @if($imgtest)
-        <img src="{{$imgtest->temporaryUrl()}}"/>
-
-        @endif
-
-<input type="file" wire:model="imgtest"/> --}}
-    @forelse($facts as $item)
+    @forelse($teams as $item)
 
 
             <div class="" wire:key="{{$item->id}}">
 
                 <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
 
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-wrap  " wire:key="$item->id">
-                        {{ $item->name }}  </h5>
+                    <div class="dark:text-gray-300 flex justify-center">
+                        <img src="{{asset('storage/'.$item->avatar )}} " class=" w-20 h-20 mb-3 rounded-full shadow-lg" />
+                    </div>
+
+                            <div class=" block">
+
+                                <h5 class="mb-2 mt-3 text-2xl font-bold tracking-tight text-gray-600 dark:text-white text-wrap text-center " >
+                                    {{ $item->name }}  </h5>
+
+                                    <span class=" flex justify-center text-sm font-bold tracking-tight text-gray-600 dark:text-white text-wrap text-center mt-2">  {{ $item->gob }}</span>
+                            </div>
+
+
                         <div class="flex  justify-around">
 
-                                    <div class="flex mt-4">
-                                        <svg class="w-7 h-7 text-green-800 dark:text-green-700"   wire:click.prevent="editfact({{ $item->id }})"
+                                    <div class="flex mt-6">
+                                        <svg class="w-7 h-7 text-green-800 dark:text-green-700"   wire:click.prevent="editteam({{ $item->id }})"
 
-                                            x-data @click="$dispatch('open-modal','updatefact')"
+                                            x-data @click="$dispatch('open-modal','updateteam')"
 
                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778"/>
@@ -133,9 +137,8 @@
 
                                     </div>
 
-                                <div class="mt-4 flex">
-                            <div class="dark:text-gray-300"> {!! $item->icon !!}</div>
-                                  <span class="text-sm text-gray-500 mr-2 " style="font-size: 8px">{{$item->created_at->diffForHumans(null, true). ' '.'ago'}}</span>
+                                <div class="mt-6 ">
+                                    <span class="text-sm text-gray-500 mr-2 " style="font-size: 8px">{{$item->created_at->diffForHumans(null, true). ' '.'ago'}}</span>
 
                                 </div>
 
@@ -162,7 +165,7 @@
 
 
 </div>
-<div class="my-6 p-4">{{$facts->links( data: ['scrollTo' => false])}}</div>
+<div class="my-6 p-4">{{$teams->links( data: ['scrollTo' => false])}}</div>
 
 
 
@@ -185,77 +188,97 @@
 
 
 
-<script>
 
 
-Livewire.on('fact-updated',() => {
 
-    Swal.fire({
-  position: "center",
+    <script>
+
+
+
+
+    FilePond.registerPlugin(FilePondPluginImagePreview);
+
+
+        FilePond.setOptions({
+            server: {
+
+
+                process: (fieldName, file, metadata, load, error, progress, abort, transfer, options) => {
+
+               @this.upload('avatar',file,load);
+            //    @this.upload('hearoimg',file,load);
+
+                },
+
+
+              revert:(filename, load) => {
+                @this.removeUpload('avatar',filename,load)
+                // @this.removeUpload('hearoimg',filename,load)
+
+              },
+
+
+            },
+        });
+
+        const inputElements = document.querySelector("#teamavatar");
+        const avatarupdate = document.querySelector("#avatarupdate");
+        const pond = FilePond.create(inputElements);
+        const pondhearo = FilePond.create(avatarupdate);
+
+
+
+
+
+
+  window.addEventListener('deleteteam', (event) => {
+
+const team_id = event.detail;
+Swal.fire({
+title: "{{ __('swal.swaltitle') }}" ,
+text: "{{ __('swal.swaltext') }}",
+icon: "warning",
+showCancelButton: true,
+confirmButtonColor: "#3085d6",
+cancelButtonColor: "#d33",
+confirmButtonText: "{{ __('swal.swalconfirmButtonText')}} ",
+}).then((result) => {
+if (result.isConfirmed) {
+
+
+Livewire.dispatch('confirmdel',team_id);
+
+}
+});
+
+});
+
+
+Livewire.on('teamdeleted', (event) => {
+
+Swal.fire({
+  title: "{{__('swal.swaldeletetitle') }}" ,
+  text: "{{ __('swal.swaldeletetext') }}",
   icon: "success",
-
-  title: "{{__('swal.updatetitle') }}",
-
-  timer: 1500,
+  timer: 1700,
   showConfirmButton: false,
     });
 });
 
-window.addEventListener('deletefact', (event) => {
+window.addEventListener('close-modal',() => {
 
-    const fact_id = event.detail;
-    Swal.fire({
-  title: "{{ __('swal.swaltitle') }}" ,
-  text: "{{ __('swal.swaltext') }}",
-  icon: "warning",
-  showCancelButton: true,
-  confirmButtonColor: "#3085d6",
-  cancelButtonColor: "#d33",
-  confirmButtonText: "{{ __('swal.swalconfirmButtonText')}} ",
-}).then((result) => {
-  if (result.isConfirmed) {
+    const colsebtn = document.querySelector('.filepond--action-revert-item-processing');
 
 
-    Livewire.dispatch('confirmdel',fact_id);
+if(colsebtn){
 
-  }
+colsebtn.click();
+}
+
+
+Livewire.dispatch('resetvalue')
+
 });
-
-    });
-
-
-    Livewire.on('factdeleted', (event) => {
-
- Swal.fire({
-      title: "{{__('swal.swaldeletetitle') }}" ,
-      text: "{{ __('swal.swaldeletetext') }}",
-      icon: "success",
-      timer: 1700,
-      showConfirmButton: false,
-        });
-    });
-
-
-
-
-
-
-    window.addEventListener('close-modal',() => {
-
-
-
-        Livewire.dispatch('resetvalue')
-
-        });
-
-
-
-
-
-
-
-
-
 
 
 
@@ -263,4 +286,5 @@ window.addEventListener('deletefact', (event) => {
 
     </script>
 
-@endscript
+
+    @endscript

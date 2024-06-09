@@ -10,6 +10,9 @@ return [
 "serveies"=> "Serveies",
 "handlserveies"=> "Mange Serveies",
 "handelsetting"=> "Mange Setting",
+"profilelink"=> "Mange Profile",
+"handelteam"=> "Mange Team",
+"logout"=> " Log Out",
 
 
 ];
