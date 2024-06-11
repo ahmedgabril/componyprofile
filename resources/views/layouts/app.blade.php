@@ -6,19 +6,12 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="theme-color" content="#ffffff">
         <!-- Twitter -->
-        <meta name="twitter:card" content="summary">
-        <meta name="twitter:site" content="@">
-        <meta name="twitter:creator" content="@">
-        <meta name="twitter:title" content="Tailwind CSS Dashboard Stacked Layout - Flowbite">
-        <meta name="twitter:description" content="Get started with a free and open-source admin dashboard layout built with Tailwind CSS and Flowbite featuring charts, widgets, CRUD layouts, authentication pages, and more">
-        <meta name="twitter:image" content="https://flowbite-admin-dashboard.vercel.app/images/og-image.png">
+
 
         <!-- Facebook -->
-        <meta property="og:url" content="https://flowbite-admin-dashboard.vercel.app/layouts/sidebar/">
-        <meta property="og:title" content="Tailwind CSS Dashboard Stacked Layout - Flowbite">
+
         <meta property="og:description" content="Get started with a free and open-source admin dashboard layout built with Tailwind CSS and Flowbite featuring charts, widgets, CRUD layouts, authentication pages, and more">
         <meta property="og:type" content="article">
-        <meta property="og:image" content="https://flowbite-admin-dashboard.vercel.app/images/og-image.png">
         <meta property="og:image:type" content="image/png">
 
 
@@ -30,10 +23,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 
-<link rel="icon" type="image/png" href="https://flowbite-admin-dashboard.vercel.app/favicon.ico">
-<link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet" />
+
+<link href="{{asset('asset/backend/css/filePond.css')}}" rel="stylesheet" />
 <link
-    href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
+    href="{{asset('asset/backend/css/filePond-imagePreview.css')}}"
     rel="stylesheet"
 />
 
@@ -47,7 +40,7 @@
 @livewireStyles
 
     </head>
-    <body class="bg-gray-50 dark:bg-gray-800">
+    <body class="bg-gray-50 dark:bg-gray-800" dir="{{ app()->getLocale() === 'en'? 'ltr':'rtl' }}" id="app">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
         @include('backend.navbar')
             {{-- <livewire:layout.navigation /> --}}
@@ -77,8 +70,8 @@
 
 
 
-        <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
-        <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+        <script src="{{asset('asset/backend/js/filePond-imagePreview.js')}}"></script>
+        <script src="{{asset('asset/backend/js/filePond.js')}}"></script>
 
     <script>
 

@@ -95,7 +95,7 @@
 
             <div class="" wire:key="{{$item->id}}">
 
-                <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-200 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
 
                     <div class="dark:text-gray-300 flex justify-center">
                         <img src="{{asset('storage/'.$item->avatar )}} " class=" w-20 h-20 mb-3 rounded-full shadow-lg" />
@@ -220,6 +220,10 @@
 
               },
 
+            //   remove: (source, load, error) => {
+            // @this.removeUpload('avatar', source, load);
+            //    },
+
 
             },
         });
@@ -234,7 +238,7 @@
   Livewire.on('teamadded',() => {
 
 const colsebtn = document.querySelector('.filepond--action-revert-item-processing');
-const colsebtnrmove = document.querySelector('.filepond--action-remove-item');
+
 
         if(colsebtn){
 
@@ -242,7 +246,7 @@ const colsebtnrmove = document.querySelector('.filepond--action-remove-item');
 
 
 
-        colsebtnrmove.click();
+
 
 
 
@@ -269,16 +273,11 @@ const colsebtnrmove = document.querySelector('.filepond--action-remove-item');
 
 
   const colsebtn = document.querySelector('.filepond--action-revert-item-processing');
- const colsebtnrmove = document.querySelector('.filepond--action-remove-item');
+
 
         if(colsebtn){
 
         colsebtn.click();
-
-
-
-        colsebtnrmove.click();
-
 
 
         }

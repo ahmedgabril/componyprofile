@@ -16,5 +16,7 @@ return [
     "hearotitle-en"=> " hearo Title EN",
     "shortdes-ar"=> " Short Des AR",
     "shortdes-en"=> " Short Des EN",
-
+    "siteinfo"=> "Site Info",
+    "address_en"=> "Address Of Compony EN",
+    "address_ar"=> "Address Of Compony AR",
 ];

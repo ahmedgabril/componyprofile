@@ -2,9 +2,12 @@
 
 namespace App\Livewire;
 
-use App\Models\setting;
+use App\Models\info;
+use App\Models\hearo;
+
 use App\Models\sochail;
 use Livewire\Component;
+use Livewire\Attributes\Rule;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Validate;
@@ -18,7 +21,7 @@ class Handelsetting extends Component
     #[Layout("layouts.app")]
 
 
-    #[Validate("nullable|image|max:1024")]
+    #[Validate("sometimes|nullable|image|max:1024")]
     public $logo;
     #[Validate("nullable|url")]
      public $facebook  ;
@@ -27,8 +30,9 @@ class Handelsetting extends Component
       #[Validate("url")]
       public $youtube ;
 
-      public $twitter , $telgram,$tictok,$whatsup,$gmail;
+   public $twitter , $telgram,$tictok,$whatsup,$gmail;
     public $getid;
+    public $getinfo_id;
     public $sochail_id;
     public $imgreslogo;
     public $hearoimgres;
@@ -37,7 +41,28 @@ class Handelsetting extends Component
     public $getheroimgtemp;
     public $hearotitle = [];
     public $shortdes = [];
+    #[Validate([
+        'compony_name' => 'required|string',
+        'compony_name.*' => [
+    'required',
+    'min:5',
+
+
+],
+
+])]
     public $compony_name = [];
+    #[Validate([
+        'address' => 'nullable|string',
+        'address.*' => [
+    'nullable',
+    'min:5',
+
+
+],
+
+])]
+    public $address = [];
 
 
 
@@ -57,32 +82,43 @@ class Handelsetting extends Component
          $this->linkedin = $getsocail?->linkedin;
          $this->tictok = $getsocail?->tictok;
          $this->sochail_id = $getsocail?->id;
-        $getdata =  setting::first();
 
-        $this->shortdes['ar'] = $getdata->getTranslation('shortdes','ar');
-        $this->shortdes['en'] = $getdata->getTranslation('shortdes','en');
-        $this->hearotitle['ar'] = $getdata->getTranslation('hearotitle','ar');
-        $this->hearotitle['en'] = $getdata->getTranslation('hearotitle','en');
-        $this->compony_name['ar'] = $getdata->getTranslation('compony_name','ar');
-        $this->compony_name['en'] = $getdata->getTranslation('compony_name','en');
-        $this->getid =$getdata->id;
+
+         $getdata =  hearo::first();
+        $this->shortdes['ar'] = $getdata?->getTranslation('shortdes','ar');
+        $this->shortdes['en'] = $getdata?->getTranslation('shortdes','en');
+        $this->hearotitle['ar'] = $getdata?->getTranslation('hearotitle','ar');
+        $this->hearotitle['en'] = $getdata?->getTranslation('hearotitle','en');
+        $this->getid =$getdata?->id;
+
+        $getinfo =  info::first();
+        $this->compony_name['ar'] =  $getinfo?->getTranslation('compony_name','ar');
+        $this->compony_name['en'] =  $getinfo?->getTranslation('compony_name','en');
+        $this->address['en'] =  $getinfo?->getTranslation('address','en');
+        $this->address['ar'] =  $getinfo?->getTranslation('address','ar');
+        $this->getinfo_id =$getinfo?->id;
     }
     public function render()
     {
 
 
-        $getdata =  setting::first();
-        $this->getlogotemp =$getdata->logo;
-        $this->getheroimgtemp =$getdata->hearoimg;
+        $getinfo =  info::first();
+        $gethearo =  hearo::first();
+        $this->getlogotemp = $getinfo?->logo;
+        $this->getheroimgtemp = $gethearo?->hearoimg;
         return view('livewire.handelsetting');
 
     }
 
 
 
-    public function uploadlogo() {
+    public function updateinfo() {
 
-        // $this->validate();
+
+
+    //   $this->validate();
+
+
 
         if(!empty($this->logo) ){
 
@@ -99,26 +135,64 @@ class Handelsetting extends Component
 
 
 
-        if($this->getid){
+        if($this->getinfo_id){
 
 
-            setting::where('id',$this->getid)->update([
+            info::where('id',$this->getinfo_id)->update([
+
+
+                'compony_name' =>
+
+                [
+             'en'=> $this->compony_name['en'],
+             'ar'=> $this->compony_name['ar'],
+
+                ],
+
+            'address' =>
+
+            [
+         'en'=> $this->address['en'],
+         'ar'=> $this->address['ar'],
+
+            ],
+
 
                 'logo' => $this->imgreslogo == null ?  $this->getlogotemp: $this->imgreslogo,
 
             ]);
         }else{
 
-            setting::create([
 
-                'logo' => $this->imgreslogo == null ?  $this->getlogotemp: $this->imgreslogo,
+            info::create([
+
+
+                'compony_name' =>
+
+                [
+             'en'=> $this->compony_name['en'],
+             'ar'=> $this->compony_name['ar'],
+
+                ],
+
+            'address' =>
+
+            [
+         'en'=> $this->address['en'],
+         'ar'=> $this->address['ar'],
+
+            ],
+
+
+                'logo' => $this->logo->store('logo','public'),
 
             ]);
+
 
         }
 
 
-        $this->dispatch('logo-updated');
+        $this->dispatch('info-updated');
 
 
 
@@ -132,7 +206,7 @@ class Handelsetting extends Component
 
 
 
-    public function uploadhearo() {
+    public function updatehearo() {
 
         // $this->validate();
 
@@ -154,21 +228,67 @@ class Handelsetting extends Component
 
 
 
-    setting::where('id',$this->getid)->update([
+    hearo::where('id',$this->getid)->update([
+
+
+
+
+        'hearotitle' =>
+
+        [
+     'en'=> $this->hearotitle['en'],
+     'ar'=> $this->hearotitle['ar'],
+
+        ],
+
+
+
+        'shortdes' =>
+
+        [
+     'en'=> $this->shortdes['en'],
+     'ar'=> $this->shortdes['ar'],
+
+        ],
+
+
 
         'hearoimg'=> $this->hearoimgres == null ?  $this->getheroimgtemp: $this->hearoimgres,
 
     ]);
    }else{
 
-    setting::create([
+    hearo::create([
 
-        'hearoimg'=> $this->hearoimgres == null ?  $this->getheroimgtemp: $this->hearoimgres,
+
+
+        'hearotitle' =>
+
+        [
+     'en'=> $this->hearotitle['en'],
+     'ar'=> $this->hearotitle['ar'],
+
+        ],
+
+
+
+        'shortdes' =>
+
+        [
+     'en'=> $this->shortdes['en'],
+     'ar'=> $this->shortdes['ar'],
+
+        ],
+
+
+
+        'hearoimg'=> $this->hearoimg->store('hearoimg','public'),
 
     ]);
 
+
    }
-        $this->dispatch('hearoimg-updated');
+        $this->dispatch('hearo-updated');
 
 
 
@@ -187,32 +307,8 @@ class Handelsetting extends Component
 
         setting::where('id',$this->getid)->update([
 
-            'compony_name' =>
-
-            [
-         'en'=> $this->compony_name['en'],
-         'ar'=> $this->compony_name['ar'],
-
-            ],
 
 
-            'hearotitle' =>
-
-            [
-         'en'=> $this->hearotitle['en'],
-         'ar'=> $this->hearotitle['ar'],
-
-            ],
-
-
-
-            'shortdes' =>
-
-            [
-         'en'=> $this->shortdes['en'],
-         'ar'=> $this->shortdes['ar'],
-
-            ],
 
         ]);
 
@@ -243,6 +339,15 @@ class Handelsetting extends Component
             [
          'en'=> $this->shortdes['en'],
          'ar'=> $this->shortdes['ar'],
+
+            ],
+
+
+            'address' =>
+
+            [
+         'en'=> $this->address['en'],
+         'ar'=> $this->address['ar'],
 
             ],
 
