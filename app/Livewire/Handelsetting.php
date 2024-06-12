@@ -12,6 +12,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class Handelsetting extends Component
@@ -21,13 +22,13 @@ class Handelsetting extends Component
     #[Layout("layouts.app")]
 
 
-    #[Validate("sometimes|nullable|image|max:1024")]
+    // #[Validate("sometimes|nullable|image|max:1024")]
     public $logo;
-    #[Validate("nullable|url")]
+
      public $facebook  ;
-     #[Validate("url")]
+
       public $linkedin;
-      #[Validate("url")]
+
       public $youtube ;
 
    public $twitter , $telgram,$tictok,$whatsup,$gmail;
@@ -41,27 +42,12 @@ class Handelsetting extends Component
     public $getheroimgtemp;
     public $hearotitle = [];
     public $shortdes = [];
-    #[Validate([
-        'compony_name' => 'required|string',
-        'compony_name.*' => [
-    'required',
-    'min:5',
 
-
-],
-
-])]
     public $compony_name = [];
-    #[Validate([
-        'address' => 'nullable|string',
-        'address.*' => [
-    'nullable',
-    'min:5',
 
 
-],
 
-])]
+
     public $address = [];
 
 
@@ -98,6 +84,13 @@ class Handelsetting extends Component
         $this->address['ar'] =  $getinfo?->getTranslation('address','ar');
         $this->getinfo_id =$getinfo?->id;
     }
+
+    protected $rules = [
+        'compony_name.*' => 'required|string|min:5',
+        'address.*' => 'nullable|string|min:5',
+    ];
+
+
     public function render()
     {
 
@@ -114,10 +107,14 @@ class Handelsetting extends Component
 
     public function updateinfo() {
 
-
-
-    //   $this->validate();
-
+        $this->validate();
+        // try {
+        //     $validatedData = $this->validate();
+        //     // Your update logic here
+        // } catch (ValidationException $e) {
+        //    dd($e->getMessage());
+        //     throw $e;
+        // }
 
 
         if(!empty($this->logo) ){
@@ -208,7 +205,12 @@ class Handelsetting extends Component
 
     public function updatehearo() {
 
-        // $this->validate();
+        $this->validate([
+
+
+            'hearotitle.*' => 'required|string|min:5',
+             'shortdes.*' => 'required|string|min:5',
+        ]);
 
         if(!empty($this->hearoimg) ){
 

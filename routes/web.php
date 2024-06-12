@@ -1,5 +1,6 @@
 
 <?php
+use App\Livewire\Handelabout;
 use App\Livewire\Handelfacts;
 use App\Livewire\Handelteam;
 use Livewire\Livewire;
@@ -37,6 +38,7 @@ Route::group([
     Route::get('handelcat', Handelcat::class)->middleware(['auth'])->name('handelcat');
     Route::get('handelproject', Handelproject::class)->middleware(['auth'])->name('handelproject');
     Route::get('handelserveies', Hndelserveies::class)->middleware(['auth'])->name('handelserveies');
+    Route::get('handelabout', Handelabout::class)->middleware(['auth'])->name('handelabout');
     Route::get('handelfact', Handelfacts::class)->middleware(['auth'])->name('handelfact');
     Route::get('handelteam', Handelteam::class)->middleware(['auth'])->name('handelteam');
     Route::get('handelsetting', Handelsetting::class)->middleware(['auth'])->name('handelsetting');

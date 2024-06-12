@@ -1,9 +1,7 @@
 <div class="pt-16 overflow-y-auto">
 
 
-    <div class="container mx-auto mb-8" x-data="{showtap: 'logoimg'}"  >
-
-
+    <div class="container mx-auto mb-8" x-data="{showtap: 'siteinfo'}"  >
 
 <div class="mb-4 border-b border-gray-200 dark:border-gray-700" >
     <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab"  >
@@ -25,36 +23,9 @@
             </a>
 
         </li>
-        {{-- <li class="me-2 " >
-            <a href="#"
-            @click="showtap ='logoimg' "
 
-            id="profile-tab"  type="button" role="tab"
-            :class=" showtap == 'logoimg' ? 'text-green-600 border-green-600':'border-transparent'"
-            class="inline-flex items-center justify-center p-4   border-b-2  rounded-t-lg dark:text-gray-300 hover:text-green-600 hover:border-green-600 dark:hover:text-green-600 group">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mx-2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
-              </svg>
-              {{__('setting.uplodlogo')}}
-            </a>
 
-        </li> --}}
 
-        {{-- <li class="me-2 " >
-            <a href="#"
-            @click="showtap = 'hearo' "
-
-            id="profile-tab"  type="button" role="tab"
-            :class="showtap =='hearo' ? 'text-green-600 border-green-600':'border-transparent' "
-            class="inline-flex items-center justify-center p-4   border-b-2  rounded-t-lg dark:text-gray-300 hover:text-green-600 hover:border-green-600 dark:hover:text-green-600 group">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 ml-2 mr-2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9.75v6.75m0 0-3-3m3 3 3-3m-8.25 6a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z" />
-              </svg>
-
-              {{__('setting.uplodhearo')}}
-            </a>
-
-        </li> --}}
 
 
         <li class="me-2 " >
@@ -109,103 +80,7 @@
 
 
 
-
-
-
-
-     <div class="hearocontent" x-show="showtap == 'hearocontent' ">
-
-        <div class="flex justify-center mt-2 mb-2">
-
-            @if($getheroimgtemp )
-            <img  src= "{{asset('storage/'.$getheroimgtemp)}}" class=" rounded-md mb-4"   width="200" height="200" alt="hearo"/>
-            @endif
-          </div>
-
-
-
-        <form class=" max-w-4xl mx-auto p-6 mt-3 mb-3" wire:submit.prevent="updatehearo">
-
-
-
-
-             <div class="mx-auto max-w-2xl mb-4 mt-3" wire:ignore>
-
-
-
-
-
-
-           <input type="file"  id="imagehearo" accept="image/.*" wire:model="hearoimg"  />
-
-
-
-
-           </div>
-              <div>
-                 @error('hearoimg') <span class="text-danger ">{{ $message }}</span> @enderror
-              </div>
-
-
-
-
-
-
-            <div class="grid md:grid-cols-2 md:gap-6 mt-3">
-              <div class="relative z-0 w-full mb-5 group">
-
-
-                <label for="hearotitlear"  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('setting.hearotitle-ar')}}</label>
-                <textarea id="hearotitlear" rows="4"
-                wire:model="hearotitle.ar"
-                class="block p-2.5 w-full text-sm
-                 text-gray-900 bg-gray-50 rounded-lg border
-                  border-gray-300 focus:ring-blue-500 focus:border-blue-500
-                   dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                   placeholder="Leave a comment..."></textarea>
-
-              </div>
-
-
-
-              <div class="relative z-0 w-full mb-5 group">
-
-                <label for="hearotitleen" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('setting.hearotitle-en')}}</label>
-                <textarea id="hearotitleen" wire:model="hearotitle.en" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Leave a comment..."></textarea>
-              </div>
-            </div>
-
-
-            <div class="grid md:grid-cols-2 md:gap-6">
-                <div class="relative z-0 w-full mb-5 group">
-
-
-                  <label for="messageshortdesar"   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('setting.shortdes-ar')}}</label>
-                  <textarea id="messageshortdesar"
-                  wire:model="shortdes.ar"
-                  rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Leave a comment..."></textarea>
-
-                </div>
-
-
-                <div class="relative z-0 w-full mb-5 group">
-
-                  <label for="messageshortdesen" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('setting.shortdes-en')}}</label>
-                  <textarea id="messageshortdesen" wire:model="shortdes.en" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Leave a comment..."></textarea>
-                </div>
-              </div>
-
-
-
-            <button type="submit"
-            class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none
-             focus:ring-green-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">{{__('setting.btnsave')}}</button>
-          </form>
-
-
-     </div>
-
-     <div class="siteinfo" x-show="showtap == 'siteinfo' ">
+        <div class="siteinfo" x-show="showtap == 'siteinfo' ">
 
 
             @if($getlogotemp)
@@ -333,6 +208,116 @@
 
 
      </div>
+
+
+
+
+     <div class="hearocontent" x-show="showtap == 'hearocontent' ">
+
+        <div class="flex justify-center mt-2 mb-2">
+
+            @if($getheroimgtemp )
+            <img  src= "{{asset('storage/'.$getheroimgtemp)}}" class=" rounded-md mb-4"   width="200" height="200" alt="hearo"/>
+            @endif
+          </div>
+
+
+
+        <form class=" max-w-4xl mx-auto p-6 mt-3 mb-3" wire:submit.prevent="updatehearo">
+
+
+
+
+             <div class="mx-auto max-w-2xl mb-4 mt-3" wire:ignore>
+
+
+
+
+
+
+           <input type="file"  id="imagehearo" accept="image/.*" wire:model="hearoimg"  />
+
+
+
+
+           </div>
+              <div>
+                 @error('hearoimg') <span class="text-danger ">{{ $message }}</span> @enderror
+              </div>
+
+
+
+
+
+
+            <div class="grid md:grid-cols-2 md:gap-6 mt-3">
+              <div class="relative z-0 w-full mb-5 group">
+
+
+                <label for="hearotitlear"  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('setting.hearotitle-ar')}}</label>
+                <textarea id="hearotitlear" rows="4"
+                wire:model="hearotitle.ar"
+                class="block p-2.5 w-full text-sm
+                 text-gray-900 bg-gray-50 rounded-lg border
+                  border-gray-300 focus:ring-blue-500 focus:border-blue-500
+                   dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                   placeholder="Leave a comment..."></textarea>
+                   <div>
+                    @error('hearotitle.ar') <span class="text-danger ">{{ $message }}</span> @enderror
+                </div>
+              </div>
+
+
+
+              <div class="relative z-0 w-full mb-5 group">
+
+                <label for="hearotitleen" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('setting.hearotitle-en')}}</label>
+                <textarea id="hearotitleen" wire:model="hearotitle.en" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Leave a comment..."></textarea>
+                <div>
+                    @error('hearotitle.en') <span class="text-danger ">{{ $message }}</span> @enderror
+                </div>
+
+            </div>
+            </div>
+
+
+            <div class="grid md:grid-cols-2 md:gap-6">
+                <div class="relative z-0 w-full mb-5 group">
+
+
+                  <label for="messageshortdesar"   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('setting.shortdes-ar')}}</label>
+                  <textarea id="messageshortdesar"
+                  wire:model="shortdes.ar"
+                  rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Leave a comment..."></textarea>
+
+                  <div>
+                    @error('shortdes.ar') <span class="text-danger ">{{ $message }}</span> @enderror
+                </div>
+                </div>
+
+
+                <div class="relative z-0 w-full mb-5 group">
+
+                  <label for="messageshortdesen" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('setting.shortdes-en')}}</label>
+                  <textarea id="messageshortdesen" wire:model="shortdes.en" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Leave a comment..."></textarea>
+
+                  <div>
+                    @error('shortdes.en') <span class="text-danger ">{{ $message }}</span> @enderror
+                </div>
+
+                </div>
+              </div>
+
+
+
+            <button type="submit"
+            class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none
+             focus:ring-green-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">{{__('setting.btnsave')}}</button>
+          </form>
+
+
+     </div>
+
 
 
      <div class="sochail" x-show="showtap == 'sochail' ">

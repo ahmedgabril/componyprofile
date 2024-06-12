@@ -13,4 +13,5 @@ return [
 "logout"=> "تسجيل الخروج",
 "profilelink"=> "الصفحه الشخصيه",
 "handelteam"=> "اداره فريق العمل",
+"mangeabout"=> "ادراه صفحه من نحن",
 ];

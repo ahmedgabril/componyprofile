@@ -8,7 +8,7 @@ use App\Models\catogery;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
-use Livewire\Attributes\Rule;
+
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Computed;
@@ -36,7 +36,7 @@ class Handelproject extends Component
     public $youtube_url;
 
 
-    #[Rule('nullable|url')]
+    #[Validate('nullable|url')]
     public $github_link;
     #[Validate('nullable|url')]
     public $project_link;

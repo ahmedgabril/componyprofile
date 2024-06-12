@@ -12,6 +12,7 @@ return [
 "handelsetting"=> "Mange Setting",
 "profilelink"=> "Mange Profile",
 "handelteam"=> "Mange Team",
+"mangeabout"=> "Mange  About Us",
 "logout"=> " Log Out",
 
 

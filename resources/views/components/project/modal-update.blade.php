@@ -330,7 +330,7 @@
 
 
 
-    } );
+    });
 
 
     window.addEventListener('edit-des',()=>{
