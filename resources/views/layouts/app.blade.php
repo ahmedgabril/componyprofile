@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ app()->getLocale() === 'en'? 'ltr':'rtl' }}" id="app" >
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ app()->getLocale() === 'ar'? 'rtl':'ltr' }}"  >
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,24 +23,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 
-
 <link href="{{asset('asset/backend/css/filePond.css')}}" rel="stylesheet" />
 <link
     href="{{asset('asset/backend/css/filePond-imagePreview.css')}}"
     rel="stylesheet"
 />
 
-
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <link rel="stylesheet" href="{{ asset('asset/backend/css/backend.css') }}"/>
-        <script src="{{asset('asset/backend/js/ckedtior.js')}}"></script>
+
         {{-- <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script> --}}
 
 @livewireStyles
 
     </head>
-    <body class="bg-gray-50 dark:bg-gray-800" dir="{{ app()->getLocale() === 'en'? 'ltr':'rtl' }}" id="app">
+    <body class="bg-gray-50 dark:bg-gray-800" dir="{{ app()->getLocale() === 'ar'? 'rtl':'ltr' }}" >
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
         @include('backend.navbar')
             {{-- <livewire:layout.navigation /> --}}
@@ -68,10 +66,14 @@
 
 
 
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/decoupled-document/ckeditor.js"></script>
+
+
 
 
         <script src="{{asset('asset/backend/js/filePond-imagePreview.js')}}"></script>
         <script src="{{asset('asset/backend/js/filePond.js')}}"></script>
+
 
     <script>
 

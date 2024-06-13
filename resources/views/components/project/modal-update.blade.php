@@ -87,9 +87,9 @@
 
        <div class="grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 gap-4 my-4">
 
-            <div>
+            <div class="">
                 <label for="message0" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('projects.short-des_en')}}</label>
-                <textarea id="message0" rows="4" wire:model="shortdes.en" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50
+                <textarea id="message0" rows="4" wire:model="shortdes.en" class="block p-2.5 min-w-full text-sm text-gray-900 bg-gray-50
                 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700
                 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Write your thoughts here..."></textarea>
@@ -101,7 +101,7 @@
 
             <div>
                 <label for="message1" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('projects.short-des_ar')}}</label>
-                <textarea id="message1" rows="4" wire:model="shortdes.ar" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50
+                <textarea id="message1" rows="4" wire:model="shortdes.ar" class="block p-2.5 min-w-full text-sm text-gray-900 bg-gray-50
                 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700
                 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Write your thoughts here..."></textarea>
@@ -114,16 +114,16 @@
 
 
 
-   <div class="grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 gap-4 my-4">
+   <div class="grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 gap-4 my-4 min-w-full">
 
     <div wire:ignore>
         <label for="updateproeditor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('projects.des-ar')}}</label>
 
-        <div id="updatepro-container"></div>
-        <div id="updateproeditor" wire:model.live="des.en" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50
+        <div id="updatepro-container" class="min-w-full"></div>
+        <div id="updateproeditor" wire:model.live="des.en"  class="block p-2.5 min-w-full text-sm text-gray-900 bg-gray-50
         rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700
         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        placeholder="Write your thoughts here..."></div>
+       ></div>
 
         <div class="text-red-700">@error('des.en') {{ $message }} @enderror</div>
 
@@ -133,10 +133,10 @@
     <div  wire:ignore>
         <label for="updatedesarmain" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('projects.des-en')}}</label>
         <div id="updatedesar-container"></div>
-        <div id="updatedesarmain"  wire:model.live="des.ar"  class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50
+        <div id="updatedesarmain"  wire:model.live="des.ar"  class="block p-2.5 min-w-full text-sm text-gray-900 bg-gray-50
         rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700
         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        placeholder="Write your thoughts here..."></div>
+       ></div>
 
     </div>
 </div>

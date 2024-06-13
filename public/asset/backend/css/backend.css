@@ -1,3 +1,10 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 .translate-x-negative-full {
     --tw-translate-x: -100%!important;
     transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -11,7 +18,8 @@
 
 
     html, body {
-        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
         height: 100vh;
         font-family: 'Cairo', sans-serif!important;
        font-weight: 700!important;
@@ -57,3 +65,39 @@
         max-width: 80%;
         margin: 20px auto;
     }
+    .ck.ck-toolbar.ck-toolbar_grouping>.ck-toolbar__items {
+        flex-wrap: wrap!important;}
+
+        .ck.ck-editor__editable_inline {
+            overflow-wrap: anywhere;
+
+        }
+
+        .filepond--root {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            justify-items: center;
+            margin-left: 1rem;
+            overflow: auto;/* Negative margin equal to the gap to counteract the extra space */
+        }
+
+        .filepond--root .filepond--item {
+            width: calc(33.333% - 1rem); /* For 3 columns */
+            margin-left: 1rem;
+            margin-bottom: 1rem; /* Add bottom margin if needed */
+            box-sizing: border-box; /* Include padding and border in the element's width */
+        }
+
+
+        @media only screen and (max-width: 687px) {
+            .filepond--root .filepond--item {
+                width: calc(25% -1rem); /* Set width to 30% for mobile */
+                margin-left: 1rem; /* Adjust the margin as needed */
+            }
+        }
+        @media only screen and (min-width: 1024px) {
+            .filepond--root .filepond--item {
+                width: calc(30% - 1rem); /* Set width to 32% for large screens */
+            }
+        }

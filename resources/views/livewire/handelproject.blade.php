@@ -193,10 +193,55 @@
 <script>
 
 
+
+
+FilePond.registerPlugin(FilePondPluginImagePreview);
+
+
+FilePond.setOptions({
+    server: {
+
+
+        process: (fieldName, file, metadata, load, error, progress, abort, transfer, options) => {
+
+        @this.upload('images',file,load);
+    //    @this.upload('hearoimg',file,load);
+
+        },
+
+
+      revert:(filename, load) => {
+        @this.removeUpload('images',filename,load)
+        // @this.removeUpload('hearoimg',filename,load)
+
+      },
+
+
+    },
+});
+
+const inputElements = document.querySelector("#addproimage");
+
+// const hearoimginput = document.querySelector("#imagehearo");
+const pond = FilePond.create(inputElements);
+// const pondhearo = FilePond.create(hearoimginput);
+
+
+
+
+
+
+
 Livewire.on('proj-updated',() =>{
 
 
+    const colsebtn = document.querySelector('.filepond--action-revert-item-processing');
 
+
+        if(colsebtn){
+
+        colsebtn.click();
+        }
 
 
 
@@ -261,9 +306,6 @@ window.addEventListener('deleteproj', (event) => {
         Livewire.dispatch('resetvalue')
 
     });
-
-
-
 
 
 

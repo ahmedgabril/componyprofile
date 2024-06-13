@@ -89,7 +89,7 @@
 
             <div>
                 <label for="message0" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> {{__('projects.short-des_en')}}</label>
-                <textarea id="message0" rows="4" wire:model="shortdes.en" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50
+                <textarea id="message0" rows="4" wire:model="shortdes.en" class="block p-2.5 min-w-full text-sm text-gray-900 bg-gray-50
                 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700
                 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Write your thoughts here..."></textarea>
@@ -101,7 +101,7 @@
 
             <div>
                 <label for="message1" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('projects.short-des_ar')}}</label>
-                <textarea id="message1" rows="4" wire:model="shortdes.ar" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50
+                <textarea id="message1" rows="4" wire:model="shortdes.ar" class="block p-2.5 min-w-full text-sm text-gray-900 bg-gray-50
                 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700
                 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Write your thoughts here..."></textarea>
@@ -120,8 +120,8 @@
         <div wire:ignore>
         <label for="addproeditor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('projects.des-en')}}</label>
 
-        <div id="addpro-container"></div>
-        <div id="addproeditor" wire:model.live="des.en" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50
+        <div id="addpro-container" class="min-w-full"></div>
+        <div id="addproeditor" wire:model.live="des.en" rows="4" class="block p-2.5 min-w-full text-sm text-gray-900 bg-gray-50
         rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700
         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         placeholder="Write your thoughts here..."></div>
@@ -136,7 +136,7 @@
         <label for="desarmain" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('projects.des-ar')}}</label>
 
         <div id="desar-container"></div>
-        <div id="desarmain"  wire:model.live="des.ar"  class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50
+        <div id="desarmain"  wire:model.live="des.ar"  class="block p-2.5 min-w-full text-sm text-gray-900 bg-gray-50
         rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700
         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         placeholder="Write your thoughts here..."></div>
@@ -173,7 +173,7 @@
         <div class="uplodefile">
 
 
-            {{-- @if ($this->images && is_array($this->images) || is_object($this->images))
+            @if ($this->images && is_array($this->images) || is_object($this->images))
             <div class="grid grid-cols-4 gap-4">
 
                     @foreach($this->images as $key => $screen)
@@ -191,19 +191,32 @@
 
           </div>
 
-          @endif --}}
-                <div class="">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">{{__('projects.images')}}</label>
-                    <input
-                    class="block w-full text-sm text-gray-900 border  border-gray-300 rounded-lg
+          @endif
 
-                    cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600
-                    dark:placeholder-gray-400"
-                    id="file_input" wire:model="images" type="file" multiple accept="image/*">
 
-                    @error('images.*') <span class="text-danger ">{{ $message }}</span> @enderror
+
+
+          <div class="" >
+
+
+                <div wire:ignore>
+                    <input type="file" id="addproimage" multiple  accept="image/.*" wire:model="images"  />
 
                 </div>
+
+       </div>
+
+
+
+
+
+       <div>
+          @error('logo') <span class="text-danger ">{{ $message }}</span> @enderror
+      </div>
+
+
+
+
     </div>
 
     </div>
@@ -305,6 +318,16 @@ document.querySelector( '#submit' ).addEventListener( 'click', () => {
 
 
 Livewire.on('projAdded', () => {
+
+  const colsebtn = document.querySelector('.filepond--action-revert-item-processing');
+
+
+if(colsebtn){
+
+colsebtn.click();
+}
+
+
 
 @this.des['ar'] = editorar.setData('');
 @this.des['en'] = editoren.setData('');

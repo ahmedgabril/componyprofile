@@ -30,7 +30,7 @@ class Handelabout extends Component
 
                     $getabout=  about::first();
                     $this->des['ar']=$getabout?->getTranslation('des','ar');
-                    $this->des['ar']=$getabout?->getTranslation('des','en');
+                    $this->des['en']=$getabout?->getTranslation('des','en');
                     $this->about_id= $getabout?->id;
 
 
@@ -42,16 +42,11 @@ class Handelabout extends Component
 
 
 
-           #[Computed]
-        public function getdata (){
-           return $this->dispatch('setdes');
 
-
-        }
 
     public function render()
     {
-        $this->dispatch('setdes');
+
         return view('livewire.handelabout');
     }
 

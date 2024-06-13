@@ -14,6 +14,7 @@ return [
 "handelteam"=> "Mange Team",
 "mangeabout"=> "Mange  About Us",
 "logout"=> " Log Out",
-
+"aboutdesar"=> "Des Ar",
+"aboutdesen"=> "Des En",
 
 ];

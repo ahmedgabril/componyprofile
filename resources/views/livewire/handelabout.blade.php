@@ -2,36 +2,27 @@
 
 <div class=" overflow-y-auto mb-6">
 
-    <div class="container mx-auto   my-16 shadow-md" x-data x-init="
+    <div class="container mx-auto  my-16 shadow-md" x-data ="{}" >
 
-
-
-
-
-
-
-    " >
-
-        <h2 class="text-gray-500 dark:text-white p-4 mx-auto">{{ __('projects.mangeproj') }}   </h2>
+        <h2 class="text-gray-500 dark:text-white p-4 mx-auto">{{ __('backend.mangeabout') }}   </h2>
     </div>
 
   <div class="container mx-auto mb-4 mt-4 bg-white p-6">
     <form wire:submit.prevent="updateabout">
 
 
-
         <div class="grid md:grid-cols-2 md:gap-6 p-5">
 
 
 
-             <div class="relative z-0 w-full mb-5 group" >
-                <label for="updateproeditor" class="block mb-4 text-sm font-medium text-gray-900 dark:text-white">{{__('projects.des-ar')}}</label>
+             <div class="relative z-0 min-w-full mb-5 group" >
+                <label for="updateproeditor" class="block mb-4 text-sm font-medium text-gray-900 dark:text-white">{{__('backend.aboutdesar')}}</label>
 
                 <div wire:ignore>
 
-                    <div id="updatedisar-container"></div>
+                    <div id="updatedisar-container" class="  "></div>
 
-                    <div class="relative z-0 w-full mb-5 group" id="updatedisar"   wire:model.live="des.ar">
+                    <div class="relative z-0 min-w-full mb-5 group" id="updatedisar"   wire:model.live.debounce.150ms="des.ar">
 
 
 
@@ -57,7 +48,7 @@
 
 
             <div class="relative z-0 w-full mb-5 group">
-                <label for="updateproeditor" class="block mb-4 text-sm font-medium text-gray-900 dark:text-white">{{__('projects.des-en')}}</label>
+                <label for="updateproeditor" class="block mb-4 text-sm font-medium text-gray-900 dark:text-white">{{__('backend.aboutdesen')}}</label>
 
 
              <div wire:ignore>
@@ -65,7 +56,7 @@
 
 
 
-                <div id="updatedisen"  wire:model.live="des.en">
+                <div id="updatedisen"  wire:model.live.debounce.150ms="des.en">
 
 
 
@@ -86,12 +77,11 @@
 
         </div>
 
-
         <div
         class="flex flex-shrink-0 flex-wrap items-center justify-center rounded-b-md border-t-2 border-neutral-100 p-4 dark:border-white/10">
 
 
-        <button
+       <button
 
         type="submit"
         id="about-submit"
@@ -103,6 +93,8 @@
           {{__('projects.updatebtn')}}
        </button>
         </div>
+
+
     </form>
 
 
@@ -114,13 +106,13 @@
 
 
 
-
+    {{-- <script src="{{asset('asset/backend/js/ckedtior.js')}}"></script> --}}
     @script
 
 
 
-<script>
 
+<script>
 
     let updatedisen;
     let updatedisar;
@@ -132,12 +124,26 @@
         .create(document.querySelector('#updatedisen'), {
             ckfinder: {
                 uploadUrl: "{{route('ckeditor.upload',['_token'=> csrf_token()])}}",
-            }
+            },
+
+            toolbar: [
+        'undo', 'redo',
+
+
+        '|', 'heading',
+        '|', 'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor',
+        '|', 'bold', 'italic',
+        '|', 'link', 'uploadImage', 'insertTable', 'blockQuote', 'mediaEmbed',
+        '|', 'bulletedList', 'numberedList', 'outdent', 'indent'
+    ],
+
         })
         .then(editor => {
             updatedisen = editor;
             const toolbarContainer = document.querySelector('#updatedisen-container');
             toolbarContainer.appendChild(editor.ui.view.toolbar.element);
+
+
 
             // Set initial data for 'en' editor after Livewire component is done
 
@@ -172,16 +178,7 @@
         });
 
 
-            //     window.addEventListener('setdes',()=>{
 
-    //    console.log(@this.des['ar']);
-
-    //     // updatedisar.setData(@this.des['ar']);
-    //     // updatedisen.setData(@this.des['en']);
-
-
-
-    //     });
 
 
 
