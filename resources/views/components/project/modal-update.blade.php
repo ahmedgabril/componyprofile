@@ -188,15 +188,14 @@
 
     <div>
 
-
+@dump($this->images_temp)
         <div class="uplodefile">
 
-
-            @if ($this->images && is_array($this->images) || is_object($this->images))
+            @if ($this->images_temp && is_array($this->images_temp) || is_object($this->images_temp) )
             <div class="grid grid-cols-4 gap-4">
 
-                    @foreach($this->images as $key => $screen)
-                        <div class=" " style="position: relative">
+                    @foreach($this->images_temp as $key => $screen)
+                        <div class=" " style="position: relative" wire:key="{{$key}}">
                             <a  href="#"
                             style="  position: absolute;
                          margin-right: 5px;
@@ -217,14 +216,11 @@
           </div>
 
           @endif
-                <div class="">
+                <div class="" wire:ignore>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input"> {{__('projects.images')}}</label>
                     <input
-                    class="block w-full text-sm text-gray-900 border  border-gray-300 rounded-lg
 
-                    cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600
-                    dark:placeholder-gray-400"
-                    id="file_input" wire:model="images" type="file" multiple accept="image/*">
+                    id="imageupdate" wire:model="images" type="file" multiple accept="image/*">
 
                     @error('images.*') <span class="text-danger ">{{ $message }}</span> @enderror
 

@@ -25,6 +25,9 @@ class Handelproject extends Component
   public $sumnail_status= false;
      public $getlocal;
      public $imgsumnail_temp;
+     public $images_temp =[];
+     public $images_path =[];
+
     public $sortdir = 'desc';
     public $getimgpath ;
     public $projcet_id;
@@ -147,7 +150,7 @@ class Handelproject extends Component
 
                     // Update the database record with the modified array
                     project::where('id', $this->projcet_id)->update(['images' => json_encode($updatedArray)]);
-                    unset($this->images[$key]);
+                    unset($this->images_temp[$key]);
                 }
 
                         // $this->images = json_encode($this->images);
@@ -248,9 +251,9 @@ public function editproj($proj_id) {
     $this->github_link = $getproj->github_link;
     $this->project_link = $getproj->project_link;
     $this->imgsumnail_temp = $getproj->imgsumnail;
-    $this->images =  json_decode($getproj->images,true);
+    $this->images_temp =  json_decode($getproj->images,true);
 
-$this->dispatch('edit-des');
+   $this->dispatch('edit-des');
     // implode($getproj->getTranslations('name', ['en']),) ;
 
 }
@@ -288,21 +291,31 @@ public function updateproj() {
             $this->getimgpath =   $this->imgsumnail_temp;
         }
 
- if( $this->images !==  json_decode($getres->images,true)) {
+ if(!empty($this->images ) ) {
 
-    Storage::deleteDirectory('public/images/'.$getres->name);
+
+            if(!empty($this->images ) && !empty($this->images_temp )){
+
+            }else{
+                Storage::deleteDirectory('public/images/'.$getres->name);
+            }
 
 
         foreach ($this->images as $key => $photos) {
 
-            $this->images[$key] = $photos->store('images/'.$getres->name,'public');
+      $this->images_path[] =  $this->images[$key] = $photos->store('images/'.$getres->name,'public');
 
 
         }
 
-}
 
-  $this->images = json_encode($this->images);
+
+   }else{
+
+
+    $this->images_path =  [];
+   }
+// $this->images_path = json_encode( $this->images_path);
 
 
    $getres->update([
@@ -324,7 +337,7 @@ public function updateproj() {
       'youtube_url' => $this->youtube_url,
       'github_link' => $this->github_link,
       'imgsumnail'=> $this->getimgpath == null ? $this->imgsumnail_temp: $this->getimgpath,
-      'images'=>  $this->images,
+      'images'=>  $this->images_path ,
 
    ]);
 

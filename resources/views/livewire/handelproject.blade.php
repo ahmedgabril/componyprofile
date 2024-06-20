@@ -205,14 +205,14 @@ FilePond.setOptions({
         process: (fieldName, file, metadata, load, error, progress, abort, transfer, options) => {
 
         @this.upload('images',file,load);
-    //    @this.upload('hearoimg',file,load);
+    //    @this.upload('images',file,load);
 
         },
 
 
       revert:(filename, load) => {
         @this.removeUpload('images',filename,load)
-        // @this.removeUpload('hearoimg',filename,load)
+        // @this.removeUpload('images',filename,load)
 
       },
 
@@ -222,9 +222,9 @@ FilePond.setOptions({
 
 const inputElements = document.querySelector("#addproimage");
 
-// const hearoimginput = document.querySelector("#imagehearo");
+ const imageupdate = document.querySelector("#imageupdate");
 const pond = FilePond.create(inputElements);
-// const pondhearo = FilePond.create(hearoimginput);
+ const pondhearo = FilePond.create(imageupdate);
 
 
 
@@ -246,7 +246,7 @@ Livewire.on('proj-updated',() =>{
 
 
     Swal.fire({
-  position: "top-start",
+  position: "center",
   icon: "success",
   title: "{{__('swal.updatetitle') }}",
   showConfirmButton: false,

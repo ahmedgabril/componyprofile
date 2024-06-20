@@ -173,27 +173,6 @@
         <div class="uplodefile">
 
 
-            @if ($this->images && is_array($this->images) || is_object($this->images))
-            <div class="grid grid-cols-4 gap-4">
-
-                    @foreach($this->images as $key => $screen)
-                        <div class=" " style="position: relative">
-
-                            <a  href="#"
-                               style="  position: absolute;
-                            margin-right: 5px;
-                            margin-top: 6px;
-                        background-color: red;"
-                                wire:click.prevent="removeimg('{{$key}}')" class="btn-close" >x</a>-
-                            <img src="{{  $screen->temporaryUrl() }}" class="" height="200" width="200"/>
-                        </div>
-                    @endforeach
-
-          </div>
-
-          @endif
-
-
 
 
           <div class="" >
