@@ -2,7 +2,7 @@
 
     <form wire:submit.prevent="addserveies" id="addserveies" >
 
-        <div class=" grid lg:grid-cols-3 sm:grid-cols-1 md:grid-cols-3 gap-4 ">
+        <div class=" grid lg:grid-cols-4 sm:grid-cols-1 md:grid-cols-4 gap-4 ">
 
 
             <div>
@@ -20,6 +20,14 @@
                 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600
                 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name.ar"  />
                <div class="text-red-700">@error('name.ar') {{ $message }} @enderror</div>
+              </div>
+
+              <div>
+                <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('serveies.price')}} </label>
+                <input type="text" wire:model.blur ="price"   id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600
+                dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"   />
+               <div class="text-red-700">@error('price') {{ $message }} @enderror</div>
               </div>
 
               <div>
@@ -118,7 +126,7 @@
      id="isumnail" type="file">
 
 
-     @error('imgsumnail') <span class="text-danger ">{{ $message }}</span> @enderror
+     @error('imgsumnail') <span class="text-red-700">{{ $message }}</span> @enderror
 
     </div>
 
@@ -142,14 +150,11 @@
                 @endforeach
             </div>
         @endif --}}
-                <div class="">
+                <div class="" wire:ignore>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">{{__('serveies.images')}}</label>
                     <input
-                    class="block w-full text-sm text-gray-900 border  border-gray-300 rounded-lg
 
-                    cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600
-                    dark:placeholder-gray-400"
-                    id="file_input" wire:model="images" type="file" multiple accept="image/*">
+                    id="ser_add" wire:model="images" type="file" multiple accept="image/*">
 
                     @error('images.*') <span class="text-danger ">{{ $message }}</span> @enderror
 
@@ -250,24 +255,6 @@ document.querySelector( '#addser-submit' ).addEventListener( 'click', () => {
 
 } );
 
-
-
-Livewire.on('serv-aadded', () => {
-
-@this.des['ar'] = editorar.setData('');
-@this.des['en'] = editoren.setData('');
-
-Swal.fire({
-    title: "{{__('swal.swaladddata') }}" ,
-icon: 'success',
-timer: 3000,
-toast: true,
-position: 'top-right',
-showConfirmButton: false,
-});
-
-
-});
 
 
 </script>

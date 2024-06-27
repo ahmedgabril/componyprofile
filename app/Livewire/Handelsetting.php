@@ -7,6 +7,7 @@ use App\Models\hearo;
 
 use App\Models\sochail;
 use Livewire\Component;
+use App\Rules\ArabicString;
 use Livewire\Attributes\Rule;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Computed;
@@ -85,11 +86,6 @@ class Handelsetting extends Component
         $this->getinfo_id =$getinfo?->id;
     }
 
-    protected $rules = [
-        'compony_name.*' => 'required|string|min:5',
-        'address.*' => 'nullable|string|min:5',
-    ];
-
 
     public function render()
     {
@@ -103,11 +99,37 @@ class Handelsetting extends Component
 
     }
 
+    public function maxarbic($getnumber = 225)
+    {
+        return \Validator::extend('max_arabic', function ($attribute, $value, $parameters, $validator) use ($getnumber) {
+            // Calculate the length of the Arabic string
+            $length = mb_strlen($value, 'UTF-8');
 
+            // Check if the length exceeds the maximum allowed (120 in this case)
+            return $length <= $getnumber;
+        });
+    }
 
     public function updateinfo() {
 
-        $this->validate();
+        $this->validate([
+            'compony_name.*' => [
+                'required',
+                'string',
+                'min:5',
+               'max:150',
+            ],
+
+            'address.*' => [
+                'required',
+                'string',
+                'min:5',
+            ],
+
+
+
+        ]);
+
         // try {
         //     $validatedData = $this->validate();
         //     // Your update logic here
@@ -155,7 +177,7 @@ class Handelsetting extends Component
             ],
 
 
-                'logo' => $this->imgreslogo == null ?  $this->getlogotemp: $this->imgreslogo,
+                'logo' => $this->imgreslogo ,
 
             ]);
         }else{
@@ -181,7 +203,7 @@ class Handelsetting extends Component
             ],
 
 
-                'logo' => $this->logo->store('logo','public'),
+                'logo' =>   $this->imgreslogo,
 
             ]);
 
@@ -205,12 +227,26 @@ class Handelsetting extends Component
 
     public function updatehearo() {
 
-        $this->validate([
 
 
-            'hearotitle.*' => 'required|string|min:5',
-             'shortdes.*' => 'required|string|min:5',
-        ]);
+            $this->validate([
+                'hearotitle.*' => [
+                    'required',
+                    'string',
+                    'min:5',
+                    'max:350', // Call your custom validation logic here
+                ],
+
+                'shortdes.*' => [
+                    'required',
+                    'string',
+                    'min:5',
+                    'max:350', // Call your custom validation logic here
+                ],
+
+
+
+            ]);
 
         if(!empty($this->hearoimg) ){
 
@@ -299,68 +335,6 @@ class Handelsetting extends Component
     }
 
 
-    public function updatehearocontent() {
-
-
-
-        $this->validate();
-
-       if($this->getid){
-
-        setting::where('id',$this->getid)->update([
-
-
-
-
-        ]);
-
-       }else{
-        setting::create([
-
-            'compony_name' =>
-
-            [
-         'en'=> $this->compony_name['en'],
-         'ar'=> $this->compony_name['ar'],
-
-            ],
-
-
-            'hearotitle' =>
-
-            [
-         'en'=> $this->hearotitle['en'],
-         'ar'=> $this->hearotitle['ar'],
-
-            ],
-
-
-
-            'shortdes' =>
-
-            [
-         'en'=> $this->shortdes['en'],
-         'ar'=> $this->shortdes['ar'],
-
-            ],
-
-
-            'address' =>
-
-            [
-         'en'=> $this->address['en'],
-         'ar'=> $this->address['ar'],
-
-            ],
-
-        ]);
-
-
-
-       }
-        $this->dispatch('hearocon-updated');
-
-    }
 
 
     public function updatesochail() {

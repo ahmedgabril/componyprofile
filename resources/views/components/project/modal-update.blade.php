@@ -1,6 +1,6 @@
 <div class="container mx-auto p-4 ">
 
-    <form wire:submit.prevent="updateproj" id="project-update-form" enctype="multipart/form-data">
+    <form wire:submit.prevent="updateproj" id="project-update-form" >
 
         <div class=" grid lg:grid-cols-3 sm:grid-cols-1 md:grid-cols-3 gap-4 ">
 
@@ -136,18 +136,29 @@
         <div id="updatedesarmain"  wire:model.live="des.ar"  class="block p-2.5 min-w-full text-sm text-gray-900 bg-gray-50
         rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700
         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-       ></div>
+       >
+
+    </div>
 
     </div>
 </div>
 
 <div class="grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 gap-4 my-4">
 
-    <div x-data = "{src:''} " >
-        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="image-sumnail">{{__('projects.imgsumnail')}}</label>
+    <div >
+
+        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
 
 
-        @if($this->imgsumnail_temp && $this->imgsumnail == null)
+
+ {{__('projects.imgsumnail')}}
+
+ <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 cursor-pointer text-center mt-2 mx-4">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
+  </svg>
+</label>
+
+        @if($this->imgsumnail_temp )
 
         <div class="mb-3 mt-2" style="position: relative">
 
@@ -161,34 +172,42 @@
         </div>
 
 
-    @endif
-
-<div class="" >
-
-  @if($this->sumnail_status)
-
-  <img x-on:click="$refs.sumnail.click()" :src=" src "   width="250" height="250"/>
-
-  @endif
-
-   <input x-ref="sumnail" accept="image/*" class=" w-full text-sm hidden text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400
-    focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-    wire:change="changstatus"
-    wire:model="imgsumnail"
-    id="image-sumnail" type="file"
-    @change=" src = URL.createObjectURL($event.target.files[0])"
-
-    />
+        @endif
 
 
-     @error('imgsumnail') <span class="text-danger ">{{ $message }}</span> @enderror
-    </div>
+
+
+
+
+            <div class="sumnail" >
+
+
+                <div>
+
+                    <input  accept="image/*"
+                    wire:model="imgsumnail"
+
+
+                    id="updateimgsumnail"
+                     type="file"
+
+
+
+
+                    >
+                </div>
+
+
+                          @error('imgsumnail') <span class="text-danger ">{{ $message }}</span> @enderror
+                         </div>
+
+
+
     </div>
 
 
     <div>
 
-@dump($this->images_temp)
         <div class="uplodefile">
 
             @if ($this->images_temp && is_array($this->images_temp) || is_object($this->images_temp) )
@@ -229,9 +248,6 @@
 
     </div>
 </div>
-
-        </form>
-
  <!-- Modal footer -->
  <div
  class="flex flex-shrink-0 flex-wrap items-center justify-center rounded-b-md border-t-2 border-neutral-100 p-4 dark:border-white/10">
@@ -260,6 +276,9 @@
  </button>
 
 </div>
+        </form>
+
+
     </div>
 
     @script
@@ -283,10 +302,10 @@
                 const toolbarContainer = document.querySelector( '#updatepro-container' );
 
                 toolbarContainer.appendChild( editor.ui.view.toolbar.element );
-            } )
+            })
             .catch( error => {
                 console.error( error );
-            } );
+            });
 
 
 
@@ -311,7 +330,7 @@
             } )
             .catch( error => {
                 console.error( error );
-            } );
+            });
 
 
 
@@ -338,25 +357,8 @@
 
 });
 
-    Livewire.on('proj-updated',() =>{
 
 
-
-        Updateeditorar.setData('');
-        Updateeditoren.setData('');
-
-
-        Swal.fire({
-        position: "top-start",
-        icon: "success",
-        title: "{{__('swal.updatetitle') }}",
-        showConfirmButton: false,
-        timer: 1500
-        });
-
-
-
-        });
 
 
 

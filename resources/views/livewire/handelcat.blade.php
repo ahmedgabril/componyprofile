@@ -180,11 +180,45 @@
 
 <script>
 
+FilePond.registerPlugin(FilePondPluginImagePreview);
+
+
+FilePond.setOptions({
+    server: {
+
+
+        process: (fieldName, file, metadata, load, error, progress, abort, transfer, options) => {
+
+       @this.upload('icon',file,load,progress);
+
+
+        },
+
+
+    revert:(filename, load) => {
+        @this.removeUpload('icon',filename,load);
+
+       load();
+    },
+
+
+    },
+});
+
+const getcatimageforupdate = document.querySelector("#catimage");
+const getcatimgforadd = document.querySelector("#catimageforadd");
+const pond = FilePond.create(getcatimageforupdate);
+const catimageforadd = FilePond.create(getcatimgforadd);
 
 Livewire.on('catogery-updated',() => {
+   let removebutton =  document.querySelector('.filepond--action-revert-item-processing');
 
+   if(removebutton){
+
+    removebutton.click();
+   }
     Swal.fire({
-  position: "top-start",
+  position: "center",
   icon: "success",
 
   title: "{{__('swal.updatetitle') }}",
@@ -232,19 +266,21 @@ window.addEventListener('deletecat', (event) => {
 
 
     Livewire.on('categoryAdded', () => {
-
+        catimageforadd.removeFile({ revert: true });
         Swal.fire({
-        title: "{{__('swal.swaladddata') }}" ,
-        icon: 'success',
-        timer: 3000,
-        toast: true,
-        position: 'top-right',
-        showConfirmButton: false,
+  position: "center",
+  icon: "success",
+
+  title: "{{__('swal.swaladddata') }}",
+
+  timer: 1500,
+  showConfirmButton: false,
     });
+});
 
 
 
-    });
+
 
 
     window.addEventListener('close-modal',() => {

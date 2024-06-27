@@ -187,17 +187,76 @@
 
 
 <script>
+ let  getseradd = document.querySelector("#ser_add");
+
+let  getser_update = document.querySelector("input[id='ser_update']");
+
+let  seradd = FilePond.create(getseradd);
+let  ser_update = FilePond.create(getser_update);
+
+
+FilePond.registerPlugin(FilePondPluginImagePreview);
+
+
+
+
+
+
+
+
+
+
+FilePond.setOptions({
+server: {
+
+
+    process: (fieldName, file, metadata, load, error, progress, abort, transfer, options) => {
+
+
+    @this.upload('images',file,load,progress);
+
+
+    },
+
+
+  revert:(filename, load) => {
+
+    @this.removeUpload('images',filename,load);
+
+  },
+
+
+},
+});
+
+
+Livewire.on('serv-added', () => {
+    seradd.removeFiles({ revert: true });
+
+
+
+        Swal.fire({
+  position: "center",
+  icon: "success",
+  title: "{{__('swal.updatetitle') }}",
+  showConfirmButton: false,
+  timer: 1500
+   });
+
+
+     });
+
 
 
 Livewire.on('serv-updated',() =>{
 
 
-
+    ser_update.removeFiles({ revert: true });
 
 
 
     Swal.fire({
-  position: "top-start",
+  position: "center",
   icon: "success",
   title: "{{__('swal.updatetitle') }}",
   showConfirmButton: false,

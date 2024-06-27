@@ -1,5 +1,5 @@
 
-<h3 class="text-center  text-gray-800 font-bold dark:text-white  p-8 py-8 mb-8" style="font-size:28px">{{ __('welcome.ourteam') }} </h3> 
+<h3 class="text-center  text-gray-800 font-bold dark:text-white  p-8 py-8 mb-8" style="font-size:28px">{{ __('welecome.ourteam') }} </h3>
 
 
 <div class="container grid gap-4  lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1  mx-auto p-4 w-full ">
@@ -7,8 +7,8 @@
 
     <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <div class="flex justify-end px-4 pt-4">
-          
-     
+
+
         </div>
         <div class="flex flex-col items-center pb-10">
             <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="{{ asset('img/profile.jpg') }}" alt="Bonnie image"/>
@@ -25,12 +25,12 @@
 
 
 
-    
+
 
 <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     <div class="flex justify-end px-4 pt-4">
-   
-      
+
+
     </div>
     <div class="flex flex-col items-center pb-10">
         <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="{{ asset('img/profile.jpg') }}" alt="Bonnie image"/>
@@ -53,8 +53,8 @@
 
 <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     <div class="flex justify-end px-4 pt-4">
-    
-    
+
+
     </div>
     <div class="flex flex-col items-center pb-10">
         <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="{{ asset('img/profile.jpg') }}" alt="Bonnie image"/>
@@ -74,7 +74,7 @@
 
 <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     <div class="flex justify-end px-4 pt-4">
- 
+
 
     </div>
     <div class="flex flex-col items-center pb-10">
@@ -88,5 +88,5 @@
     </div>
 </div>
 
-    
+
 </div>

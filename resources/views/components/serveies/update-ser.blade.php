@@ -2,7 +2,7 @@
 
     <form wire:submit.prevent="updateserv" id="serveies-update-form" >
 
-        <div class=" grid lg:grid-cols-3 sm:grid-cols-1 md:grid-cols-3 gap-4 ">
+        <div class=" grid lg:grid-cols-4 sm:grid-cols-1 md:grid-cols-4 gap-4 ">
 
 
             <div>
@@ -22,7 +22,13 @@
                <div class="text-red-700">@error('name.ar') {{ $message }} @enderror</div>
               </div>
 
-
+              <div>
+                <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('serveies.price')}}</label>
+                <input type="text" wire:model.blur ="price"   id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600
+                dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"  />
+               <div class="text-red-700">@error('price') {{ $message }} @enderror</div>
+              </div>
 
               <div>
                 <label for="cat_ar" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('serveies.youtube_url')}}</label>
@@ -136,7 +142,7 @@
     />
 
 
-     @error('imgsumnail') <span class="text-danger ">{{ $message }}</span> @enderror
+     @error('imgsumnail') <span class="text-red-600 ">{{ $message }}</span> @enderror
     </div>
     </div>
 
@@ -147,10 +153,10 @@
         <div class="uplodefile">
 
 
-            @if ($this->images && is_array($this->images) || is_object($this->images))
+            @if ($this->images_temp && is_array($this->images_temp) || is_object($this->images_temp))
             <div class="grid grid-cols-4 gap-4">
 
-                    @foreach($this->images as $key => $screen)
+                    @foreach($this->images_temp as $key => $screen)
                         <div class=" " style="position: relative" wire:key="{{$key}}">
 
                             <a  href="#"
@@ -173,14 +179,11 @@
           </div>
 
           @endif
-                <div class="">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input"> {{__('projects.images')}}</label>
+                <div class="" wire:ignore>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="ser_update"> {{__('projects.images')}}</label>
                     <input
-                    class="block w-full text-sm text-gray-900 border  border-gray-300 rounded-lg
 
-                    cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600
-                    dark:placeholder-gray-400"
-                    id="file_input" wire:model="images" type="file" multiple accept="image/*">
+                    id="ser_update" wire:model="images" type="file" multiple accept="image/*">
 
                     @error('images.*') <span class="text-danger ">{{ $message }}</span> @enderror
 
@@ -305,13 +308,6 @@
         Updateeditoren.setData('');
 
 
-        Swal.fire({
-        position: "top-start",
-        icon: "success",
-        title: "{{__('swal.updatetitle') }}",
-        showConfirmButton: false,
-        timer: 1500
-        });
 
 
 

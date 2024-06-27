@@ -27,15 +27,16 @@ class Handelproject extends Component
      public $imgsumnail_temp;
      public $images_temp =[];
      public $images_path =[];
+     public $regs = '/^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})$/';
 
-    public $sortdir = 'desc';
+
+     public $sortdir = 'desc';
     public $getimgpath ;
     public $projcet_id;
     #[Validate('required|int')]
     public $catogery_id;
 
 
-  #[Validate('nullable|url')]
     public $youtube_url;
 
 
@@ -79,6 +80,7 @@ class Handelproject extends Component
                 'max:255'
 
             ],
+           'youtube_url' => ['nullable','sometimes', "regex:$this->regs"],
             'name' => 'required',
             'name.*' => [
                 'required',
@@ -174,8 +176,7 @@ class Handelproject extends Component
     public function addproject()  {
 
 
-
-        $valdat = $this->validate();
+        $this->validate();
         $this->getlocal = app()->getLocale() == "en" ? $this->name['en']: $this->name['ar'];
 
         if(!empty($this->images)) {
@@ -262,11 +263,13 @@ public function editproj($proj_id) {
 
 public function updateproj() {
 
-
+// $this->sumnail_status = true;
 
     $this->validate([
 
             'imgsumnail'=> 'sometimes:image|max:1024',
+            'youtube_url' => ['nullable','sometimes', "regex:$this->regs"],
+
 
     ]);
 
@@ -291,7 +294,7 @@ public function updateproj() {
             $this->getimgpath =   $this->imgsumnail_temp;
         }
 
- if(!empty($this->images ) ) {
+        if(!empty($this->images ) ) {
 
 
             if(!empty($this->images ) && !empty($this->images_temp )){
@@ -313,7 +316,7 @@ public function updateproj() {
    }else{
 
 
-    $this->images_path =  [];
+    $this->images_path = $this->images_temp;
    }
 // $this->images_path = json_encode( $this->images_path);
 

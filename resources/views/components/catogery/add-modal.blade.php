@@ -28,16 +28,14 @@
 
 
 
-          <div x-data ="{src: null }" class="mt-4">
+          <div  class="mt-4" wire:ignore>
             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="image-sumnail">{{__('catogery.icon')}}</label>
 
-        <img x-on:click="$refs.icon.click()" :src= "src ? src :'/img/uploadimg.jpg' "   width="250" height="250"/>
 
-       <input  x-ref="icon" accept="image/*" class=" w-full text-sm hidden text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400
-        focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" wire:model="icon"
+       <input  accept="image/*"  wire:model="icon"
 
-      @change=" src = URL.createObjectURL($event.target.files[0])"
-         id="icon" type="file">
+
+         id="catimageforadd" type="file">
 
 
          @error('icon') <span class="text-danger ">{{ $message }}</span> @enderror

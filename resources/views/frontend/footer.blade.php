@@ -1,6 +1,6 @@
 
 
-<div class="bg-white dark:bg-gray-800">
+<div class="bg-white dark:bg-gray-800 p-6 px-6  overflow-auto  bottom-0 relative">
     <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div class="md:flex md:justify-between">
           <div class="mb-6 md:mb-0">

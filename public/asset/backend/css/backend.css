@@ -25,10 +25,6 @@
        font-weight: 700!important;
     }
 
-    p{
-
-        font-size: 14px!important;
-    }
     h1{
 
         font-size: 26px;
@@ -73,7 +69,7 @@
 
         }
 
-        .filepond--root {
+       .filepond--root {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -91,13 +87,13 @@
 
 
         @media only screen and (max-width: 687px) {
-            .filepond--root .filepond--item {
+             .filepond--root .filepond--item {
                 width: calc(25% -1rem); /* Set width to 30% for mobile */
                 margin-left: 1rem; /* Adjust the margin as needed */
             }
         }
         @media only screen and (min-width: 1024px) {
-            .filepond--root .filepond--item {
+             .filepond--root .filepond--item {
                 width: calc(30% - 1rem); /* Set width to 32% for large screens */
             }
         }

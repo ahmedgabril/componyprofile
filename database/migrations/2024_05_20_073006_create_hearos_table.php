@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('hearos', function (Blueprint $table) {
             $table->id();
-            $table->string('hearotitle')->nullable();
+            $table->tinyText('hearotitle')->nullable();
             $table->string('hearoimg')->nullable();
-            $table->string('shortdes')->nullable();
+            $table->tinyText('shortdes')->nullable();
 
             $table->timestamps();
         });

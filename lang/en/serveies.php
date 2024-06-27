@@ -10,7 +10,7 @@ return [
 "addserv"=> "Add New Serveies",
 "name.en"=> "Name Of English",
 "name.ar"=> "Name Of ARABIC",
-
+"price"=> "price of servies",
 
 
 

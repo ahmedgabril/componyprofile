@@ -192,10 +192,21 @@
 
 <script>
 
+   let  inputElements = document.querySelector("#addproimage");
+
+    let  imageupdate = document.querySelector("input[id='imageupdate']");
+
+    let  pond = FilePond.create(inputElements);
+    let  pondhearo = FilePond.create(imageupdate);
+    FilePond.registerPlugin(FilePondPluginImagePreview);
 
 
 
-FilePond.registerPlugin(FilePondPluginImagePreview);
+
+
+
+
+
 
 
 FilePond.setOptions({
@@ -204,15 +215,16 @@ FilePond.setOptions({
 
         process: (fieldName, file, metadata, load, error, progress, abort, transfer, options) => {
 
+
         @this.upload('images',file,load);
-    //    @this.upload('images',file,load);
+
 
         },
 
 
       revert:(filename, load) => {
-        @this.removeUpload('images',filename,load)
-        // @this.removeUpload('images',filename,load)
+
+        @this.removeUpload('images',filename,load);
 
       },
 
@@ -220,11 +232,19 @@ FilePond.setOptions({
     },
 });
 
-const inputElements = document.querySelector("#addproimage");
 
- const imageupdate = document.querySelector("#imageupdate");
-const pond = FilePond.create(inputElements);
- const pondhearo = FilePond.create(imageupdate);
+
+
+    // Your code here
+
+
+
+
+
+
+
+
+
 
 
 
@@ -234,16 +254,7 @@ const pond = FilePond.create(inputElements);
 
 Livewire.on('proj-updated',() =>{
 
-
-    const colsebtn = document.querySelector('.filepond--action-revert-item-processing');
-
-
-        if(colsebtn){
-
-        colsebtn.click();
-        }
-
-
+    pondhearo.removeFiles({ revert: true });
 
     Swal.fire({
   position: "center",

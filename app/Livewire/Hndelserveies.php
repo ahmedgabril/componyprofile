@@ -7,7 +7,7 @@ use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
-use Livewire\Attributes\Rule;
+
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Computed;
@@ -27,9 +27,12 @@ class Hndelserveies extends Component
     #[Layout('layouts.app')]
 
   public $sumnail_status= false;
+  public $regs = '/^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})$/';
 
      public $getlocal;
 
+     public $images_temp = [];
+     public $images_path =[];
      public $imgsumnail_temp;
     public $sortdir = 'desc';
     public $getimgpath ;
@@ -37,56 +40,20 @@ class Hndelserveies extends Component
 
 
 
-  #[Validate('nullable|url')]
+  public $price;
     public $youtube_url;
 
 
 
-    #[Validate([
-        'images' => 'sometimes:image|max:1024',
-        'images.*' => [
-            'sometimes:image|max:1024',
 
-
-        ],
-    ])]
     public $images = [];
 
-
-    #[Rule('required|image|max:1024')]
+   public $name = [];
     public $imgsumnail;
-    #[Validate([
-        'name' => 'required',
-        'name.*' => [
-            'required',
-            'min:5',
-            'max:65'
 
-        ],
 
-    ])]
-    public $name = [];
-    #[Validate([
-        'shortdes' => 'required',
-        'shortdes.*' => [
-            'required',
-            'min:20',
-            'max:255'
-
-        ],
-    ])]
     public $shortdes = [];
 
-    #[Validate([
-        'des' => 'required',
-        'des.*' => [
-            'required',
-            'min:20',
-
-        ],
-
-
-    ])]
     public $des = [];
     public $paginate = 5;
 
@@ -98,6 +65,48 @@ class Hndelserveies extends Component
         $this->resetPage();
 
     }
+
+
+
+    public function rules()
+    {
+        return [
+
+            'imgsumnail' => 'required|image|max:1024',
+            'price' => 'required|int',
+            'shortdes' => 'required',
+            'shortdes.*' => [
+                'required',
+                'min:20',
+                'max:255'
+
+            ],
+           'youtube_url' => ['nullable','sometimes', "regex:$this->regs"],
+            'name' => 'required',
+            'name.*' => [
+                'required',
+                'min:5',
+                'max:65'
+
+            ],
+
+
+            'images' => 'sometimes:image|max:1024',
+            'images.*' => [
+                'sometimes:image|max:1024',
+
+
+            ],
+
+            'des' => 'required',
+            'des.*' => [
+                'required',
+                'min:20',
+
+            ],
+        ];
+    }
+
 
   public function changstatus(){
 
@@ -122,12 +131,12 @@ class Hndelserveies extends Component
 
 
 
-        $validated = $this->validate();
-        $this->getlocal = app()->getLocale() == "en" ? $this->name['en']: $this->name['ar'];
+       $this->validate();
+        $this->getlocal = app()->getLocale() == "en" ? $this?->name['en']: $this?->name['ar'];
 
         if(!empty($this->images)) {
             foreach ($this->images as $key => $photos) {
-     $this->images[$key] = $photos->store('images/'.$this->getlocal,'public');
+       $this->images[$key] = $photos->store('images_ser/'.$this->getlocal,'public');
 
 
 
@@ -152,6 +161,7 @@ class Hndelserveies extends Component
             'ar' => $this->des['ar']
          ],
          'youtube_url' => $this->youtube_url,
+         'price' => $this->price,
          'imgsumnail'=> $this->imgsumnail->store('imgsumnail/'.$this->getlocal,'public'),
          'images'=>  $this->images,
 
@@ -162,15 +172,15 @@ class Hndelserveies extends Component
 
 
 
-    $this->resetvalue();
-    $this->dispatch('close-modal','add-serveies');
-    $this->dispatch('serv-aadded'); // Emit an event for closing the modal
 
+    $this->dispatch('close-modal','add-serveies');
+    $this->dispatch('serv-added'); // Emit an event for closing the modal
+    $this->resetvalue();
 
 }
 
 
-public function removeimg($key ,$path) {
+public function removeimg($key,$path) {
 
 
     Storage::deleteDirectory('public/'.$path);
@@ -186,7 +196,7 @@ public function removeimg($key ,$path) {
 
         // Update the database record with the modified array
         serves::where('id', $this->serveies_id)->update(['images' => json_encode($updatedArray)]);
-        unset($this->images[$key]);
+        unset($this->images_temp[$key]);
     }
 
             // $this->images = json_encode($this->images);
@@ -228,10 +238,10 @@ public function editserv($proj_id) {
     $this->shortdes['ar'] = $getproj->getTranslation('shortdes', 'ar') ;
 
     $this->youtube_url = $getproj->youtube_url;
-
+    $this->price = $getproj->price;
 
     $this->imgsumnail_temp = $getproj->imgsumnail;
-    $this->images =  json_decode($getproj->images,true);
+    $this->images_temp = json_decode($getproj->images,true);
 
     $this->dispatch('edit-des');
 
@@ -247,10 +257,11 @@ public function updateserv () {
 
 
 
+
     $this->validate([
 
             'imgsumnail'=> 'sometimes:image|max:1024',
-
+            'youtube_url' => ['nullable','sometimes', "regex:$this->regs"]
     ]);
 
 
@@ -279,14 +290,20 @@ public function updateserv () {
 
 
 
- if( $this->images !==  json_decode($getres->images,true)) {
+        if( !empty($this->images )) {
 
-    Storage::deleteDirectory('public/images/'.$getres->name);
+
+            if(!empty($this->images ) && !empty($this->images_temp )){
+
+            }else{
+                Storage::deleteDirectory('public/images_ser/'.$getres->name);
+            }
+
 
 
         foreach ($this->images as $key => $photos) {
 
-            $this->images[$key] = $photos->store('images/'.$getres->name,'public');
+           $this->images_path[] =  $this->images[$key] = $photos->store('images_ser/'.$getres->name,'public');
 
 
 
@@ -295,9 +312,11 @@ public function updateserv () {
 
 
 
-}
+    }else{
+        $this->images_path = $this->images_temp;
 
-  $this->images = json_encode($this->images);
+    }
+
 
 
    $getres->update([
@@ -316,9 +335,10 @@ public function updateserv () {
       ],
 
       'youtube_url' => $this->youtube_url,
+      'price' => $this->price,
 
       'imgsumnail'=> $this->getimgpath == null ? $this->imgsumnail_temp: $this->getimgpath,
-      'images'=>  $this->images,
+      'images'=>   $this->images_path ,
 
    ]);
 
@@ -362,6 +382,7 @@ public function updateserv () {
     $this->name = [];
     $this->shortdes = [];
     $this->des = [];
+    $this->price = '';
     $this->imgsumnail = null;
     $this->images = [];
     $this->youtube_url = '';

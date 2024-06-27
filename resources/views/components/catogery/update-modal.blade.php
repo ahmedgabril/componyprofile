@@ -39,20 +39,10 @@
 
 
       @endif
+                 <div class="" wire:ignore>
 
-          @if($this->icon_status)
-
-
-        <img x-on:click="$refs.icon.click()" :src= "src ? src :'' "   width="250" height="250"/>
-        @endif
-       <input
-       wire:change="chang_icon_status"
-
-       x-ref="icon" accept="image/*" class=" w-full text-sm hidden text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400
-        focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" wire:model="icon"
-
-      @change=" src = URL.createObjectURL($event.target.files[0])"
-         id="image-icons" type="file">
+                    <input type="file" accept="images/*" id="catimage" wire:model="icon"/>
+                 </div>
 
 
          @error('icon') <span class="text-danger ">{{ $message }}</span> @enderror
