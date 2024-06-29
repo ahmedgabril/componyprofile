@@ -48,7 +48,7 @@
          id="icon" type="text">
 
 
-         @error('icon') <span class="text-danger ">{{ $message }}</span> @enderror
+         @error('icon') <span class="text-red-700 ">{{ $message }}</span> @enderror
 
         </div>
 
@@ -73,7 +73,7 @@
    font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out
     hover:bg-green-900 hover:shadow-primary-2 focus:bg-green-800 focus:shadow-success-2 focus:outline-none focus:ring-0
      active:bg-green-600 active:shadow-primary-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong">
-     {{__('fact.updatfact')}}
+     {{__('fact.updatefact')}}
  </button>
 </div>
     </div>

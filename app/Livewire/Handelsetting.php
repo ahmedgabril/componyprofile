@@ -8,7 +8,7 @@ use App\Models\hearo;
 use App\Models\sochail;
 use Livewire\Component;
 use App\Rules\ArabicString;
-use Livewire\Attributes\Rule;
+
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Validate;
@@ -25,6 +25,10 @@ class Handelsetting extends Component
 
     // #[Validate("sometimes|nullable|image|max:1024")]
     public $logo;
+    public $regs = '#^(?:https?://)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]{11})#';
+
+
+
 
      public $facebook  ;
 
@@ -32,7 +36,7 @@ class Handelsetting extends Component
 
       public $youtube ;
 
-   public $twitter , $telgram,$tictok,$whatsup,$gmail;
+   public $twitter , $telgram, $tictok, $whatsup, $gmail;
     public $getid;
     public $getinfo_id;
     public $sochail_id;
@@ -62,7 +66,7 @@ class Handelsetting extends Component
         $getsocail =  sochail::first();
         $this->youtube = $getsocail?->youtube;
         $this->twitter = $getsocail?->twitter;
-        $this->facebook = $getsocail?->twitter;
+        $this->facebook = $getsocail?->facebook;
          $this->telgram = $getsocail?->telgram;
          $this->whatsup = $getsocail?->whatsup;
          $this->gmail = $getsocail?->gmail;
@@ -99,16 +103,6 @@ class Handelsetting extends Component
 
     }
 
-    public function maxarbic($getnumber = 225)
-    {
-        return \Validator::extend('max_arabic', function ($attribute, $value, $parameters, $validator) use ($getnumber) {
-            // Calculate the length of the Arabic string
-            $length = mb_strlen($value, 'UTF-8');
-
-            // Check if the length exceeds the maximum allowed (120 in this case)
-            return $length <= $getnumber;
-        });
-    }
 
     public function updateinfo() {
 
@@ -336,10 +330,18 @@ class Handelsetting extends Component
 
 
 
-
     public function updatesochail() {
 
-        $this->validate();
+        $this->validate([
+
+            'facebook' => 'sometimes|nullable|url',
+            'gmail' =>    'sometimes|nullable|email',
+             'youtube' => ['nullable','sometimes', "regex:$this->regs"],
+            'twitter' => 'sometimes|nullable|url',
+            'whatsup' => 'required|numeric',
+            'linkedin' => 'sometimes|nullable|url',
+            'telgram' => 'sometimes|nullable|string',
+        ]);
 
         if($this->sochail_id){
 
@@ -362,8 +364,6 @@ class Handelsetting extends Component
         }else{
 
             sochail::create([
-
-
 
                 'facebook' => $this->facebook,
                 'gmail' => $this->gmail,

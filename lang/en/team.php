@@ -10,7 +10,7 @@ return [
 "gob_en"=> "Team Gob_ar",
 "gob_ar"=> "Team Gob_ar",
 "updateteam"=> "Update Team",
-
+"nodata"=> " No Data Added For Compony Teame" ,
 
 
 

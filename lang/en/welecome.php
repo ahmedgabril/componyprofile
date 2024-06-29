@@ -6,9 +6,9 @@ return [
 
 
     'home' => 'Home',
-    'about' => 'About',
+    'about' => 'About Us',
     'services' => 'Services',
-    'contact' => 'Contact',
+    'contact' => 'Contact Us',
     'projects' => "Projects",
     'sitelogo' => "Graytec",
     'ourprojects' => "Our Projects",
@@ -28,6 +28,9 @@ return [
     'showpro'=> ' View Site',
     'proimages' => 'Project Images',
     'prodes' => 'Project Descrption',
+    'getinfo' => 'General overview',
+    'cv' => 'Cv For Owner',
+    'address' => 'Compony Address',
     ];
 
 

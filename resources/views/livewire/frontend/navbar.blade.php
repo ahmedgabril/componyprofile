@@ -1,9 +1,6 @@
-<nav class="bg-white border-gray-200 dark:bg-gray-800 pt-0 fixed w-full z-50">
+<nav class="bg-white border-gray-200 dark:bg-gray-800 top-0 left-0 fixed w-full z-50 ">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-8">
-    <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
-        <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
-        <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">{{ __('welecome.sitelogo') }}</span>
-    </a>
+        <livewire:frontend.getlogo/>
     <div class="flex items-center md:order-2 space-x-1 md:space-x-0 rtl:space-x-reverse">
 
 
@@ -82,14 +79,45 @@
             </li>
 
 
-            <li>
-                <a href="#" wire:navigate class="block nav-link py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500
-                 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">{{ __('welecome.about') }}</a>
-                </li>
-            <li>
-            <a href="#" wire:navigate class="block nav-link py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white
-             md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">{{ __('welecome.contact') }}</a>
-            </li>
+            <div class="flex items-center   md:order-2 space-x-1 md:space-x-0 rtl:space-x-reverse">
+                <button type="button" data-dropdown-toggle="compony_infos" class="inline-flex items-center font-lg justify-center px-4 py-0
+                 text-md text-gray-900 dark:text-white rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+
+
+                 {{__('welecome.getinfo')}}
+                    <svg class="w-2.5 h-2.5 ms-2.5 m-2 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+
+                    </svg>
+                </button>
+                <!-- Dropdown -->
+                <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700" id="compony_infos">
+                  <ul class="py-2 font-medium p-8" role="none">
+
+                    <li>
+                     <a href="{{route('aboutus')}}" wire:navigate class="block nav-link py-2 px-6 md:p-0 text-gray-900 rounded mb-3 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500
+                         dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">{{ __('welecome.about') }}</a>
+                        </li>
+                    <li>
+                    <a href="{{route('contactus')}}" wire:navigate class="block nav-link py-2 px-3 mb-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white
+                     md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">{{ __('welecome.contact') }}</a>
+                    </li>
+                    <li>
+                        <a href="{{route('getcv')}}" wire:navigate class="block nav-link py-2 px-3 md:p-0 text-gray-900 rounded
+                         hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white
+                         md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+
+
+                      {{__('welecome.cv')}} </a>
+                  </li>
+
+
+                  </ul>
+                </div>
+
+            </div>
+
+
 
 
         </ul>
@@ -101,17 +129,6 @@
 
     </div>
   </nav>
-
-  <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg
-        bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white
-        dark:bg-gray-800 md:dark:bg-gray-800 dark:border-gray-700">
-    <li>
-        <a href="/" wire:navigate class="block py-2 px-3 text-white nav-link"
-           title="{{ __('welecome.home') }}">
-            {{ __('welecome.home') }}
-        </a>
-    </li>
-    </ul>
 
 
 
@@ -136,8 +153,7 @@ document.addEventListener('DOMContentLoaded', function () {
       link.classList.add('active'); // Add "active" class if it matches
     }
 
-    console.log(` ${currentRoute}`);// Get the link's href
-    console.log(`${linkHref} `);
+
   });
 });
 

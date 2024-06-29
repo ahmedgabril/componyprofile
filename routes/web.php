@@ -1,5 +1,6 @@
 
 <?php
+
 use App\Livewire\Home;
 use Livewire\Livewire;
 use App\Livewire\Handelcat;
@@ -10,7 +11,10 @@ use App\Livewire\Handelprofile;
 use App\Livewire\Handelproject;
 use App\Livewire\Handelsetting;
 use App\Livewire\Hndelserveies;
+use App\Livewire\Frontend\Getcv;
+use App\Livewire\Frontend\AboutUs;
 use App\Livewire\Frontend\Project;
+use App\Livewire\Frontend\ContactUs;
 use App\Livewire\Frontend\Getservies;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -39,8 +43,11 @@ Route::group([
         ->name('dashboard');
         Route::post('/upload',[HomeController::class,'upload'])->name('ckeditor.upload');
 
-    // Use Livewire components
+    // fornt end routes
 
+    Route::get('/contactus', ContactUs::class)->name('contactus');
+    Route::get('/aboutus', AboutUs::class)->name('aboutus');
+    Route::get('/getcv', Getcv::class)->name('getcv');
     Route::get('/project', Project::class)->name('project');
     Route::get('/getserv', Getservies::class)->name('getserv');
     Route::get('/getprodata/{gitid}', Getprojectdata::class)->name('getprodata');

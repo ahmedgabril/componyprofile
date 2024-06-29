@@ -9,28 +9,16 @@ html, body {
 
 
 .hearo{
-transition: all ease-in-out 3s;
+transition: all ease-in-out 1s;
 perspective: 1000px
 
 }
 
-.nav-link {
-    display: inline-block;
-    padding: 10px 20px;
-    text-decoration: none;
-    color: #fff; /* Or your desired color */
-    transition: all 0.3s ease-in-out; /* Add optional transition */
-}
 
 /* Hover effect (optional) */
-.nav-link:hover {
-    background-color: #ddd;
-}
 
-.nav-link.active {
-    font-weight: bold;
-    color: #f24a17; /* Or customize the active link color */
-}
+
+
 
     h2{
 

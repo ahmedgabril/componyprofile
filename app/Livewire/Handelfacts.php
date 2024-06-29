@@ -7,7 +7,7 @@ use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
-use Livewire\Attributes\Rule;
+
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
@@ -32,7 +32,7 @@ class Handelfacts extends Component
 
         // public $imgtest;
 
-                #[Rule([
+                #[Validate([
                     'name' => 'required',
                     'name.*' => [
                 'required',
@@ -40,6 +40,7 @@ class Handelfacts extends Component
                 'max:65'
 
             ],
+
 
         ])]
         public $name = [];
@@ -138,7 +139,7 @@ class Handelfacts extends Component
 
                     ]);
                     $this->resetvalue();
-                    $this->icon_status = false;
+
                     $this->dispatch('close-modal','updatefact');
                     $this->dispatch('fact-updated');
 

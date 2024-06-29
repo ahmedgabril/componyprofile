@@ -12,7 +12,7 @@
 
 
         <div class=" flex justify-center border-spacing-4 items-center  w-60 h-48 rounded-md object-cover mb-3 mt-3 bg-center cursor-pointer
-         bg-gray-800 hover:brightness-50"
+         bg-gray-800 hover:brightness-50 text-gray-50"
 
          @click='$dispatch("getalldata")' >
          <h2 class="text-center leading-none  font-bold" style="font-size:28px!important"> {{__('welecome.all')}}</h2>
@@ -30,13 +30,13 @@
 
 
 
-            <div class=" flex justify-center flex-wrap border-spacing-4 items-center  w-60 h-48 rounded-md object-cover mb-3 mt-3 bg-center cursor-pointer
+            <div class=" flex justify-center flex-wrap border-spacing-6 shadow-md items-center  w-60 h-48 rounded-md  object-cover mb-3 mt-3 bg-center cursor-pointer
              bg-gray-500 bg-blend-multiply" style="background-image: url('{{asset("storage/".$value?->icon) }}')"
 
            wire:key="{{ $key}}"
              @click="$dispatch('getcat',{ getid: {{$value->id}}})"
              >
-             <h2 class="text-center leading-none  font-bold" style="font-size:28px!important">{{$value->name}}</h2>
+             <h2 class="text-center leading-none text-gray-50  font-bold" style="font-size:28px!important">{{$value->name}}</h2>
 
             </div>
 

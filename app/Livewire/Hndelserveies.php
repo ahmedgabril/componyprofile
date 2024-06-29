@@ -27,7 +27,7 @@ class Hndelserveies extends Component
     #[Layout('layouts.app')]
 
   public $sumnail_status= false;
-  public $regs = '/^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})$/';
+  public $regs = '#^(?:https?://)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]{11})#';
 
      public $getlocal;
 

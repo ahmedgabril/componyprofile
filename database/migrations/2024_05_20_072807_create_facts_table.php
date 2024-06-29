@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('facts', function (Blueprint $table) {
             $table->id();
-            $table->string('icon');
-            $table->string('number');
-            $table->string('name');
+            $table->string('icon')->nullable();
+            $table->string('number')->nullable();
+            $table->string('name')->nullable();
 
 
             $table->timestamps();

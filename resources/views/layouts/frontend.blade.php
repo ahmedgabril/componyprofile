@@ -26,7 +26,7 @@
         <div class="p-0 mt-0  ">
 
 
-            @include('frontend/navbar')
+          <livewire:frontend.navbar/>
 
 
 
@@ -36,13 +36,8 @@
                     {{$slot}}
                 </main>
 
-             <div class="pt-15px">
 
-                @include('frontend/footer')
-             </div>
-
-
-
+                <livewire:frontend.footer/>
 
         </div>
 

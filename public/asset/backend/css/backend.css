@@ -4,6 +4,16 @@
     margin: 0;
     padding: 0;
 }
+        .text-danger{
+
+        color:rgb(221, 87, 87);
+        }
+button:where([type='submit']) {
+  -webkit-appearance: button; /* 1 */
+  background-color: #117129; /* 2 */
+  background-image: none; /* 2 */
+}
+
 
 .translate-x-negative-full {
     --tw-translate-x: -100%!important;
@@ -43,6 +53,7 @@
 
         font-size: 18px!important;
     }
+
     :is([dir=rtl]) select:not([size]) {
         background-position: left 0.75rem center;
         padding-right: 0.75rem;

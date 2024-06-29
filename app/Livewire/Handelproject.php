@@ -27,9 +27,8 @@ class Handelproject extends Component
      public $imgsumnail_temp;
      public $images_temp =[];
      public $images_path =[];
-     public $regs = '/^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})$/';
 
-
+     public $regs = '#^(?:https?://)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]{11})#';
      public $sortdir = 'desc';
     public $getimgpath ;
     public $projcet_id;
