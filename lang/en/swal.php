@@ -13,5 +13,6 @@ return  [
     "updatetitle"=> "data  has been updated",
     "dangeralert"=> "Danger alert",
     "notfound"=> "data not found",
+     "sendms"=>"Message Has Been Sent Sccessfuly"
 
 ];

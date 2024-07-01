@@ -1,4 +1,5 @@
-<div>
+
+
 
 
     <nav class="bg-white border-gray-200 dark:bg-gray-800 fixed left-0 z-50 w-full"  >
@@ -28,11 +29,92 @@
 
 
 
-            <div class="flex items-center mx-4 md:order-2 space-x-1 md:space-x-0 ltr:space-x-reverse gap-2" >
+            <div class="flex items-center mx-4 md:order-2 space-x-1 md:space-x-0 ltr:space-x-reverse gap-2  "  wire:poll.keep-alive >
 
 
-              <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100
-              dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm ml-3 mr-2 " >
+                <button id="mega-menu-dropdown-button" data-dropdown-toggle="mega-menu-dropdown"
+                 class="flex items-center justify-between w-full py-2 px-3 font-medium text-gray-500 border-b
+                  border-gray-100 md:w-auto hover:bg-gray-50 md:hover:bg-transparent md:border-0
+                   md:hover:text-blue-600 md:p-0 dark:text-gray-400 md:dark:hover:text-blue-500 dark:hover:bg-gray-700
+                    dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                        <path d="M5.85 3.5a.75.75 0 0 0-1.117-1 9.719 9.719 0 0 0-2.348 4.876.75.75 0 0 0 1.479.248A8.219 8.219 0 0 1 5.85 3.5ZM19.267 2.5a.75.75 0 1 0-1.118 1 8.22 8.22 0 0 1 1.987 4.124.75.75 0 0 0 1.48-.248A9.72 9.72 0 0 0 19.266 2.5Z" />
+                        <path fill-rule="evenodd" d="M12 2.25A6.75 6.75 0 0 0 5.25 9v.75a8.217 8.217 0 0 1-2.119 5.52.75.75 0 0 0 .298 1.206c1.544.57 3.16.99 4.831 1.243a3.75 3.75 0 1 0 7.48 0 24.583 24.583 0 0 0 4.83-1.244.75.75 0 0 0 .298-1.205 8.217 8.217 0 0 1-2.118-5.52V9A6.75 6.75 0 0 0 12 2.25ZM9.75 18c0-.034 0-.067.002-.1a25.05 25.05 0 0 0 4.496 0l.002.1a2.25 2.25 0 1 1-4.5 0Z" clip-rule="evenodd" />
+                      </svg>
+
+                </button>
+
+
+                <div id="mega-menu-dropdown"
+                wire:ignore.self
+                 class="absolute z-10
+                  w-auto max-w-sm
+                  text-sm bg-white border max-h-screen overflow-y-auto mb-12 hidden
+                    flex-col justify-items-center border-gray-100 rounded-lg shadow-md dark:border-gray-700 md:grid-cols-3 dark:bg-gray-700">
+
+
+                           @dump( $getcount->count() )
+                                    @if($getdata)
+                                    @forelse ($getdata as $key => $item)
+                                    <div class="p-4 flex flex-col dark:hover:bg-gray-900   hover:bg-gray-200 transition-transform delay-400" >
+
+                                        <a  href="#" class="p-2  rounded-md dark:text-gray-300 text-gray-700">
+
+                                            <div class="flex justify-between gap-4 flex-wrap my-4 ">
+                                           <div>
+                                                <h5 class="break-words capitalize text-blue-500">{{$item->fullname}} </h5>
+                                           </div>
+                                                <div class="flex flex-wrap justify-between gap-4">
+                                                    <h6 class="break-words text-pretty text-red-700">{{$item->getcontact}}</h6>
+
+                                                    <span class="text-gray-400 text-sm text-justify">{{ $item->created_at->format('Y-m-d') }}</span>
+                                                    <span class="text-gray-400 text-sm text-justify">{{$item->created_at->diffForHumans(null, true). ' '.'ago'}}</span>
+                                                </div>
+                                            </div>
+
+                                            <p class="reak-words text-pretty leading-6 ">
+                                              {{$item->des}}
+                                            </p>
+
+                                        </a>
+
+                                    </div>
+
+                                    <hr class="h-px my-0 bg-gray-200 border-0 dark:bg-gray-700">
+
+
+                                    @empty
+                                    <div class="flex items-center   p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                                        <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                          <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                        </svg>
+                                        <span class="sr-only">Info</span>
+                                        <div class="">
+                                          <span class="font-medium">{{__('swal.dangeralert')}} !!</span> {{__('swal.notfound')}}
+                                        </div>
+                                      </div>
+                                    @endforelse
+                                          <div class="flex flex-col {{$getdata?->count() <= 2?'mb-2':'mb-14'}} bottom-0">
+                                               <button type="button" class="bg-gray-500 dark:hover:bg-gray-900  hover:bg-gray-800 text-gray-50 mb-4 p-4 mt-4 mx-2"
+
+                                            wire:click.prevent="addmore">مشاهده الاشعارات السابقه</button></div>
+
+
+
+                                    @endif
+
+
+                    <hr class="h-px my-0 bg-gray-200 border-0 dark:bg-gray-700">
+
+
+
+
+                    <hr class="h-px my-0 bg-gray-200 border-0 dark:bg-gray-700">
+
+                </div>
+
+              <button id="theme-toggle" wire:ignore type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100
+              dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm  " >
                <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
                <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
            </button>
@@ -75,7 +157,7 @@
              focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button"
              aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
                 <span class="sr-only">Open user menu</span>
-                <img class="w-8 h-8 rounded-full" src="{{asset('img/profile.jpg')}}" alt="user photo">
+                <img class="w-8 h-8 rounded-full" src="{{asset('img/profile1.jpg')}}" alt="user photo">
               </button>
               <!-- Dropdown menu -->
               <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
@@ -111,12 +193,39 @@
 
 
         </div>
+
+
+
+<style>
+
+#mega-menu-dropdown-button::before {
+           content: "@php echo $getcount->count() ? $getcount->count() : 0; @endphp";
+            display: inline-flex;
+
+        right: 27px;
+        margin-left: 0px;
+        background-color: red;
+        color: white;
+        /* padding: 0px 4px; */
+        border-radius: 50%;
+        margin-top: -28px;
+        width: 15px;
+        height: 15px;
+        justify-content: center;
+        align-items: center;
+        padding: 11px;
+        position: relative;
+        }
+
+</style>
+
+
+
       </nav>
 
 
 
 
-    @include('backend.sidebar')
 
 
-</div>
+

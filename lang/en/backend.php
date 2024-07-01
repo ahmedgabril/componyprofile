@@ -16,5 +16,8 @@ return [
 "logout"=> " Log Out",
 "aboutdesar"=> "Des Ar",
 "aboutdesen"=> "Des En",
-
+"handelcv"=> " Add Cv",
+"pro_lateset"=> "lateset projects",
+"serv_lateset"=> "lateset Serveies",
+"cat_lateset"=> "lateset Catogeries",
 ];

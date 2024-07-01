@@ -23,4 +23,5 @@ return [
 "images"=> " Upload multiple images",
 
 "updatebtn"=> " Update Data",
+"pronum"=> " Project Number",
 ];

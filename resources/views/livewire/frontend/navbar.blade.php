@@ -63,25 +63,32 @@
         <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg
          bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white  dark:bg-gray-800 md:dark:bg-gray-800 dark:border-gray-700">
             <li>
-            <a href="/" wire:navigate class=" nav-link active block py-2 px-3 text-white    rounded md:bg-transparent md:dark:hover:text-blue-500 md:text-gray-700 md:p-0 md:dark:text-gry-200"
+                <a href="{{route('home')}}" wire:navigate class="block  cursor-pointer {{request()->routeIs('home')? ' text-green-500  dark:text-green-500  border-b-2 border-green-500':'border-transparent'}}
+                     py-2 px-3    rounded
+                    hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700
 
-            >{{ __('welecome.home') }}</a>
+                    md:dark:hover:text-blue-500
+                    dark:hover:bg-gray-700
+                     dark:hover:text-white md:dark:hover:bg-transparent ">{{ __('welecome.home') }}</a>
             </li>
 
             <li>
-            <a href="{{route('project')}}" wire:navigate class="block nav-link   py-2 px-3  md:p-0 text-gray-900 rounded
-             hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700
-              dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">{{ __('welecome.projects') }}</a>
+            <a href="{{route('project')}}" wire:navigate class="block  cursor-pointer {{request()->routeIs('project')? ' text-green-500  dark:text-green-500  border-b-2 border-green-500':'border-transparent'}}
+                   py-2 px-3    rounded
+             hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white
+              dark:hover:text-white md:dark:hover:bg-transparent   md:dark:hover:text-blue-500">{{ __('welecome.projects') }}</a>
             </li>
             <li>
-            <a href="/getserv" wire:navigate class="block nav-link py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white
-             md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">{{ __('welecome.services') }}</a>
+            <a href="{{route('getserv')}}" wire:navigate class="block nav-link cursor-pointer py-2 px-3
+             {{request()->routeIs('getserv')? ' text-green-500  dark:text-green-500  border-b-2 border-green-500':'border-transparent'}}
+             rounded hover:bg-gray-100 md:hover:bg-transparent  dark:text-white md:hover:text-blue-700
+             md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent ">{{ __('welecome.services') }}</a>
             </li>
 
 
-            <div class="flex items-center   md:order-2 space-x-1 md:space-x-0 rtl:space-x-reverse">
+            <div class="flex items-center cursor-pointer   md:order-2 space-x-1 md:space-x-0 rtl:space-x-reverse">
                 <button type="button" data-dropdown-toggle="compony_infos" class="inline-flex items-center font-lg justify-center px-4 py-0
-                 text-md text-gray-900 dark:text-white rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+                 text-md text-gray-900 dark:text-white rounded-lg cursor-pointer hover:bg-gray-100 dark:bg-transparent  dark:hover:text-blue-500">
 
 
                  {{__('welecome.getinfo')}}
@@ -95,17 +102,26 @@
                   <ul class="py-2 font-medium p-8" role="none">
 
                     <li>
-                     <a href="{{route('aboutus')}}" wire:navigate class="block nav-link py-2 px-6 md:p-0 text-gray-900 rounded mb-3 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500
-                         dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">{{ __('welecome.about') }}</a>
+                     <a href="{{route('aboutus')}}" wire:navigate class="block  py-2 px-6
+
+                       {{request()->routeIs('aboutus')? ' text-green-500  dark:text-green-500  border-b-2 border-green-500':'border-transparent'}}
+                     rounded mb-3 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500
+                         dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent ">{{ __('welecome.about') }}</a>
                         </li>
                     <li>
-                    <a href="{{route('contactus')}}" wire:navigate class="block nav-link py-2 px-3 mb-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white
-                     md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">{{ __('welecome.contact') }}</a>
+                    <a href="{{route('contactus')}}" wire:navigate class="block  py-2 px-3 mb-3
+
+                    {{request()->routeIs('contactus')? ' text-green-500  dark:text-green-500  border-b-2 border-green-500':'border-transparent'}}
+                 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white
+                     md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent ">{{ __('welecome.contact') }}</a>
                     </li>
                     <li>
-                        <a href="{{route('getcv')}}" wire:navigate class="block nav-link py-2 px-3 md:p-0 text-gray-900 rounded
+                        <a href="{{route('getcv')}}" wire:navigate class="block  py-2 px-3
+
+                    {{request()->routeIs('getcv')? ' text-green-500  dark:text-green-500  border-b-2 border-green-500':'border-transparent'}}
+                      rounded
                          hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white
-                         md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+                         md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent ">
 
 
                       {{__('welecome.cv')}} </a>

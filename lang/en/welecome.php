@@ -6,6 +6,8 @@ return [
 
 
     'home' => 'Home',
+    'RESOURCES' =>'RESOURCES',
+    'FOLLOWUS'=>'FOLLOW US',
     'about' => 'About Us',
     'services' => 'Services',
     'contact' => 'Contact Us',
@@ -31,6 +33,12 @@ return [
     'getinfo' => 'General overview',
     'cv' => 'Cv For Owner',
     'address' => 'Compony Address',
+
+    "message" =>  "Type your Message",
+    "fullname" =>  "Full Name  ",
+   "emailorphone" =>  "Type Your  Email or Phone",
+   "formdes"=> "Gray Tech Company welcomes you, and we are pleased to communicate with you. You can send us your information, and we will get in touch with you as soon as possible.",
+  "sendms" => "Send Message"
     ];
 
 

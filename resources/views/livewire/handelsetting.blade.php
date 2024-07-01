@@ -600,7 +600,6 @@ if(colsebtn){
 }
 
 
-
        Swal.fire({
        position: "center",
        icon: "success",

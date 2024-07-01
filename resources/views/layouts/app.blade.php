@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ app()->getLocale() === 'ar'? 'rtl':'ltr' }}"  >
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"   >
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,20 +32,26 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <link rel="stylesheet" href="{{ asset('asset/backend/css/backend.css') }}"/>
+        <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/decoupled-document/ckeditor.js"></script>
 
         {{-- <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script> --}}
 
-@livewireStyles
 
     </head>
-    <body class="bg-gray-50 dark:bg-gray-800" dir="{{ app()->getLocale() === 'ar'? 'rtl':'ltr' }}" >
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-        @include('backend.navbar')
-            {{-- <livewire:layout.navigation /> --}}
+    <body class="" dir="{{ app()->getLocale() === 'ar'? 'rtl':'ltr' }}" >
+        <div class="min-h-screen bg-gray-200 dark:bg-gray-900">
+                <header>
 
-            <!-- Page Heading -->
+                    <livewire:backend.navbar />
+
+                    <livewire:backend.sidebar />
+                </header>
 
 
+                {{-- @include('backend.navbar')
+                @include('backend.sidebar') --}}
+
+      {{-- <livewire:layout.navigation /> --}}
             <!-- Page Content -->
             <main class="pt-14 overflow-y-auto">
                 {{$slot}}
@@ -62,17 +68,18 @@
 
 
 
-        @livewireScripts
 
 
 
-    <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/decoupled-document/ckeditor.js"></script>
+
 
 
 
 
         <script src="{{asset('asset/backend/js/filePond-imagePreview.js')}}"></script>
         <script src="{{asset('asset/backend/js/filePond.js')}}"></script>
+        {{-- <script src="{{ asset('asset/backend/js/pdf.js') }}"></script>
+        <script src="{{ asset('asset/backend/js/pdf.worker.js') }}"></script> --}}
 
 
     <script>
@@ -131,22 +138,32 @@
 
     </script>
 
-<script  >
-document.addEventListener("DOMContentLoaded", function () {
-    initFlowbite();
-
-});
-
-
-
-
-            document.addEventListener('livewire:navigated', () => {
-
-
-                initFlowbite();
-
+                <script  >
+                    document.addEventListener("DOMContentLoaded", function () {
+                        initFlowbite();
 
                     },{ once: true });
+
+
+
+
+                document.addEventListener('livewire:navigated', () => {
+
+
+                  initFlowbite();
+                  let getdrower =  document.querySelector("#getdrower");
+              let backdropElement = document.querySelector('[drawer-backdrop]');
+
+             if(backdropElement){
+              backdropElement.addEventListener('click',() => {
+
+                backdropElement.remove();
+                getdrower.click();
+              });
+
+            }
+
+                     });
 
 
             </script>

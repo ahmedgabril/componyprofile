@@ -291,7 +291,7 @@
     } );
 
 
-    window.addEventListener('edit-des',()=>{
+    window.addEventListener('edit-des',(e)=>{
 
         Updateeditorar.setData(@this.des['ar']);
         Updateeditoren.setData(@this.des['en']);
@@ -300,18 +300,6 @@
 
 });
 
-    Livewire.on('serv-updated',() =>{
-
-
-
-        Updateeditorar.setData('');
-        Updateeditoren.setData('');
-
-
-
-
-
-        });
 
 
 

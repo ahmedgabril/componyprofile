@@ -4,6 +4,8 @@
     margin: 0;
     padding: 0;
 }
+
+
         .text-danger{
 
         color:rgb(221, 87, 87);
@@ -108,3 +110,6 @@ button:where([type='submit']) {
                 width: calc(30% - 1rem); /* Set width to 32% for large screens */
             }
         }
+
+
+

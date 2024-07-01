@@ -3,10 +3,11 @@
 
 
 
-        <div class="container mx-auto p-6 pt-24">
+        <div class="container mx-auto  p-6 pt-24 bg-gray-50 dark:bg-gray-700">
+            <h3 class="text-center  text-gray-800 font-bold dark:text-white  p-8 py-8 mb-8" style="font-size:28px">{{ __('welecome.aboutus') }} </h3>
 
-            {!!$getdata?->des!!}
 
+           <div class="p-4 flex flex-col items-center mx-auto sm:mx-4 ">{!!$getdata?->des!!}</div>
 
             </div>
 

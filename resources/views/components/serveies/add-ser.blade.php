@@ -114,7 +114,7 @@
 
 <div class="grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 gap-4 my-4">
 
-    <div x-data ="{src: null }">
+    <div x-data ="{src: '' }">
         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="image-sumnail">{{__('serveies.imgsumnail')}}</label>
 
     <img x-on:click="$refs.sumnail.click()" :src= "src ? src :'/img/uploadimg.jpg' "   width="250" height="250"/>
@@ -122,7 +122,7 @@
    <input  x-ref="sumnail" accept="image/*" class=" w-full text-sm hidden text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400
     focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" wire:model="imgsumnail"
 
-  @change=" src = URL.createObjectURL($event.target.files[0])"
+  @change="src = URL.createObjectURL($event.target.files[0])"
      id="isumnail" type="file">
 
 
@@ -196,8 +196,8 @@
 @script
 <script>
 
-let editorar;
-let editoren;
+let editorservar;
+let editorserven;
 
 DecoupledEditor
     .create( document.querySelector( '#desen' ), {
@@ -211,7 +211,7 @@ DecoupledEditor
 
     })
     .then( editor => {
-        editoren = editor;
+        editorserven = editor;
         const toolbarContainer = document.querySelector( '#desen-container' );
         toolbarContainer.appendChild( editor.ui.view.toolbar.element );
     })
@@ -232,7 +232,7 @@ DecoupledEditor
         } )
         .then( editor => {
 
-            editorar = editor;
+            editorservar = editor;
             const toolbarContainer = document.querySelector( '#desar-container' );
 
             toolbarContainer.appendChild( editor.ui.view.toolbar.element );
@@ -249,8 +249,8 @@ DecoupledEditor
 
 
 document.querySelector( '#addser-submit' ).addEventListener( 'click', () => {
-    @this.des['ar'] = editorar.getData();
-    @this.des['en'] = editoren.getData();
+    @this.des['ar'] = editorservar.getData();
+    @this.des['en'] = editorserven.getData();
 
 
 } );

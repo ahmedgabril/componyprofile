@@ -14,7 +14,7 @@ return [
 "orderby"=> "ORDER BY",
 "updatecat"=> "Update Catogery",
 "icon"=> "uplode icon",
-
+"catnum"=> "Catogery Number",
 
 
 ];

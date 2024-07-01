@@ -99,7 +99,7 @@
         <a href="#">
             <img class="rounded-t-lg w-full object-cover " src="{{ asset('storage/'.$item->imgsumnail) }}" alt="sumnail" style="height: 200px" wire:key="{{$item->id}}"/>
         </a>
-        <div class="p-5">
+        <div class="p-1">
             <a href="#">
                 <h5 class="mb-2 text-2xl  mt-4 font-bold tracking-tight text-gray-900 dark:text-white capitalize text-center break-words">{{$item->name}}</h5>
 
@@ -269,7 +269,7 @@ Livewire.on('serv-updated',() =>{
 window.addEventListener('deleteserv', (event) => {
 
     const data = event.detail;
-    // const projname = event.detail['proname'];
+
     Swal.fire({
   title: "{{__('swal.swaltitle') }}" ,
   text: "{{ __('swal.swaltext') }}",

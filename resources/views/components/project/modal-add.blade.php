@@ -308,15 +308,13 @@ colsebtn.click();
 
 
 
-@this.des['ar'] = editorar.setData('');
-@this.des['en'] = editoren.setData('');
 
 Swal.fire({
     title: "{{__('swal.swaladddata') }}" ,
 icon: 'success',
 timer: 3000,
-toast: true,
-position: 'top-right',
+
+position: 'center',
 showConfirmButton: false,
 });
 

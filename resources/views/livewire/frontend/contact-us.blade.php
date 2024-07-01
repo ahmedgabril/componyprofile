@@ -2,39 +2,61 @@
 
     <h2 class="text-center  text-gray-800 font-bold dark:text-white  p-8  mb-8" style="">{{ __('welecome.contactus')  }}</h2>
 
-<div class=" container grid md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-2  mx-auto  pt-12 " >
+<div class=" container grid md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-2  mx-auto  pt-12 gap-4 " >
 
-    <div class="">
-    <form class="max-w-md mx-auto  py-8 p-4">
-        <div class="relative z-0 w-full mb-5 group">
-            <input type="email" name="floating_email" id="floating_email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-            <label for="floating_email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email address</label>
-        </div>
+    <div class="p-4 mx-auto   container flex flex-wrap gap-3 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+
+        <p class=" break-words leading-8 font-bold dark:text-gray-400 text-center ">{{__('welecome.formdes')}}</p>
+    <form class="w-full mx-auto  py-8 p-4" wire:submit.prevent="savemessage">
 
 
         <div class="grid md:grid-cols-2 md:gap-6">
           <div class="relative z-0 w-full mb-5 group">
-              <input type="text" name="floating_first_name" id="floating_first_name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+              <input type="text" wire:model="fullname" name="floating_first_name" id="floating_first_name"
+               class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0
+               border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+
+               placeholder=" " />
               <label for="floating_first_name" class="peer-focus:font-medium absolute text-sm text-gray-500
-               dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600
-                peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">First name</label>
+               dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0]
+               peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600
+                peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0
+                 peer-focus:scale-75 peer-focus:-translate-y-6">{{__('welecome.fullname')}}</label>
+                 <div class="text-red-700">@error('fullname') {{ $message }} @enderror</div>
           </div>
+
+
           <div class="relative z-0 w-full mb-5 group">
-              <input type="text" name="floating_last_name" id="floating_last_name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-              <label for="floating_last_name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Last name</label>
-          </div>
+            <input type="text" wire:model="getcontact" name="floating_email" id="floating_email"
+             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600
+              dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "  />
+            <label for="floating_email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6
+             scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600
+              peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100
+              peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"> {{__('welecome.emailorphone')}}</label>
+
+              <div class="text-red-700">@error('getcontact') {{ $message }} @enderror</div>
         </div>
-        <div class="grid md:grid-cols-2 md:gap-6">
-          <div class="relative z-0 w-full mb-5 group">
-              <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="floating_phone" id="floating_phone" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-              <label for="floating_phone" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Phone number (123-456-7890)</label>
-          </div>
-          <div class="relative z-0 w-full mb-5 group">
-              <input type="text" name="floating_company" id="floating_company" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-              <label for="floating_company" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Company (Ex. Google)</label>
-          </div>
+
         </div>
-        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+        <div class="mb-4">
+            <label for="message0" class="block mb-3 text-sm  text-gray-900 dark:text-gray-400 font-extrabold"> {{__('welecome.message')}}</label>
+            <textarea id="message0" rows="7" wire:model="des" class="block p-2.5 min-w-full text-sm text-gray-900 bg-gray-50
+            rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700
+            dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Write your Message here..."></textarea>
+
+            <div class="text-red-700">@error('des') {{ $message }} @enderror</div>
+
+        </div>
+
+        <div class="flex justify-center mx-auto max-w-40">
+
+            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300
+            font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600
+             dark:hover:bg-blue-700 dark:focus:ring-blue-800">{{__('welecome.sendms')}}</button>
+
+        </div>
       </form>
 
 </div>
@@ -180,3 +202,29 @@
 
  </div>
 </div>
+
+
+            @script
+
+            <script>
+
+        Livewire.on('msadded',() => {
+
+
+            Swal.fire({
+                title: "{{__('swal.sendms') }}" ,
+            icon: 'success',
+            timer: 3000,
+
+            position: 'center',
+            showConfirmButton: false,
+            });
+
+
+
+        })
+
+
+            </script>
+
+            @endscript

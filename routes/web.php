@@ -1,8 +1,10 @@
 
 <?php
 
+use App\Livewire\Handelcv;
 use App\Livewire\Home;
 use Livewire\Livewire;
+use App\Livewire\Dashbord;
 use App\Livewire\Handelcat;
 use App\Livewire\Handelteam;
 use App\Livewire\Handelabout;
@@ -38,7 +40,7 @@ Route::group([
 
 
 
-    Route::view('dashboard', 'dashboard')
+    Route::get('dashboard', Dashbord::class)
         ->middleware(['auth', 'verified'])
         ->name('dashboard');
         Route::post('/upload',[HomeController::class,'upload'])->name('ckeditor.upload');
@@ -61,6 +63,7 @@ Route::group([
     Route::get('handelfact', Handelfacts::class)->middleware(['auth'])->name('handelfact');
     Route::get('handelteam', Handelteam::class)->middleware(['auth'])->name('handelteam');
     Route::get('handelsetting', Handelsetting::class)->middleware(['auth'])->name('handelsetting');
+    Route::get('/handelcv', Handelcv::class)->name('handelcv');
 
     Route::view('profile', 'profile')->middleware(['auth']) ->name('profile');
 
@@ -69,6 +72,7 @@ Route::group([
     Livewire::setUpdateRoute(function ($handle) {
         return Route::post('/custom/livewire/update', $handle);
     });
+
     require __DIR__.'/auth.php';
 });
 

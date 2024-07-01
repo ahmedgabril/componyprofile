@@ -4,50 +4,45 @@
         <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
             <div class="md:flex md:justify-between">
               <div class="mb-6 md:mb-0">
-                  <a href="https://flowbite.com/" class="flex items-center">
-                      <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 me-3" alt="FlowBite Logo" />
-                      <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
-                  </a>
+
+                <livewire:frontend.getlogo/>
               </div>
               <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
                   <div>
-                      <h3 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Resources</h3>
+                      <h3 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">{{__('welecome.RESOURCES')}}</h3>
                       <ul class="text-gray-500 dark:text-gray-400 font-medium">
                           <li class="mb-4">
-                              <a href="https://flowbite.com/" class="hover:underline">Flowbite</a>
+                              <a href="/" class="hover:underline text-blue-600">Gray Tec</a>
                           </li>
-                          <li>
-                              <a href="https://tailwindcss.com/" class="hover:underline">Tailwind CSS</a>
-                          </li>
+                          <li class="mb-4">
+                            <a href="{{route('project')}}" class="hover:underline text-blue-600">{{__('welecome.projects')}}</a>
+                        </li>
+
+                        <li class="mb-4">
+                            <a href="{{route('getserv')}}" class="hover:underline text-blue-600">{{__('welecome.services')}}</a>
+                        </li>
                       </ul>
                   </div>
                   <div>
-                      <h3 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Follow us</h3>
+                      <h3 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">{{__('welecome.FOLLOWUS')}}</h3>
                       <ul class="text-gray-500 dark:text-gray-400 font-medium">
                           <li class="mb-4">
-                              <a href="https://github.com/themesberg/flowbite" class="hover:underline ">Github</a>
+                              <a href="{{$getsochail?->linkedin}}" class="hover:underline text-blue-600">Linkedin</a>
                           </li>
                           <li>
-                              <a href="https://discord.gg/4eeurUVvTy" class="hover:underline">Discord</a>
-                          </li>
-                      </ul>
-                  </div>
-                  <div>
-                      <h3 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Legal</h3>
-                      <ul class="text-gray-500 dark:text-gray-400 font-medium">
-                          <li class="mb-4">
-                              <a href="#" class="hover:underline">Privacy Policy</a>
+                              <a href="{{$getsochail?->facebook}}" class="hover:underline text-blue-600 mb-4">FaceBook</a>
                           </li>
                           <li>
-                              <a href="#" class="hover:underline">Terms &amp; Conditions</a>
-                          </li>
+                            <a href="{{$getsochail?->youtube_url}}" class="hover:underline text-blue-600 mb-4">youtube</a>
+                        </li>
                       </ul>
                   </div>
+
               </div>
           </div>
           <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-800 lg:my-8" />
           <div class="sm:flex sm:items-center sm:justify-between">
-              <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://flowbite.com/" class="hover:underline">Flowbite™</a>. All Rights Reserved.
+              <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="http://127.0.0.1:8000/ar" class="hover:underline">Gray Tec</a>. All Rights Reserved.
               </span>
               <div class="flex mt-4 sm:justify-center sm:mt-0">
                   <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
