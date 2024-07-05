@@ -14,7 +14,7 @@ class Footer extends Component
 
 
             'getsochail' => sochail::first(),
-
+            'getinfo' => info::first(),
         ]);
     }
 }

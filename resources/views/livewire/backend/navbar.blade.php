@@ -29,10 +29,16 @@
 
 
 
-            <div class="flex items-center mx-4 md:order-2 space-x-1 md:space-x-0 ltr:space-x-reverse gap-2  "  wire:poll.keep-alive >
+            <div class="flex items-center mx-4 md:order-2 space-x-1 md:space-x-0 ltr:space-x-reverse gap-2  "  wire:poll >
 
+         <div class=" relative">
 
+            <span    class=" absolute top-[-23px] left-1 right-1 cursor-pointer p-2  items-center justify-center flex  bg-red-700
+            rounded-full w-4 h-4 text-center text-white font-medium"  data-dropdown-toggle="mega-menu-dropdown">{{$getcount?->count()}}</span>
+         </div>
                 <button id="mega-menu-dropdown-button" data-dropdown-toggle="mega-menu-dropdown"
+                X-data
+                @click ="$dispatch('changestatus')"
                  class="flex items-center justify-between w-full py-2 px-3 font-medium text-gray-500 border-b
                   border-gray-100 md:w-auto hover:bg-gray-50 md:hover:bg-transparent md:border-0
                    md:hover:text-blue-600 md:p-0 dark:text-gray-400 md:dark:hover:text-blue-500 dark:hover:bg-gray-700
@@ -53,7 +59,6 @@
                     flex-col justify-items-center border-gray-100 rounded-lg shadow-md dark:border-gray-700 md:grid-cols-3 dark:bg-gray-700">
 
 
-                           @dump( $getcount->count() )
                                     @if($getdata)
                                     @forelse ($getdata as $key => $item)
                                     <div class="p-4 flex flex-col dark:hover:bg-gray-900   hover:bg-gray-200 transition-transform delay-400" >
@@ -94,10 +99,10 @@
                                         </div>
                                       </div>
                                     @endforelse
-                                          <div class="flex flex-col {{$getdata?->count() <= 2?'mb-2':'mb-14'}} bottom-0">
+                                          <div class="flex flex-col {{$getdata?->count() <= 2?'mb-2':'mb-14'}} bottom-0 rounded-md">
                                                <button type="button" class="bg-gray-500 dark:hover:bg-gray-900  hover:bg-gray-800 text-gray-50 mb-4 p-4 mt-4 mx-2"
 
-                                            wire:click.prevent="addmore">مشاهده الاشعارات السابقه</button></div>
+                                            wire:click.prevent="addmore">{{__('backend.addmore')}}</button></div>
 
 
 
@@ -109,26 +114,36 @@
 
 
 
-                    <hr class="h-px my-0 bg-gray-200 border-0 dark:bg-gray-700">
 
                 </div>
 
-              <button id="theme-toggle" wire:ignore type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100
-              dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm  " >
-               <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-               <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-           </button>
 
 
 
-              <button type="button" data-dropdown-toggle="language-dropdown-menu" class="inline-flex items-center
+
+
+              <div>
+              <button id="theme-toggle"  type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100
+
+                    dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm  " >
+                    <div  wire:ignore>
+                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+
+                    </div>
+                </button>
+
+
+
+              <button type="button"   data-dropdown-toggle="language-dropdown-menu" class="inline-flex items-center
               font-medium justify-center  py-2 p-2 text-sm text-gray-900 dark:text-white rounded-lg cursor-pointer
                hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white" style="margin-left:7px; margin-right:12px">
                 <svg class="w-5 h-5 rounded-full me-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 3900 3900"><path fill="#b22234" d="M0 0h7410v3900H0z"/><path d="M0 450h7410m0 600H0m0 600h7410m0 600H0m0 600h7410m0 600H0" stroke="#fff" stroke-width="300"/><path fill="#3c3b6e" d="M0 0h2964v2100H0z"/><g fill="#fff"><g id="d"><g id="c"><g id="e"><g id="b"><path id="a" d="M247 90l70.534 217.082-184.66-134.164h228.253L176.466 307.082z"/><use xlink:href="#a" y="420"/><use xlink:href="#a" y="840"/><use xlink:href="#a" y="1260"/></g><use xlink:href="#a" y="1680"/></g><use xlink:href="#b" x="247" y="210"/></g><use xlink:href="#c" x="494"/></g><use xlink:href="#d" x="988"/><use xlink:href="#c" x="1976"/><use xlink:href="#e" x="2470"/></g></svg>
 
               </button>
               <!-- Dropdown -->
-              <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700" id="language-dropdown-menu">
+              <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg
+              shadow dark:bg-gray-700" id="language-dropdown-menu" wire:ignore>
                 <ul class="py-2 font-medium" role="none">
               @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
             <li>
@@ -148,7 +163,7 @@
                 </ul>
               </div>
 
-
+            </div>
 
 
 
@@ -160,7 +175,8 @@
                 <img class="w-8 h-8 rounded-full" src="{{asset('img/profile1.jpg')}}" alt="user photo">
               </button>
               <!-- Dropdown menu -->
-              <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
+              <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100
+               rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown" wire:ignore.self>
                 <div class="px-4 py-3">
                   <span class="block text-sm text-gray-900 dark:text-white">{{ Auth::user()?->name }}</span>
                   <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">{{ Auth::user()?->email }}</span>
@@ -195,29 +211,6 @@
         </div>
 
 
-
-<style>
-
-#mega-menu-dropdown-button::before {
-           content: "@php echo $getcount->count() ? $getcount->count() : 0; @endphp";
-            display: inline-flex;
-
-        right: 27px;
-        margin-left: 0px;
-        background-color: red;
-        color: white;
-        /* padding: 0px 4px; */
-        border-radius: 50%;
-        margin-top: -28px;
-        width: 15px;
-        height: 15px;
-        justify-content: center;
-        align-items: center;
-        padding: 11px;
-        position: relative;
-        }
-
-</style>
 
 
 

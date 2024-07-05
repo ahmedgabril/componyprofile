@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('hearos', function (Blueprint $table) {
+        Schema::create('getalerts', function (Blueprint $table) {
             $table->id();
-            $table->text('hearotitle')->nullable();
-            $table->string('hearoimg')->nullable();
-            $table->text('shortdes')->nullable();
+            $table->string('name')->nullable();
+            $table->integer('status')->default(0);
 
             $table->timestamps();
         });
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('hearos');
+        Schema::dropIfExists('getalerts');
     }
 };

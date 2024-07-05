@@ -15,7 +15,7 @@ class Getservies extends Component
      public $getcatdata;
      public function mount(){
 
-        $this->getcatdata =  serves::orderby('id','DESC')->get();
+        $this->getcatdata =  serves::orderby('id','desc')->get();
      }
     public function render()
     {
@@ -30,7 +30,7 @@ class Getservies extends Component
    public function getalldata(){
 
 
-          return $this->getcatdata = serves::orderby('id','DESC')->get();
+          return $this->getcatdata = serves::orderby('id','desc')->get();
 
 
 

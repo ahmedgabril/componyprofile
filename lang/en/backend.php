@@ -20,4 +20,5 @@ return [
 "pro_lateset"=> "lateset projects",
 "serv_lateset"=> "lateset Serveies",
 "cat_lateset"=> "lateset Catogeries",
+"addmore"=> " View More Msessage",
 ];

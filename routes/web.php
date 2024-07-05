@@ -9,7 +9,7 @@ use App\Livewire\Handelcat;
 use App\Livewire\Handelteam;
 use App\Livewire\Handelabout;
 use App\Livewire\Handelfacts;
-use App\Livewire\Handelprofile;
+
 use App\Livewire\Handelproject;
 use App\Livewire\Handelsetting;
 use App\Livewire\Hndelserveies;
@@ -56,14 +56,14 @@ Route::group([
     Route::get('/getservdata/{gitid}', GetserviesData::class)->name('getservdata');
 
   // backend routes
-    Route::get('handelproject', Handelproject::class)->name('handelproject');
-    Route::get('handelcat', Handelcat::class)->middleware(['auth'])->name('handelcat');
-    Route::get('handelserveies', Hndelserveies::class)->middleware(['auth'])->name('handelserveies');
-    Route::get('handelabout', Handelabout::class)->middleware(['auth'])->name('handelabout');
-    Route::get('handelfact', Handelfacts::class)->middleware(['auth'])->name('handelfact');
-    Route::get('handelteam', Handelteam::class)->middleware(['auth'])->name('handelteam');
-    Route::get('handelsetting', Handelsetting::class)->middleware(['auth'])->name('handelsetting');
-    Route::get('/handelcv', Handelcv::class)->name('handelcv');
+    Route::get('handelproject', Handelproject::class)->middleware(['auth', 'verified'])->name('handelproject');
+    Route::get('handelcat', Handelcat::class)->middleware(['auth', 'verified'])->name('handelcat') ;
+    Route::get('handelserveies', Hndelserveies::class)->middleware(['auth', 'verified'])->name('handelserveies');
+    Route::get('handelabout', Handelabout::class)->middleware(['auth', 'verified'])->name('handelabout');
+    Route::get('handelfact', Handelfacts::class)->middleware(['auth', 'verified'])->name('handelfact');
+    Route::get('handelteam', Handelteam::class)->middleware(['auth', 'verified'])->name('handelteam');
+    Route::get('handelsetting', Handelsetting::class)->middleware(['auth', 'verified'])->name('handelsetting');
+    Route::get('/handelcv', Handelcv::class)->middleware(['auth', 'verified'])->name('handelcv');
 
     Route::view('profile', 'profile')->middleware(['auth']) ->name('profile');
 
@@ -72,7 +72,6 @@ Route::group([
     Livewire::setUpdateRoute(function ($handle) {
         return Route::post('/custom/livewire/update', $handle);
     });
-
     require __DIR__.'/auth.php';
 });
 

@@ -356,8 +356,8 @@ public function updateserv () {
 
      $serv = serves::find($data['servid']);
 
-     Storage::deleteDirectory('public/images/'.$data['proname']);
-     Storage::deleteDirectory('public/imgsumnail/'.$data['proname']);
+     Storage::deleteDirectory('public/images/'.$data['servname']);
+     Storage::deleteDirectory('public/imgsumnail/'.$data['servname']);
 
 
      $serv->delete();

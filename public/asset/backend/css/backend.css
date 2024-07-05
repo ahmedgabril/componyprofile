@@ -78,7 +78,7 @@ button:where([type='submit']) {
         flex-wrap: wrap!important;}
 
         .ck.ck-editor__editable_inline {
-            overflow-wrap: anywhere;
+            overflow-wrap:  break-word;
 
         }
 

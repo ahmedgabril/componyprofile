@@ -35,14 +35,14 @@
       <h3 class="text-center mb-6 mt-6 dark:text-gray-200 text-gray-700">  {{__('welecome.proimages')}}</h3>
 
       @endif
-            <div class="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4 bg-slate-50  dark:bg-gray-800 mx-auto max-w-5xl ">
+            <div class="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4  dark:bg-gray-800 mx-auto max-w-5xl ">
 
 
                 @if($getdata)
             @foreach(json_decode($getdata->images) as $key=> $value)
 
             <div>
-                <img class="h-80 max-w-full rounded-lg  bg-slate-50  dark:bg-gray-800" src="{{asset('storage/'. $value)}}" alt="">
+                <img class="h-80 max-w-full rounded-lg   dark:bg-gray-800" src="{{asset('storage/'. $value)}}" alt="">
             </div>
 
 
@@ -62,7 +62,7 @@
 
                    @if($getdata->github_link)
 
-                   <a href="{{$getdata->github_link}}" class="inline-flex items-center mx-4 px-3 py-2 text-sm font-medium text-center text-white bg-grren-500 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-400 dark:focus:ring-green-800">
+                   <a href="{{$getdata->github_link}}" class="inline-flex items-center mx-4 px-3 py-2 text-sm font-medium text-center text-white bg-green-500 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-400 dark:focus:ring-green-800">
                      رابط الجيت هب
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github mr-2 ml-2" viewBox="0 0 16 16">

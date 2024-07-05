@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Frontend;
 
+use App\Models\getalert;
 use App\Models\info;
 use App\Models\sendmessage;
 use App\Models\sochail;
@@ -39,12 +40,20 @@ class ContactUs extends Component
        'des'=>'required|string|max:600',
      ]);
 
-      sendmessage::create([
+     $gemestid =  sendmessage::create([
 
         'fullname'=> $this->fullname,
         'getcontact'=> $this->getcontact,
          'des'=> $this->des,
       ]);
+
+         $getdata = $gemestid->latest()->first();
+
+
+         getalert::create([
+
+            'name'=>$getdata->fullname,
+         ]);
 
        $this->dispatch('msadded');
        $this->des ='';
