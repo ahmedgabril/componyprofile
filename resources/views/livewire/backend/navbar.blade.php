@@ -1,7 +1,4 @@
-
-
-
-
+<div>
     <nav class="bg-white border-gray-200 dark:bg-gray-800 fixed left-0 z-50 w-full"  >
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
 
@@ -29,7 +26,7 @@
 
 
 
-            <div class="flex items-center mx-4 md:order-2 space-x-1 md:space-x-0 ltr:space-x-reverse gap-2  "  wire:poll >
+            <div class="flex items-center mx-4 md:order-2 space-x-1 md:space-x-0 ltr:space-x-reverse gap-2  " wire:poll.3s >
 
          <div class=" relative">
 
@@ -39,7 +36,7 @@
                 <button id="mega-menu-dropdown-button" data-dropdown-toggle="mega-menu-dropdown"
                 X-data
                 @click ="$dispatch('changestatus')"
-                 class="flex items-center justify-between w-full py-2 px-3 font-medium text-gray-500 border-b
+                 class="flex items-center  w-full py-2 sm:mr-[100px]  font-medium text-gray-500 border-b
                   border-gray-100 md:w-auto hover:bg-gray-50 md:hover:bg-transparent md:border-0
                    md:hover:text-blue-600 md:p-0 dark:text-gray-400 md:dark:hover:text-blue-500 dark:hover:bg-gray-700
                     dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">
@@ -55,13 +52,13 @@
                 wire:ignore.self
                  class="absolute z-10
                   w-auto max-w-sm
-                  text-sm bg-white border max-h-screen overflow-y-auto mb-12 hidden
-                    flex-col justify-items-center border-gray-100 rounded-lg shadow-md dark:border-gray-700 md:grid-cols-3 dark:bg-gray-700">
+                  text-sm bg-white border max-h-screen overflow-y-scroll  hidden
+                 border-gray-100 rounded-lg shadow-md dark:border-gray-700 md:grid-cols-3 dark:bg-gray-700">
 
 
                                     @if($getdata)
                                     @forelse ($getdata as $key => $item)
-                                    <div class="p-4 flex flex-col dark:hover:bg-gray-900   hover:bg-gray-200 transition-transform delay-400" >
+                                    <div class="p-4  dark:hover:bg-gray-900   hover:bg-gray-200 transition-transform delay-400" >
 
                                         <a  href="#" class="p-2  rounded-md dark:text-gray-300 text-gray-700">
 
@@ -77,15 +74,29 @@
                                                 </div>
                                             </div>
 
+                                            @if($item->serv_name)
+                                            <span class=" text-sm text-gray-400">اسم الخدمه </span><br>
+
+                                            @endif
+                                            <p class="reak-words text-pretty leading-6 ">
+                                             {{$item->serv_name}}
+                                              </p>
+                                              <hr class="h-px my-0 bg-gray-200 border-0 dark:bg-gray-700">
+
+                                              @if($item->serv_name)
+                                              <span class=" text-sm text-gray-400"> الرساله </span><br>
+
+                                              @endif
+
                                             <p class="reak-words text-pretty leading-6 ">
                                               {{$item->des}}
                                             </p>
+                                            <hr class="h-px my-0 bg-gray-200 border-0 dark:bg-gray-700">
 
                                         </a>
 
                                     </div>
 
-                                    <hr class="h-px my-0 bg-gray-200 border-0 dark:bg-gray-700">
 
 
                                     @empty
@@ -99,17 +110,19 @@
                                         </div>
                                       </div>
                                     @endforelse
-                                          <div class="flex flex-col {{$getdata?->count() <= 2?'mb-2':'mb-14'}} bottom-0 rounded-md">
-                                               <button type="button" class="bg-gray-500 dark:hover:bg-gray-900  hover:bg-gray-800 text-gray-50 mb-4 p-4 mt-4 mx-2"
 
-                                            wire:click.prevent="addmore">{{__('backend.addmore')}}</button></div>
+
+                                    <div class="flex flex-col {{$getdata?->count() <= 3 ?'mb-2':'mb-14'}} bottom-0 rounded-md">
+                                        <button type="button" class="bg-gray-500 dark:hover:bg-gray-900  hover:bg-gray-800 text-gray-50 mb-4 p-4 mt-4 mx-2"
+
+                                     wire:click.prevent="addmore">{{__('backend.addmore')}}</button></div>
+
 
 
 
                                     @endif
 
 
-                    <hr class="h-px my-0 bg-gray-200 border-0 dark:bg-gray-700">
 
 
 
@@ -123,15 +136,6 @@
 
 
               <div>
-              <button id="theme-toggle"  type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100
-
-                    dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm  " >
-                    <div  wire:ignore>
-                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-
-                    </div>
-                </button>
 
 
 
@@ -165,6 +169,15 @@
 
             </div>
 
+            <button id="theme-toggle"  type="button" class="text-gray-500  dark:text-gray-400 hover:bg-gray-100
+
+            dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm  " >
+            <div  wire:ignore>
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+
+         </div>
+        </button>
 
 
 
@@ -216,7 +229,7 @@
 
       </nav>
 
-
+    </div>
 
 
 

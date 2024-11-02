@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('fullname')->nullable();
             $table->string('getcontact')->nullable();
+            $table->string('serv_name')->nullable();
             $table->text('des')->nullable();
             $table->timestamps();
         });

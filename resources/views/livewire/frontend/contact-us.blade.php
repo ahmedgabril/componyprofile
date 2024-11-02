@@ -39,6 +39,31 @@
         </div>
 
         </div>
+
+
+        <div class="w-full mx-auto mb-4">
+
+
+            <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">  اختر اسم الخدمه </label>
+            <select id="countries" wire:model.live="serv_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+
+                <option selected="">....</option>
+                @foreach ($getserv as $data )
+                <option value="{{ $data->name }}"> {{ $data->name }}</option>
+                @endforeach
+
+
+
+
+
+
+
+            </select>
+            <div class="text-red-700">@error('serv_name') {{ $message }} @enderror</div>
+
+
+ </div>
         <div class="mb-4">
             <label for="message0" class="block mb-3 text-sm  text-gray-900 dark:text-gray-400 font-extrabold"> {{__('welecome.message')}}</label>
             <textarea id="message0" rows="7" wire:model="des" class="block p-2.5 min-w-full text-sm text-gray-900 bg-gray-50
@@ -46,7 +71,7 @@
             dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Write your Message here..."></textarea>
 
-            <div class="text-red-700">@error('des') {{ $message }} @enderror</div>
+            {{-- <div class="text-red-700">@error('des') {{ $message }} @enderror</div> --}}
 
         </div>
 

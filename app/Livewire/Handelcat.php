@@ -46,7 +46,7 @@ public $getlocal;
 
 ])]
 public $name = [];
-public $paginate = 10;
+public $paginate = 5;
 
 #[Validate('required|image|max:1024')]
 public $icon;

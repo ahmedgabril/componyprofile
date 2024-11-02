@@ -39,7 +39,16 @@
 
     </head>
     <body class="" dir="{{ app()->getLocale() === 'ar'? 'rtl':'ltr' }}" >
-        <div class="min-h-screen bg-gray-200 dark:bg-gray-900">
+
+
+        <div class="min-h-screen bg-gray-200 dark:bg-gray-900 ">
+
+            {{-- <div class="loader-container  bg-gray-900" wire:loading>
+
+                <div class="loader "></div>
+            </div> --}}
+
+
                 <header>
 
                     <livewire:backend.navbar />
@@ -54,6 +63,7 @@
       {{-- <livewire:layout.navigation /> --}}
             <!-- Page Content -->
             <main class="pt-14 overflow-y-auto">
+
                 {{$slot}}
 
             </main>
@@ -78,8 +88,7 @@
 
         <script src="{{asset('asset/backend/js/filePond-imagePreview.js')}}"></script>
         <script src="{{asset('asset/backend/js/filePond.js')}}"></script>
-        {{-- <script src="{{ asset('asset/backend/js/pdf.js') }}"></script>
-        <script src="{{ asset('asset/backend/js/pdf.worker.js') }}"></script> --}}
+
 
 
     <script>
@@ -138,8 +147,22 @@
 
     </script>
 
-                <script  >
+
+
+                <script>
+
+
+
                     document.addEventListener("DOMContentLoaded", function () {
+
+
+                            // document.querySelector('.loader-container ').classList.add('loader-hidden');
+                            // document.body.removeChild( document.querySelector('.loader-container '));
+
+
+
+
+
                         initFlowbite();
 
                     },{ once: true });
@@ -151,17 +174,12 @@
 
 
                   initFlowbite();
-                  let getdrower =  document.querySelector("#getdrower");
-              let backdropElement = document.querySelector('[drawer-backdrop]');
 
-             if(backdropElement){
-              backdropElement.addEventListener('click',() => {
 
-                backdropElement.remove();
-                getdrower.click();
-              });
 
-            }
+
+
+
 
                      });
 
