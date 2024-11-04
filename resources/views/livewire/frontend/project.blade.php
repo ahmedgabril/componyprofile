@@ -11,13 +11,22 @@
 
 
 
-        <div class=" flex justify-center border-spacing-4 items-center  w-60 h-48 rounded-md object-cover mb-3 mt-3 bg-center cursor-pointer
+        <div class="hidden  md:flex justify-center border-spacing-4 items-center  w-60 h-48 rounded-md object-cover mb-3 mt-3 bg-center cursor-pointer
          bg-gray-800 hover:brightness-50 text-gray-50"
 
          @click='$dispatch("getalldata")' >
          <h2 class="text-center leading-none  font-bold" style="font-size:28px!important"> {{__('welecome.all')}}</h2>
 
         </div>
+
+
+        <div class=" md:hidden flex justify-center border-spacing-6 shadow-md items-center p-4 bg-gry-500   rounded-md  mb-3 mt-3  cursor-pointer
+         text-gray-800 dark:text-gray-50"
+
+        @click='$dispatch("getalldata")' >
+        <h3 class="text-center leading-none  font-bold" > {{__('welecome.all')}}</h3>
+
+       </div>
 
 
     </div>
@@ -30,13 +39,25 @@
 
 
 
-            <div class=" flex justify-center flex-wrap border-spacing-6 shadow-md items-center  w-60 h-48 rounded-md  object-cover mb-3 mt-3 bg-center cursor-pointer
+            <div class="hidden md:flex justify-center flex-wrap border-spacing-6 shadow-md items-center  w-60 h-48 rounded-md  object-cover mb-3 mt-3 bg-center cursor-pointer
              bg-gray-500 bg-blend-multiply" style="background-image: url('{{asset("storage/".$value?->icon) }}')"
 
            wire:key="{{ $key}}"
              @click="$dispatch('getcat',{ getid: {{$value->id}}})"
              >
-             <h2 class="text-center leading-none text-gray-50  font-bold" style="font-size:28px!important">{{$value->name}}</h2>
+             <h3 class="text-center leading-none text-gray-50  font-bold" style="font-size:28px!important">{{$value->name}}</h3>
+
+            </div>
+
+
+
+
+            <div class=" md:hidden flex justify-center flex-wrap border-spacing-6 shadow-md items-center p-4 bg-gry-500   rounded-md  mb-3 mt-3  cursor-pointer "
+
+           wire:key="{{ $key}}"
+             @click="$dispatch('getcat',{ getid: {{$value->id}}})"
+             >
+             <h6 class="text-center leading-none dark:text-gray-50 text-gray-800 font-bold" >{{$value->name}}</h6>
 
             </div>
 
