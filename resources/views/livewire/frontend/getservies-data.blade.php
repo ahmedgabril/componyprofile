@@ -76,3 +76,7 @@
 
 
     </div>
+    <script>
+
+        document.title = "servies-data";
+       </script>

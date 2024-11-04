@@ -7,7 +7,7 @@
         <meta name="theme-color" content="#ffffff">
         <!-- Twitter -->
 
-
+          <title>app</title>
         <!-- Facebook -->
 
         <meta property="og:description" content="Get started with a free and open-source admin dashboard layout built with Tailwind CSS and Flowbite featuring charts, widgets, CRUD layouts, authentication pages, and more">

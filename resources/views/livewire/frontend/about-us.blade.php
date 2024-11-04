@@ -51,3 +51,8 @@
 
   </div>
 </div>
+<script>
+
+ document.title = "about-us";
+ document.description = ' شركه جراي تك لخدمات المواقع  والتطبيقات برمجه تصميم  تحسين محركات البحث'
+</script>

@@ -32,3 +32,7 @@
         </div>
 
 </div>
+<script>
+
+    document.title = "ahmed-gabril-compony-profile";
+   </script>

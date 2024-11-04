@@ -21,3 +21,7 @@
   </div>
 
   </div>
+  <script>
+
+    document.title = "my cv";
+   </script>

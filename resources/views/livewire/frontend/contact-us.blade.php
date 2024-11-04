@@ -253,3 +253,7 @@
             </script>
 
             @endscript
+<script>
+
+document.title = "contact-us";
+</script>

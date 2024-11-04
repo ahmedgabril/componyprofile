@@ -163,3 +163,7 @@
 
 
 </div>
+   <script>
+
+    document.title = "projects";
+   </script>

@@ -4,8 +4,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        @livewire('frontend.meta-tag', ['title' => 'ahmed-gabril-compony-profile',
+         'description' => ' شركه جراي تك لخدمات المواقع  والتطبيقات برمجه تصميم  تحسين محركات البحث', 'keywords' => ['gray tec','ahmed gabril', 'compony profile','cv','احمد جبريل','جراي تك','احمد جبريل']])
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
