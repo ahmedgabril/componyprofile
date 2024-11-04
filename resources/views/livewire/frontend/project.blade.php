@@ -15,7 +15,7 @@
          bg-gray-800 hover:brightness-50 text-gray-50"
 
          @click='$dispatch("getalldata")' >
-         <h2 class="text-center leading-none  font-bold" style="font-size:28px!important"> {{__('welecome.all')}}</h2>
+         <h2 class="text-center leading-none cursor-pointe font-bold" style="font-size:28px!important"> {{__('welecome.all')}}</h2>
 
         </div>
 
@@ -24,7 +24,7 @@
          text-gray-800 dark:text-gray-50"
 
         @click='$dispatch("getalldata")' >
-        <h3 class="text-center leading-none  font-bold" > {{__('welecome.all')}}</h3>
+        <h3 class="text-center leading-none cursor-pointe font-bold" > {{__('welecome.all')}}</h3>
 
        </div>
 
@@ -45,7 +45,7 @@
            wire:key="{{ $key}}"
              @click="$dispatch('getcat',{ getid: {{$value->id}}})"
              >
-             <h3 class="text-center leading-none text-gray-50  font-bold" style="font-size:28px!important">{{$value->name}}</h3>
+             <h3 class="text-center leading-none text-gray-50 cursor-pointe font-bold" style="font-size:28px!important">{{$value->name}}</h3>
 
             </div>
 
@@ -57,7 +57,7 @@
            wire:key="{{ $key}}"
              @click="$dispatch('getcat',{ getid: {{$value->id}}})"
              >
-             <h6 class="text-center leading-none dark:text-gray-50 text-gray-800 font-bold" >{{$value->name}}</h6>
+             <h6 class="text-center leading-none cursor-pointe dark:text-gray-50 text-gray-800 font-bold" >{{$value->name}}</h6>
 
             </div>
 
