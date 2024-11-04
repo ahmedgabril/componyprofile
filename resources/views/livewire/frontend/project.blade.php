@@ -20,7 +20,7 @@
         </div>
 
 
-        <div class=" md:hidden flex justify-center border-spacing-6 shadow-md items-center p-4 bg-gry-500   rounded-md  mb-3 mt-3  cursor-pointer
+        <div class=" md:hidden flex justify-center border-spacing-6 shadow-md items-center p-4 bg-gry-500  dark:hover:bg-gray-700  hover:bg-gray-300 rounded-md  mb-3 mt-3  cursor-pointer
          text-gray-800 dark:text-gray-50"
 
         @click='$dispatch("getalldata")' >
@@ -34,7 +34,7 @@
         @if($cats)
 
         @foreach($cats as $key => $value)
-        <div class="me-2 hover:brightness-50 cursor-pointer">
+        <div class="me-2  cursor-pointer">
 
 
 
@@ -52,7 +52,7 @@
 
 
 
-            <div class=" md:hidden flex justify-center flex-wrap border-spacing-6 shadow-md items-center p-4 bg-gry-500   rounded-md  mb-3 mt-3  cursor-pointer "
+            <div class=" md:hidden flex justify-center flex-wrap border-spacing-6 shadow-md items-center p-4 bg-gry-500   rounded-md  mb-3 mt-3  cursor-pointer dark:hover:bg-gray-700  hover:bg-gray-300"
 
            wire:key="{{ $key}}"
              @click="$dispatch('getcat',{ getid: {{$value->id}}})"
