@@ -26,7 +26,7 @@
 @endif
     <div class="container mx-auto p-8 mt-20 max-w-5xl bg-slate-50  dark:bg-gray-800  ">
 
-        <div class="dark:text-gray-300 text-gray-700 " >{!! $getdata->des !!}</div>
+        <div class="dark:text-gray-300 text-gray-700 " >{!! $getdata?->des !!}</div>
 
       </div>
 
@@ -60,9 +60,9 @@
             <div class="flex justify-center items-center  ">
 
 
-                   @if($getdata->github_link)
+                   @if($getdata?->github_link)
 
-                   <a href="{{$getdata->github_link}}" class="inline-flex items-center mx-4 px-3 py-2 text-sm font-medium text-center text-white bg-green-500 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-400 dark:focus:ring-green-800">
+                   <a href="{{$getdata?->github_link}}" class="inline-flex items-center mx-4 px-3 py-2 text-sm font-medium text-center text-white bg-green-500 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-400 dark:focus:ring-green-800">
                      رابط الجيت هب
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github mr-2 ml-2" viewBox="0 0 16 16">
@@ -72,9 +72,9 @@
 
                    @endif
 
-                   @if($getdata->project_link)
+                   @if($getdata?->project_link)
 
-                   <a href="{{$getdata->project_link}}" class="inline-flex  mr-2 ml-2items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                   <a href="{{$getdata?->project_link}}" class="inline-flex  mr-2 ml-2items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
 
                     {{__('welecome.showpro')}}
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg mr-2 ml-2 " viewBox="0 0 16 16">
