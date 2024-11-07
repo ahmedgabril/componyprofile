@@ -35,14 +35,14 @@
       <h3 class="text-center mb-6 mt-6 dark:text-gray-200 text-gray-700">  {{__('welecome.proimages')}}</h3>
 
       @endif
-            <div class="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4  dark:bg-gray-800 mx-auto max-w-5xl ">
+            <div class="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 bg-gray-50 p-4 rounded-md gap-4  dark:bg-gray-800 mx-auto max-w-5xl ">
 
 
                 @if($getdata)
             @foreach(json_decode($getdata->images) as $key=> $value)
 
             <div>
-                <img class="h-80 max-w-full rounded-lg   dark:bg-gray-800" src="{{asset('storage/'. $value)}}" alt="">
+                <img class=" max-w-full   dark:bg-gray-800  rounded-md" src="{{asset('storage/'. $value)}}" alt="">
             </div>
 
 
