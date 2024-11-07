@@ -88,7 +88,7 @@
 
 
 <div class=" p-4 mx-auto container flex flex-wrap gap-3 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700 " >
-   @if($getsochail->facebook)
+   @if($getsochail?->facebook)
 
    <div class="flex justify-center items-center">
     <a href="{{$getsochail->facebook}}" class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow
@@ -105,7 +105,7 @@
 
 
 
-   @if($getsochail->whatsup)
+   @if($getsochail?->whatsup)
     <div class="flex justify-center items-center">
 
         <a href="https://wa.me/{{$getsochail->whatsup}}" class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50
@@ -119,7 +119,7 @@
 
     </div>
     @endif
-    @if($getsochail->linkedin)
+    @if($getsochail?->linkedin)
     <div class="flex justify-center items-center">
     <a href="{{$getsochail->linkedin}}" class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 48 48" class="ml-2 mr-2">
@@ -135,7 +135,7 @@
 
 
 
-    @if($getsochail->tictok)
+    @if($getsochail?->tictok)
     <div class="flex justify-center items-center">
     <a href="{{$getsochail->tictok}}" class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 48 48" class="ml-2 mr-2">
