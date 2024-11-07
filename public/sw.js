@@ -29,6 +29,7 @@ self.addEventListener("install", (event) => {
   );
 });
 
+
 self.addEventListener("activate", (event) => {
   event.waitUntil( caches.keys().then((keys)=>{
     return Promise.all(
@@ -46,22 +47,43 @@ self.addEventListener("activate", (event) => {
 
 });
 
+
+
 self.addEventListener('fetch', (event) => {
-  event.respondWith(
-
-       caches.match(event.request).then((response) => {
-
-        returnfetch(event.request).then((fetchRes)=>{
-
-
-            return caches.open(cashname).then((cacheRes)=>{
-
-              cacheRes.put(event.request,fetchRes.clone())
-
-              return fetchRes;
+    event.respondWith(
+        fetch(event.request)
+            .then((networkResponse) => {
+                return caches.open(cashname).then((cache) => {
+                    cache.put(event.request, networkResponse.clone());
+                    return networkResponse;
+                });
             })
-          }) || response ;
-
-    })
-  );
+            .catch(() => {
+                return caches.match(event.request).then((cacheResponse) => {
+                    return cacheResponse || fetch(event.request);
+                });
+            })
+    );
 });
+
+
+// self.addEventListener('fetch', (event) => {
+//   event.respondWith(
+
+//        caches.match(event.request).then((response) => {
+
+//         returnfetch(event.request).then((fetchRes)=>{
+
+
+//             return caches.open(cashname).then((cacheRes)=>{
+
+//               cacheRes.put(event.request,fetchRes.clone())
+
+//               return fetchRes;
+//             })
+//           }) || response ;
+
+//     })
+//   );
+// });
+
