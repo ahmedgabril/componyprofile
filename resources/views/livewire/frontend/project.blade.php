@@ -15,16 +15,16 @@
          bg-gray-800 hover:brightness-50 text-gray-50"
 
          @click='$dispatch("getalldata")' >
-         <a   @click.prevent='$dispatch("getalldata")'' class="text-center leading-none cursor-pointe font-bold" style="font-size:28px!important"> {{__('welecome.all')}}</a>
+         <a   @click.prevent='$dispatch("getalldata")'' class="text-center  cursor-pointe font-bold" style="font-size:28px!important"> {{__('welecome.all')}}</a>
 
         </div>
 
 
-        <div class=" md:hidden flex justify-center border-spacing-6 shadow-md items-center p-4 bg-gry-500 dark:bg-gray-700 dark:hover:bg-gray-800  hover:bg-gray-300 rounded-md  mb-3 mt-3  cursor-pointer
-         text-gray-800 dark:text-gray-50"
+        <div class=" md:hidden flex justify-center border-spacing-6 shadow-md items-center p-4 bg-gry-500   dark:bg-gray-700 dark:hover:bg-gray-800  hover:bg-gray-300 rounded-md  mb-3 mt-3  cursor-pointer
+    "
 
         @click='$dispatch("getalldata")' >
-        <a   @click.prevent='$dispatch("getalldata")' class="text-center leading-none cursor-pointe font-bold" > {{__('welecome.all')}}</a>
+        <a   @click.prevent='$dispatch("getalldata")' class="text-center  cursor-pointe font-bold text-gray-800   dark:text-white" > {{__('welecome.all')}}</a>
 
        </div>
 
@@ -52,12 +52,12 @@
 
 
 
-            <div class=" md:hidden flex justify-center flex-wrap border-spacing-6 shadow-md items-center p-4 bg-gry-500   rounded-md  mb-3 mt-3  cursor-pointer dark:bg-gray-700 dark:hover:bg-gray-900  hover:bg-gray-300"
+            <div class=" md:hidden flex justify-center flex-wrap border-spacing-6 shadow-md items-center p-4 bg-gry-500   rounded-md  mb-3 mt-3   cursor-pointer dark:bg-gray-700 dark:hover:bg-gray-900  hover:bg-gray-300"
 
            wire:key="{{ $key}}"
              @click="$dispatch('getcat',{ getid: {{$value->id}}})"
              >
-             <a    @click.prevent="$dispatch('getcat',{ getid: {{$value->id}}})" class="text-center leading-none cursor-pointe dark:text-gray-50 text-gray-800 font-bold" >{{$value->name}}</a>
+             <a    @click.prevent="$dispatch('getcat',{ getid: {{$value->id}}})" class="text-center  cursor-pointe text-gray-800   dark:text-white  font-bold" >{{$value->name}}</a>
 
             </div>
 
