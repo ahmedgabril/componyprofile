@@ -52,7 +52,7 @@
 
 
 
-            <div class=" md:hidden flex justify-center flex-wrap border-spacing-6 shadow-md items-center p-4 bg-gry-500   rounded-md  mb-3 mt-3  cursor-pointer dark:bg-gray-600 dark:hover:bg-gray-800  hover:bg-gray-300"
+            <div class=" md:hidden flex justify-center flex-wrap border-spacing-6 shadow-md items-center p-4 bg-gry-500   rounded-md  mb-3 mt-3  cursor-pointer dark:bg-gray-700 dark:hover:bg-gray-900  hover:bg-gray-300"
 
            wire:key="{{ $key}}"
              @click="$dispatch('getcat',{ getid: {{$value->id}}})"
