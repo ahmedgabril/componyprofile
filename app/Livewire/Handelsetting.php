@@ -25,7 +25,8 @@ class Handelsetting extends Component
 
     // #[Validate("sometimes|nullable|image|max:1024")]
     public $logo;
-    public $regs = '#^(?:https?://)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]{11})#';
+    public $regs = '#^(?:https?://)?(?:www\.)?(?:youtube\.com/(?:channel/|user/|c/|@)?([^/]+))#';
+
 
 
 
