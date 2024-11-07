@@ -8,6 +8,12 @@ self.addEventListener("install", (event) => {
       return cache.addAll([
         "/",
         "/favicon.ico",
+        "/project",
+        "/getserv",
+        "/aboutus",
+        "/contactus",
+        "/getcv",
+        "/getprodata",
         "/manifest.json",
         "/icons/android/android-launchericon-192-192.png",
         "/icons/android/android-launchericon-144-144.png",

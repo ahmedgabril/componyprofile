@@ -135,7 +135,7 @@ class Handelfacts extends Component
                             'ar' =>$this->name['ar']
                         ],
                         'number'=> $this->number,
-                        'icon'=>  $getres->icon,
+                        'icon'=>  $this->icon,
 
                     ]);
                     $this->resetvalue();
