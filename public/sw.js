@@ -51,16 +51,16 @@ self.addEventListener('fetch', (event) => {
 
        caches.match(event.request).then((response) => {
 
-        return response || fetch(event.request).then((fetchRes)=>{
+        returnfetch(event.request).then((fetchRes)=>{
 
 
-          return caches.open(cashname).then((cacheRes)=>{
+            return caches.open(cashname).then((cacheRes)=>{
 
-            cacheRes.put(event.request,fetchRes.clone())
+              cacheRes.put(event.request,fetchRes.clone())
 
-            return fetchRes;
-          })
-        });
+              return fetchRes;
+            })
+          }) || response ;
 
     })
   );
