@@ -86,7 +86,7 @@
 
 </div>
 
-
+@if($getsochail)
 <div class=" p-4 mx-auto container flex flex-wrap gap-3 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700 " >
    @if($getsochail->facebook)
 
@@ -224,7 +224,7 @@
     </div>
     @endif
  </div>
-
+@endif
  </div>
 </div>
 
