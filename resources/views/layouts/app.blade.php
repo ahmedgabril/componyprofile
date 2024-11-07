@@ -13,8 +13,16 @@
         <meta property="og:description" content="Get started with a free and open-source admin dashboard layout built with Tailwind CSS and Flowbite featuring charts, widgets, CRUD layouts, authentication pages, and more">
         <meta property="og:type" content="article">
         <meta property="og:image:type" content="image/png">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="application-name" content="PWA">
+        <link rel="icon" sizes="512x512" href="/icons/android/android-launchericon-512-512.png">
 
-
+        <!-- Add to homescreen for Safari on iOS -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-title" content="PWA">
+        <link rel="apple-touch-icon" href="/icons/ios/512.png">
+        <link rel="manifest" href="/manifest.json"/>
         <title>{{ $title ?? 'Page Title' }}</title>
 
 

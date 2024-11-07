@@ -130,7 +130,7 @@
                                     </div>
 
                                 <div class="mt-4">
-                                    <img  class=" object-cover rounded-lg"  src="{{"/storage/".$item->icon}}" width="65" height="65" alt="icon"/>
+                                    <img  class=" object-cover rounded-lg"  src="{{asset("/storage/".$item->icon)}}" width="65" height="65" alt="icon"/>
 
                                 </div>
 

@@ -36,9 +36,7 @@ Route::group([
 
 
 
-    Route::get('/', Home::class)->name('home');
-
-
+    Route::get('/', Home::class)->name(name: 'home');
 
 
     Route::get('dashboard', Dashbord::class)

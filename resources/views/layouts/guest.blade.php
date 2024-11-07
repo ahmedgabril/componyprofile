@@ -6,6 +6,16 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
+        <link rel="manifest" href="/manifest.json"/>
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="application-name" content="PWA">
+        <link rel="icon" sizes="512x512" href="/icons/android/android-launchericon-512-512.png">
+
+        <!-- Add to homescreen for Safari on iOS -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-title" content="PWA">
+        <link rel="apple-touch-icon" href="/icons/ios/512.png">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -26,5 +36,22 @@
                 {{ $slot }}
             </div>
         </div>
+
+
+
+
+
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+                .then(registration => {
+                console.log('Service Worker registered with scope:', registration.scope);
+                }).catch(error => {
+                console.error('Service Worker registration failed:', error);
+                });
+            });
+        }
+
     </body>
 </html>
