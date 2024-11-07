@@ -40,7 +40,7 @@ class ContactUs extends Component
      $this->validate([
 
         'fullname'=>'required|string|max:100',
-        'serv_name'=>'string',
+        'serv_name'=>'sometimes|nullable|string',
         'getcontact'=>'required|string|max:100',
        'des'=>'string|max:600',
      ]);
