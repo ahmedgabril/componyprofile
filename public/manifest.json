@@ -21,7 +21,7 @@
           "short_name": "Subscriptions",
           "description": "View the list of podcasts you listen to",
           "url": "/ar",
-          "icons": [{ "src": "/android-launchericon-192-192.png", "sizes": "192x192" }]
+          "icons": [{ "src": "icons/android-launchericon-192-192.png", "sizes": "192x192" }]
         }
       ],
     "icons": [
