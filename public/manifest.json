@@ -8,7 +8,22 @@
     "scope": "/",
     "start_url": "https://ahmedgabril.com/ar",
 
-
+    "shortcuts": [
+        {
+          "name": "Open Play Later",
+          "short_name": "Play Later",
+          "description": "View the list of podcasts you saved for later",
+          "url": "/aboutus",
+          "icons": [{ "src": "/icons/ios/192.png", "sizes": "192x192" }]
+        },
+        {
+          "name": "View Subscriptions",
+          "short_name": "Subscriptions",
+          "description": "View the list of podcasts you listen to",
+          "url": "/ar",
+          "icons": [{ "src": "/android-launchericon-192-192.png", "sizes": "192x192" }]
+        }
+      ],
     "icons": [
         {
           "src": "icons/windows11/SmallTile.scale-100.png",
