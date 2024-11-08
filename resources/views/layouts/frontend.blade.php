@@ -77,29 +77,85 @@
     @livewireScripts
 
     <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                            initFlowbite();
+        document.addEventListener("DOMContentLoaded", function() {
+            initFlowbite();
+
+            let deferredPrompt;
+
+            window.addEventListener('beforeinstallprompt', (event) => {
+                event.preventDefault();
+                deferredPrompt = event;
+
+                if (!window.matchMedia('(display-mode: standalone)').matches) {
+                    document.getElementById('install-prompt').style.display = 'flex';
+                } // Show the install prompt }
+                document.getElementById('install-prompt').style.display = 'flex-col';
+            });
 
 
 
+            window.showInstallPrompt = function() {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    deferredPrompt.userChoice.then((choiceResult) => {
+                        if (choiceResult.outcome === 'accepted') {
 
-                });
-
-                    document.addEventListener('livewire:navigated', () => {
-
-
-                        initFlowbite();
-
-
-                    }, {
-                        once: true
+                            document.getElementById('install-prompt').style.display = 'none';
+                            console.log('User accepted the install prompt');
+                        } else {
+                            document.getElementById('install-prompt').style.display = 'none';
+                        }
+                        deferredPrompt = null;
                     });
+                }
+            };
+
+
+            window.hideInstallPrompt = function() {
+                document.getElementById('install-prompt').style.display = 'none';
+
+            }
+
+            if (window.matchMedia('(display-mode: standalone)').matches) {
+
+                document.getElementById('install-prompt').style.display = 'none';
+            } // Hide the install prompt if already installed }
+
+
+
+
+
+
+
+        });
+
+        document.addEventListener('livewire:navigated', () => {
+
+
+            initFlowbite();
+
+
+        }, {
+            once: true
+        });
+
+
+
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('Service Worker registered with scope:', registration.scope);
+                    }).catch(error => {
+                        console.error('Service Worker registration failed:', error);
+                    });
+            });
+        }
     </script>
 
 
-    <script>
-
-    </script>
+    <script></script>
 </body>
 
 </html>
