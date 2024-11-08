@@ -64,6 +64,30 @@
             document.addEventListener("DOMContentLoaded", function () {
                 initFlowbite();
 
+
+                let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (event) => {
+  event.preventDefault();
+  deferredPrompt = event;
+  document.getElementById('install-prompt').style.display = 'block';
+});
+
+window.showInstallPrompt = function() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('User accepted the install prompt');
+      } else {
+        console.log('User dismissed the install prompt');
+      }
+      deferredPrompt = null;
+    });
+  }
+};
+
+
             });
 
 
@@ -92,6 +116,9 @@
                     });
                 });
             }
+
+
+
 
 
 

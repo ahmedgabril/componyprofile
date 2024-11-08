@@ -1,33 +1,6 @@
 // sw.js
 
 
-
-let deferredPrompt;
-
-window.addEventListener('beforeinstallprompt', (event) => {
-    // Prevent the default prompt
-    event.preventDefault();
-    // Save the event for later use
-    deferredPrompt = event;
-    // Show your custom install prompt
-    document.getElementById('install-prompt').style.display = 'block';
-});
-
-// Function to trigger the prompt
-function showInstallPrompt() {
-    if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then((choiceResult) => {
-            if (choiceResult.outcome === 'accepted') {
-                console.log('User accepted the install prompt');
-            } else {
-                console.log('User dismissed the install prompt');
-            }
-            deferredPrompt = null;
-        });
-    }
-}
-
 const cashname = "my-app-cache-v1"
 self.addEventListener("install", (event) => {
 
