@@ -16,12 +16,7 @@ self.addEventListener("install", (event) => {
         "/ar/contactus",
         "/ar/getcv",
         "/ar/getprodata",
-        "/en/project",
-        "/en/getserv",
-        "/en/aboutus",
-        "/en/contactus",
-        "/en/getcv",
-        "/en/getprodata",
+
         "/manifest.json",
         "/icons/android/android-launchericon-192-192.png",
         "/icons/android/android-launchericon-144-144.png",
