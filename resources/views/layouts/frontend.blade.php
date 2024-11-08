@@ -46,16 +46,20 @@
         <livewire:frontend.navbar />
 
 
-        <div id="install-prompt" class="container mx-auto flex-col items-center bg-gray-50 dark:bg-gray-700 dark:text-gray-50   p-4 rounded-md ">
-            <p class=" font-normal py-1">  هل تريد هذا الموقع يعمل كا تطبيق اصلي علي هذا الجهاز  لسهوله الاستخدام وا مكانيه الاتصال بدون انترنت</p>
-          <div class="flex justify-around">
+        <div id="install-prompt"
+            class="container mx-auto flex-col items-center bg-gray-50 dark:bg-gray-700 dark:text-gray-50   p-4 rounded-md ">
+            <p class=" font-normal py-1"> هل تريد هذا الموقع يعمل كا تطبيق اصلي علي هذا الجهاز لسهوله الاستخدام وا
+                مكانيه الاتصال بدون انترنت</p>
+            <div class="flex justify-around">
 
-            <button class="text-green-600 p-2 rounded-md mt-8  hover:bg-gray-300 " onclick="showInstallPrompt()">تثبيت التطبيق</button>
+                <button class="text-green-600 p-2 rounded-md mt-8  hover:bg-gray-300 "
+                    onclick="showInstallPrompt()">تثبيت التطبيق</button>
 
-            <button class="text-red-700 p-2 rounded-md mt-8  hover:bg-gray-300 " onclick="hideInstallPrompt()"> الغاء</button>
+                <button class="text-red-700 p-2 rounded-md mt-8  hover:bg-gray-300 " onclick="hideInstallPrompt()">
+                    الغاء</button>
 
 
-          </div>
+            </div>
 
         </div>
 
@@ -73,64 +77,66 @@
     @livewireScripts
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            initFlowbite();
-
-
-            let deferredPrompt;
-
-            window.addEventListener('beforeinstallprompt', (event) => {
-                event.preventDefault();
-                deferredPrompt = event;
-
-                if (!window.matchMedia('(display-mode: standalone)').matches) { document.getElementById('install-prompt').style.display = 'flex';} // Show the install prompt }
-                // document.getElementById('install-prompt').style.display = 'flex-col';
-            });
+                document.addEventListener("DOMContentLoaded", function() {
+                            initFlowbite();
 
 
 
-            window.showInstallPrompt = function() {
-                if (deferredPrompt) {
-                    deferredPrompt.prompt();
-                    deferredPrompt.userChoice.then((choiceResult) => {
-                        if (choiceResult.outcome === 'accepted') {
 
-                          document.getElementById('install-prompt').style.display = 'none';
-                            console.log('User accepted the install prompt');
-                        } else {
-                            document.getElementById('install-prompt').style.display = 'none';
-                        }
-                        deferredPrompt = null;
+                });
+
+                    document.addEventListener('livewire:navigated', () => {
+
+
+                        initFlowbite();
+
+
+                    }, {
+                        once: true
                     });
-                }
-            };
+    </script>
 
 
-            window.hideInstallPrompt = function(){
-              document.getElementById('install-prompt').style.display = 'none';
+    <script>
+        let deferredPrompt;
 
+        window.addEventListener('beforeinstallprompt', (event) => {
+            event.preventDefault();
+            deferredPrompt = event;
+
+            if (!window.matchMedia('(display-mode: standalone)').matches) {
+                document.getElementById('install-prompt').style.display = 'flex';
+            } // Show the install prompt }
+            // document.getElementById('install-prompt').style.display = 'flex-col';
+        });
+
+
+
+        window.showInstallPrompt = function() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+
+                        document.getElementById('install-prompt').style.display = 'none';
+                        console.log('User accepted the install prompt');
+                    } else {
+                        document.getElementById('install-prompt').style.display = 'none';
+                    }
+                    deferredPrompt = null;
+                });
             }
-
-            if (window.matchMedia('(display-mode: standalone)').matches)
-             { document.getElementById('install-prompt').style.display = 'none';} // Hide the install prompt if already installed }
-
-        });
+        };
 
 
+        window.hideInstallPrompt = function() {
+            document.getElementById('install-prompt').style.display = 'none';
 
+        }
 
-
-        document.addEventListener('livewire:navigated', () => {
-
-
-            initFlowbite();
-
-
-        }, {
-            once: true
-        });
-
-
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+            document.getElementById('install-prompt').style.display = 'none';
+        } // Hide the install prompt if already installed }
 
 
 
