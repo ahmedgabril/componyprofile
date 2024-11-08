@@ -4,7 +4,7 @@
 const cashname = "my-app-cache-v1"
 self.addEventListener("install", (event) => {
 
-    self.skipWaiting();
+
   event.waitUntil(
     caches.open(cashname).then((cache) => {
       return cache.addAll([
