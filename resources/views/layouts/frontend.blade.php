@@ -47,7 +47,7 @@
 
 
         <div id="install-prompt"
-            class="container mx-auto flex-col items-center bg-gray-50 dark:bg-gray-700 dark:text-gray-50   p-4 rounded-md ">
+            class="container mx-auto flex-col items-center bg-gray-50 dark:bg-gray-700 dark:text-gray-50 lg:hidden  p-4 rounded-md ">
             <p class=" font-normal py-1"> هل تريد هذا الموقع يعمل كا تطبيق اصلي علي هذا الجهاز لسهوله الاستخدام وا
                 مكانيه الاتصال بدون انترنت</p>
             <div class="flex justify-around">
