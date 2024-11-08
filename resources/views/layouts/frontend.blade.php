@@ -45,7 +45,7 @@
           <livewire:frontend.navbar/>
 
 
-
+          <div id="install-prompt"> <p>Install this app on your device?</p> <button onclick="showInstallPrompt()">Install</button> </div>
 
 
                 <main class="mb-16">
