@@ -82,7 +82,8 @@
             window.addEventListener('beforeinstallprompt', (event) => {
                 event.preventDefault();
                 deferredPrompt = event;
-                document.getElementById('install-prompt').style.display = 'flex-col';
+                if (!window.matchMedia('(display-mode: standalone)').matches) { document.getElementById('install-prompt').style.display = 'flex';} // Show the install prompt }
+                // document.getElementById('install-prompt').style.display = 'flex-col';
             });
 
 
@@ -110,19 +111,14 @@
 
             }
 
+            if (window.matchMedia('(display-mode: standalone)').matches)
+             { document.getElementById('install-prompt').style.display = 'none';} // Hide the install prompt if already installed }
 
         });
 
 
 
-       const cheekapp =  window.addEventListener("appinstalled", (event) => {
-              console.log("Thank you for installing our app!",event);
-            });
 
-            if(cheekapp){
-              document.getElementById('install-prompt').style.display = 'none';
-
-            }
 
         document.addEventListener('livewire:navigated', () => {
 
