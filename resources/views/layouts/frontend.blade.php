@@ -115,9 +115,14 @@
 
 
 
-        window.addEventListener("appinstalled", () => {
-              console.log("Thank you for installing our app!");
+       const cheekapp =  window.addEventListener("appinstalled", (event) => {
+              console.log("Thank you for installing our app!",event);
             });
+
+            if(cheekapp){
+              document.getElementById('install-prompt').style.display = 'none';
+
+            }
 
         document.addEventListener('livewire:navigated', () => {
 
