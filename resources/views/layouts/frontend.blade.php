@@ -47,7 +47,7 @@
 
 
         <div id="install-prompt" class="container mx-auto bg-gray-50 dark:bg-gray-700  p-4 rounded-md flex-col items-center">
-            <p class="text-gray-700 dark:text-green-500  font-normal py-1">  هل تريد هذا الموقع يعمل كا تطبيق اصلي علي هذا الجهاز  لسهوله الاستخدام وا مكانيه الاتصال بدون انترنت</p>
+            <p class="text-gray-700 dark:text-gray-50  font-normal py-1">  هل تريد هذا الموقع يعمل كا تطبيق اصلي علي هذا الجهاز  لسهوله الاستخدام وا مكانيه الاتصال بدون انترنت</p>
           <div class="flex justify-around">
 
             <button class="text-green-600 p-2 rounded-md mt-8  hover:bg-gray-300 " onclick="showInstallPrompt()">تثبيت التطبيق</button>
