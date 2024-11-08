@@ -115,6 +115,9 @@
 
 
 
+        window.addEventListener("appinstalled", () => {
+              console.log("Thank you for installing our app!");
+            });
 
         document.addEventListener('livewire:navigated', () => {
 
