@@ -1,6 +1,4 @@
 // sw.js
-
-
 const cashname = "my-app-cache-v1"
 self.addEventListener("install", (event) => {
 
@@ -16,7 +14,6 @@ self.addEventListener("install", (event) => {
         "/ar/contactus",
         "/ar/getcv",
         "/ar/getprodata",
-
         "/manifest.json",
         "/icons/android/android-launchericon-192-192.png",
         "/icons/android/android-launchericon-144-144.png",
@@ -27,7 +24,7 @@ self.addEventListener("install", (event) => {
         "/icons/ios/32.png",
 
         // Add other assets here
-      ]);
+      ]).catch((error) => { console.error('Failed to cache:', error); });
     })
   );
 });
@@ -37,7 +34,7 @@ self.addEventListener("activate", (event) => {
   event.waitUntil( caches.keys().then((keys)=>{
     return Promise.all(
 
-      keys.filter((key)=> key != cashname )
+      keys.filter((key)=> key != cashname)
 
       .map((key) => caches.delete(key))
     )
@@ -49,9 +46,6 @@ self.addEventListener("activate", (event) => {
 
 
 });
-
-
-
 self.addEventListener('fetch', (event) => {
     event.respondWith(
         fetch(event.request)
@@ -68,14 +62,13 @@ self.addEventListener('fetch', (event) => {
             })
     );
 });
-
-
 // self.addEventListener('fetch', (event) => {
 //   event.respondWith(
 
 //        caches.match(event.request).then((response) => {
+//         console.log(response)
 
-//         returnfetch(event.request).then((fetchRes)=>{
+//         return  response || fetch(event.request).then((fetchRes)=>{
 
 
 //             return caches.open(cashname).then((cacheRes)=>{
@@ -84,7 +77,28 @@ self.addEventListener('fetch', (event) => {
 
 //               return fetchRes;
 //             })
-//           }) || response ;
+//           });
+
+//     })
+//   );
+// });
+
+// self.addEventListener('fetch', (event) => {
+//   event.respondWith(
+
+//        caches.match(event.request).then((response) => {
+//         console.log(response)
+
+//         return  response || fetch(event.request).then((fetchRes)=>{
+
+
+//             return caches.open(cashname).then((cacheRes)=>{
+
+//               cacheRes.put(event.request,fetchRes.clone())
+
+//               return fetchRes;
+//             })
+//           });
 
 //     })
 //   );
