@@ -46,7 +46,7 @@
         <livewire:frontend.navbar />
 
 
-        <div id="install-prompt" class="container mx-auto flex-col items-center bg-gray-50 dark:bg-gray-700 dark:text-gray-50 lg:hidden   p-4 rounded-md ">
+        <div id="install-prompt" class="container mx-auto flex-col items-center bg-gray-50 dark:bg-gray-700 dark:text-gray-50   p-4 rounded-md ">
             <p class=" font-normal py-1">  هل تريد هذا الموقع يعمل كا تطبيق اصلي علي هذا الجهاز  لسهوله الاستخدام وا مكانيه الاتصال بدون انترنت</p>
           <div class="flex justify-around">
 
@@ -82,6 +82,7 @@
             window.addEventListener('beforeinstallprompt', (event) => {
                 event.preventDefault();
                 deferredPrompt = event;
+
                 if (!window.matchMedia('(display-mode: standalone)').matches) { document.getElementById('install-prompt').style.display = 'flex';} // Show the install prompt }
                 // document.getElementById('install-prompt').style.display = 'flex-col';
             });
@@ -97,7 +98,6 @@
                           document.getElementById('install-prompt').style.display = 'none';
                             console.log('User accepted the install prompt');
                         } else {
-                            console.log('User dismissed the install prompt');
                             document.getElementById('install-prompt').style.display = 'none';
                         }
                         deferredPrompt = null;
