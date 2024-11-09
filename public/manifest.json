@@ -1,11 +1,12 @@
 {
     "name": "Gray tec ",
+    "app_id":"Gray-tec-compony",
     "short_name": "Gray-Tec",
     "description": "شركه جراي تك لخدمات الويب برمجه تصميم تطبيقات الويب والذكاء  الاصطناعي وتطبيقات الموبايل وتحسين محركات البحث",
     "theme_color": "#000000",
     "background_color": "#ffffff",
     "display": "standalone",
-    "scope": "/",
+    "scope": ".",
     "start_url": "/ar",
 
     "shortcuts": [

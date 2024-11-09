@@ -15,6 +15,8 @@ self.addEventListener("install", (event) => {
         "/ar/getcv",
         "/ar/getprodata",
         "/manifest.json",
+        "/resources/js/app.js",
+        "/resources/css/app.css",
         "/icons/android/android-launchericon-192-192.png",
         "/icons/android/android-launchericon-144-144.png",
         "/icons/android/android-launchericon-96-96.png",
@@ -34,7 +36,7 @@ self.addEventListener("activate", (event) => {
   event.waitUntil( caches.keys().then((keys)=>{
     return Promise.all(
 
-      keys.filter((key)=> key != cashname)
+      keys.filter((key)=> key !== cashname)
 
       .map((key) => caches.delete(key))
     )
@@ -83,24 +85,5 @@ self.addEventListener('fetch', (event) => {
 //   );
 // });
 
-// self.addEventListener('fetch', (event) => {
-//   event.respondWith(
 
-//        caches.match(event.request).then((response) => {
-//         console.log(response)
-
-//         return  response || fetch(event.request).then((fetchRes)=>{
-
-
-//             return caches.open(cashname).then((cacheRes)=>{
-
-//               cacheRes.put(event.request,fetchRes.clone())
-
-//               return fetchRes;
-//             })
-//           });
-
-//     })
-//   );
-// });
 
