@@ -1,10 +1,11 @@
 // sw.js
-const cashname = "my-app-cache-v1"
+const STATIC_CASHE = "my-app-static-cache-v1";
+const DYNAMIC_CASHE = "my-app-dynamic-cache-v1"
 self.addEventListener("install", (event) => {
 
 
   event.waitUntil(
-    caches.open(cashname).then((cache) => {
+    caches.open(STATIC_CASHE).then((cache) => {
       return cache.addAll([
         "/",
         "/favicon.ico",
@@ -36,7 +37,7 @@ self.addEventListener("activate", (event) => {
   event.waitUntil( caches.keys().then((keys)=>{
     return Promise.all(
 
-      keys.filter((key)=> key !== cashname)
+      keys.filter((key)=> key !== STATIC_CASHE && key !== DYNAMIC_CASHE)
 
       .map((key) => caches.delete(key))
     )
@@ -52,7 +53,7 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
         fetch(event.request)
             .then((networkResponse) => {
-                return caches.open(cashname).then((cache) => {
+                return caches.open(DYNAMIC_CASHE).then((cache) => {
                     cache.put(event.request, networkResponse.clone());
                     return networkResponse;
                 });
