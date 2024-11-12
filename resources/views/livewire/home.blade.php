@@ -40,7 +40,7 @@
     document.addEventListener('DOMContentLoaded', function() {
         function detectDevice() {
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-            let deviceType = '';
+            let deviceType = 'desktop';
 
             // iOS detection
             if (/iPad/.test(userAgent)) {
