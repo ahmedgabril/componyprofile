@@ -69,7 +69,8 @@
 
         const deviceType = detectDevice();
         document.getElementById('device-type').innerText = `Device Type: ${deviceType}`;
-        @this.call('setDeviceType', deviceType);
+
+        Livewire.dispatch('setDeviceType',deviceType)
     });
 </script>
 
