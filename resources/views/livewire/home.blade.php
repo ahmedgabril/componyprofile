@@ -1,9 +1,9 @@
-<div class="">
+<div class="home">
 
     <livewire:hearo />
     <div class="container mx-auto mt-0 mb-4">
         <h1>Device Detection</h1>
-        <p id="device-type">Detecting device... {{ $deviceType }}</p>
+        <p id="device-type">Detecting device... {{ $this->deviceType }}</p>
         <livewire:frontend.project />
     </div>
 
