@@ -16,7 +16,10 @@ class Home extends Component
     #[On('setDeviceType')]
     public function setDeviceType($deviceType)
 
-    { $this->deviceType = $deviceType; }
+    {
+
+
+        return $this->deviceType = $deviceType; }
     public function render()
     {
         return view('livewire.home');
