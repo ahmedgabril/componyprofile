@@ -64,7 +64,20 @@
                 deviceType = 'mobile';
             }
 
-            return deviceType;
+            else{
+
+
+                if (isTablet) {
+                    return deviceType = 'android-tablet';
+                }else{
+
+                    return deviceType;
+                }
+
+
+            }
+
+            }
         }
 
         const deviceType = detectDevice();
