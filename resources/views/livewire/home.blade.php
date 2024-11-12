@@ -1,9 +1,11 @@
 <div class="home">
 
     <livewire:hearo />
+
+
     <div class="container mx-auto mt-0 mb-4">
         <h1>Device Detection</h1>
-        <p id="device-type">Detecting device... {{ $this->deviceType }}</p>
+        <p id="device-type">Detecting device...</p>
         <livewire:frontend.project />
     </div>
 
@@ -31,47 +33,53 @@
         <livewire:frontend.contact-us />
 
     </div>
+    <script>
+        document.title = "ahmed-gabril-compony-profile";
+    </script>
+    <script>
 
-</div>
-<script>
-    document.title = "ahmed-gabril-compony-profile";
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        function detectDevice() {
-            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-            let deviceType = 'desktop';
+         var deviceTyperes ;
+        document.addEventListener('DOMContentLoaded', function() {
+            function detectDevice() {
+                const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+                let deviceType = 'desktop';
 
-            // Screen size detection for tablets
-            const isTablet = (Math.min(screen.width, screen.height) > 767) && (Math.min(screen.width, screen.height) < 1200);
+                // Screen size detection for tablets
+                const isTablet = (Math.min(screen.width, screen.height) > 767) && (Math.min(screen.width, screen.height) < 1200);
 
-            // iOS detection
-            if (/iPad/.test(userAgent) || (isTablet && /iPhone|iPod/.test(userAgent))) {
-                deviceType = 'ios-tablet';
-            } else if (/iPhone|iPod/.test(userAgent) && !window.MSStream) {
-                deviceType = 'ios-mobile';
-            }
-            // Android detection
-            else if (/android/i.test(userAgent)) {
-                if (/mobile/i.test(userAgent)) {
-                    deviceType = 'android-mobile';
-                } else if (isTablet) {
-                    deviceType = 'android-tablet';
+                // iOS detection
+                if (/iPad/.test(userAgent) || (isTablet && /iPhone|iPod/.test(userAgent))) {
+                    deviceType = 'ios-tablet';
+                } else if (/iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                    deviceType = 'ios-mobile';
                 }
+                // Android detection
+                else if (/android/i.test(userAgent)) {
+                    if (/mobile/i.test(userAgent)) {
+                        deviceType = 'android-mobile';
+                    } else if (isTablet) {
+                        deviceType = 'android-tablet';
+                    }
+                }
+                // Other mobile and tablet detection
+                else if (/Mobi|Tablet|iPad|iPhone|Android/i.test(userAgent)) {
+                    deviceType = 'mobile';
+                }
+
+                return deviceType;
             }
-            // Other mobile and tablet detection
-            else if (/Mobi|Tablet|iPad|iPhone|Android/i.test(userAgent)) {
-                deviceType = 'mobile';
-            }
 
-            return deviceType;
-        }
+            deviceTyperes  = detectDevice();
+            document.getElementById('device-type').innerText = `Device Type: ${deviceTyperes}`;
+            //  console.log(deviceTyperes);
 
-        const deviceType = detectDevice();
-        // document.getElementById('device-type').innerText = `Device Type: ${deviceType}`;
 
-        Livewire.dispatch('setDeviceType',deviceType)
-    });
-</script>
+
+        });
+
+
+    </script>
+</div>
+
 
 
