@@ -71,7 +71,7 @@
                      deviceType = 'android-tablet';
                 }
 
-                   require  deviceType;
+                   return  deviceType;
 
 
 
