@@ -64,25 +64,13 @@
                 deviceType = 'mobile';
             }
 
-            else{
-
-
-                if (isTablet) {
-                     deviceType = 'android-tablet';
-                }
-
-                   return  deviceType;
-
-
-
-            }
-
-            }
-
+            return deviceType;
+        }
 
         const deviceType = detectDevice();
         document.getElementById('device-type').innerText = `Device Type: ${deviceType}`;
         @this.call('setDeviceType', deviceType);
     });
 </script>
+
 
