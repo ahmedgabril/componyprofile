@@ -69,16 +69,16 @@
 
                 if (isTablet) {
                      deviceType = 'android-tablet';
-                }else{
-
-                     deviceType;
                 }
 
+                   require  deviceType;
+
+
 
             }
 
             }
-        }
+
 
         const deviceType = detectDevice();
         document.getElementById('device-type').innerText = `Device Type: ${deviceType}`;
