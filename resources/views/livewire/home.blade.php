@@ -2,7 +2,7 @@
 
     <livewire:hearo/>
     <div class="container mx-auto mt-0 mb-4">
-
+        <h1>Device Detection</h1> <p id="device-type">Detecting device...</p>
         <livewire:frontend.project/>
         </div>
 
@@ -36,3 +36,4 @@
 
     document.title = "ahmed-gabril-compony-profile";
    </script>
+<script> document.addEventListener('DOMContentLoaded', function() { function detectDevice() { const userAgent = navigator.userAgent || navigator.vendor || window.opera; let deviceType = 'desktop'; if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) { deviceType = 'mobile'; } else if (/android/i.test(userAgent)) { deviceType = 'mobile'; } else if (/Mobi|Tablet|iPad|iPhone|Android/i.test(userAgent)) { deviceType = 'mobile'; } return deviceType; } const deviceType = detectDevice(); document.getElementById('device-type').innerText = `Device Type: ${deviceType}`; @this.call('setDeviceType', deviceType); }); </script>
