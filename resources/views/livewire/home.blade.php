@@ -42,8 +42,11 @@
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
             let deviceType = 'desktop';
 
+            // Screen size detection for tablets
+            const isTablet = (Math.min(screen.width, screen.height) > 767) && (Math.min(screen.width, screen.height) < 1200);
+
             // iOS detection
-            if (/iPad/.test(userAgent)) {
+            if (/iPad/.test(userAgent) || (isTablet && /iPhone|iPod/.test(userAgent))) {
                 deviceType = 'ios-tablet';
             } else if (/iPhone|iPod/.test(userAgent) && !window.MSStream) {
                 deviceType = 'ios-mobile';
@@ -52,7 +55,7 @@
             else if (/android/i.test(userAgent)) {
                 if (/mobile/i.test(userAgent)) {
                     deviceType = 'android-mobile';
-                } else {
+                } else if (isTablet) {
                     deviceType = 'android-tablet';
                 }
             }
@@ -69,3 +72,4 @@
         @this.call('setDeviceType', deviceType);
     });
 </script>
+
