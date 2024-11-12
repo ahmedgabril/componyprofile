@@ -4,8 +4,8 @@
 
 
     <div class="container mx-auto mt-0 mb-4">
-        <h1>Device Detection</h1>
-        <p id="device-type">Detecting device...</p>
+        {{-- <h1>Device Detection</h1>
+        <p id="device-type">Detecting device...</p> --}}
         <livewire:frontend.project />
     </div>
 
@@ -36,7 +36,7 @@
     <script>
         document.title = "ahmed-gabril-compony-profile";
     </script>
-    <script>
+    {{-- <script>
 
          var deviceTyperes ;
         document.addEventListener('DOMContentLoaded', function() {
@@ -78,7 +78,7 @@
         });
 
 
-    </script>
+    </script> --}}
 </div>
 
 
