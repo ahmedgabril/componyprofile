@@ -3,7 +3,7 @@
     <livewire:hearo />
     <div class="container mx-auto mt-0 mb-4">
         <h1>Device Detection</h1>
-        <p id="device-type">Detecting device...</p>
+        <p id="device-type">Detecting device... {{ $deviceType }}</p>
         <livewire:frontend.project />
     </div>
 
@@ -68,7 +68,7 @@
         }
 
         const deviceType = detectDevice();
-        document.getElementById('device-type').innerText = `Device Type: ${deviceType}`;
+        // document.getElementById('device-type').innerText = `Device Type: ${deviceType}`;
 
         Livewire.dispatch('setDeviceType',deviceType)
     });
