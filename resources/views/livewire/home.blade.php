@@ -68,10 +68,10 @@
 
 
                 if (isTablet) {
-                    return deviceType = 'android-tablet';
+                     deviceType = 'android-tablet';
                 }else{
 
-                    return deviceType;
+                     deviceType;
                 }
 
 
