@@ -1,6 +1,6 @@
 // sw.js
-const STATIC_CASHE = "my-app-static-cache-v1";
-const DYNAMIC_CASHE = "my-app-dynamic-cache-v3"
+const STATIC_CASHE = "my-app-static-cache-v2";
+const DYNAMIC_CASHE = "my-app-dynamic-cache-v5"
 self.addEventListener("install", (event) => {
 
   event.waitUntil(
@@ -70,7 +70,7 @@ self.addEventListener('fetch', (event) => {
       caches.match(event.request).then((cachedResponse) => {
         if (cachedResponse) {
           // Return cached response
-          return cachedResponse;
+          return cachedResponse || fetch(event.request);
         }
         // Fetch from network and update cache
         return fetch(event.request).then((networkResponse) => {
