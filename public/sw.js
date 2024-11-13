@@ -1,6 +1,6 @@
 // sw.js
 // const STATIC_CASHE = "my-app-static-cache-v1";
-const DYNAMIC_CASHE = "my-app-dynamic-cache-v2"
+const DYNAMIC_CASHE = "my-app-dynamic-cache-v3"
 self.addEventListener("install", (event) => {
 
     self.skipWaiting();
