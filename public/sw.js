@@ -3,7 +3,7 @@
 const DYNAMIC_CASHE = "my-app-dynamic-cache-v3"
 self.addEventListener("install", (event) => {
 
-    self.skipWaiting();
+    // self.skipWaiting();
   event.waitUntil(
     caches.open(DYNAMIC_CASHE).then((cache) => {
       return cache.addAll([
