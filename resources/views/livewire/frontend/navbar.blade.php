@@ -1,4 +1,4 @@
-<nav class="bg-white border-gray-200 dark:bg-gray-800 top-0 left-0 fixed w-full z-50 h-[110px] ">
+<nav class="bg-white border-gray-200 dark:bg-gray-800 top-0 left-0 fixed w-full z-50 h-[105px] ">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-8">
         <livewire:frontend.getlogo/>
     <div class="flex items-center md:order-2 space-x-1 md:space-x-0 rtl:space-x-reverse ">
