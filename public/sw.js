@@ -1,10 +1,10 @@
 // sw.js
-// const STATIC_CASHE = "my-app-static-cache-v1";
+const STATIC_CASHE = "my-app-static-cache-v1";
 const DYNAMIC_CASHE = "my-app-dynamic-cache-v3"
 self.addEventListener("install", (event) => {
 
   event.waitUntil(
-    caches.open(DYNAMIC_CASHE).then((cache) => {
+    caches.open(STATIC_CASHE).then((cache) => {
       return cache.addAll([
         "/",
         "/favicon.ico",
@@ -37,7 +37,7 @@ self.addEventListener("activate", (event) => {
   event.waitUntil( caches.keys().then((keys)=>{
     return Promise.all(
 
-      keys.filter((key)=> key !== DYNAMIC_CASHE)
+      keys.filter((key)=> key !== DYNAMIC_CASHE && key !== STATIC_CASHE)
 
       .map((key) => caches.delete(key))
     )
