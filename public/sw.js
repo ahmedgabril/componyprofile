@@ -1,6 +1,6 @@
 // sw.js
 // const STATIC_CASHE = "my-app-static-cache-v1";
-const DYNAMIC_CASHE = "my-app-dynamic-cache-v1"
+const DYNAMIC_CASHE = "my-app-dynamic-cache-v2"
 self.addEventListener("install", (event) => {
 
     self.skipWaiting();
@@ -49,42 +49,42 @@ self.addEventListener("activate", (event) => {
 
 
 });
-self.addEventListener('fetch', (event) => {
-    event.respondWith(
-        fetch(event.request)
-            .then((networkResponse) => {
-                return caches.open(DYNAMIC_CASHE).then((cache) => {
-                    cache.put(event.request, networkResponse.clone());
-                    return networkResponse;
-                });
-            })
-            .catch(() => {
-                return caches.match(event.request).then((cacheResponse) => {
-                    return cacheResponse || fetch(event.request);
-                });
-            })
-    );
-});
 // self.addEventListener('fetch', (event) => {
-//   event.respondWith(
-
-//        caches.match(event.request).then((response) => {
-//         console.log(response)
-
-//         return  response || fetch(event.request).then((fetchRes)=>{
-
-
-//             return caches.open(cashname).then((cacheRes)=>{
-
-//               cacheRes.put(event.request,fetchRes.clone())
-
-//               return fetchRes;
+//     event.respondWith(
+//         fetch(event.request)
+//             .then((networkResponse) => {
+//                 return caches.open(DYNAMIC_CASHE).then((cache) => {
+//                     cache.put(event.request, networkResponse.clone());
+//                     return networkResponse;
+//                 });
 //             })
-//           });
-
-//     })
-//   );
+//             .catch(() => {
+//                 return caches.match(event.request).then((cacheResponse) => {
+//                     return cacheResponse || fetch(event.request);
+//                 });
+//             })
+//     );
 // });
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+
+       caches.match(event.request).then((response) => {
+
+
+        return  response || fetch(event.request).then((fetchRes)=>{
+
+
+            return caches.open(DYNAMIC_CASHE).then((cacheRes)=>{
+
+              cacheRes.put(event.request,fetchRes.clone())
+
+              return fetchRes;
+            })
+          });
+
+    })
+  );
+});
 
 
 
