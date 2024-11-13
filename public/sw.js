@@ -66,25 +66,25 @@ self.addEventListener("activate", (event) => {
 //     );
 // });
 self.addEventListener('fetch', (event) => {
-  event.respondWith(
-
-       caches.match(event.request).then((response) => {
-
-
-        return  response || fetch(event.request).then((fetchRes)=>{
-
-
-            return caches.open(DYNAMIC_CASHE).then((cacheRes)=>{
-
-              cacheRes.put(event.request,fetchRes.clone())
-
-              return fetchRes;
-            })
+    event.respondWith(
+      caches.match(event.request).then((cachedResponse) => {
+        if (cachedResponse) {
+          // Return cached response
+          return cachedResponse;
+        }
+        // Fetch from network and update cache
+        return fetch(event.request).then((networkResponse) => {
+          return caches.open(DYNAMIC_CACHE).then((cache) => {
+            cache.put(event.request, networkResponse.clone());
+            return networkResponse;
           });
-
-    })
-  );
-});
+        });
+      }).catch(() => {
+        // If both cache and network fail, return a default offline response (optional)
+        return caches.match('/offline.html');
+      })
+    );
+  });
 
 
 
