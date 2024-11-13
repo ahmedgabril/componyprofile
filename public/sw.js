@@ -3,7 +3,6 @@
 const DYNAMIC_CASHE = "my-app-dynamic-cache-v3"
 self.addEventListener("install", (event) => {
 
-    // self.skipWaiting();
   event.waitUntil(
     caches.open(DYNAMIC_CASHE).then((cache) => {
       return cache.addAll([
@@ -18,6 +17,7 @@ self.addEventListener("install", (event) => {
         "/manifest.json",
         "/resources/js/app.js",
         "/resources/css/app.css",
+        '/offline.html',
         "/icons/android/android-launchericon-192-192.png",
         "/icons/android/android-launchericon-144-144.png",
         "/icons/android/android-launchericon-96-96.png",
