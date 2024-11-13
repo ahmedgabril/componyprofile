@@ -1,8 +1,7 @@
-// sw.js
 const STATIC_CASHE = "my-app-static-cache-v2";
-const DYNAMIC_CASHE = "my-app-dynamic-cache-v5"
-self.addEventListener("install", (event) => {
+const DYNAMIC_CASHE = "my-app-dynamic-cache-v5";
 
+self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(STATIC_CASHE).then((cache) => {
       return cache.addAll([
@@ -17,7 +16,7 @@ self.addEventListener("install", (event) => {
         "/manifest.json",
         "/resources/js/app.js",
         "/resources/css/app.css",
-        '/offline.html',
+        "/offline.html",
         "/icons/android/android-launchericon-192-192.png",
         "/icons/android/android-launchericon-144-144.png",
         "/icons/android/android-launchericon-96-96.png",
@@ -25,30 +24,46 @@ self.addEventListener("install", (event) => {
         "/icons/ios/20.png",
         "/icons/ios/29.png",
         "/icons/ios/32.png",
-
         // Add other assets here
       ]).catch((error) => { console.error('Failed to cache:', error); });
     })
   );
 });
 
-
 self.addEventListener("activate", (event) => {
-  event.waitUntil( caches.keys().then((keys)=>{
-    return Promise.all(
-
-      keys.filter((key)=> key !== DYNAMIC_CASHE && key !== STATIC_CASHE)
-
-      .map((key) => caches.delete(key))
-    )
-
-  })
-)
-
-  //  clients.claim();
-
-
+  event.waitUntil(
+    caches.keys().then((keys) => {
+      return Promise.all(
+        keys.filter((key) => key !== DYNAMIC_CASHE && key !== STATIC_CASHE)
+          .map((key) => caches.delete(key))
+      );
+    })
+  );
 });
+
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request).then((cachedResponse) => {
+      if (cachedResponse) {
+        // Return cached response
+        return cachedResponse || fetch(event.request);
+      }
+      // Fetch from network and update cache
+      return fetch(event.request).then((networkResponse) => {
+        return caches.open(DYNAMIC_CASHE).then((cache) => {
+          cache.put(event.request, networkResponse.clone());
+          return networkResponse;
+        });
+      });
+    }).catch(() => {
+      // If both cache and network fail, return a default offline response (optional)
+      return caches.match('/offline.html');
+    })
+  );
+});
+
+
+
 // self.addEventListener('fetch', (event) => {
 //     event.respondWith(
 //         fetch(event.request)
@@ -65,26 +80,3 @@ self.addEventListener("activate", (event) => {
 //             })
 //     );
 // });
-self.addEventListener('fetch', (event) => {
-    event.respondWith(
-      caches.match(event.request).then((cachedResponse) => {
-        if (cachedResponse) {
-          // Return cached response
-          return cachedResponse || fetch(event.request);
-        }
-        // Fetch from network and update cache
-        return fetch(event.request).then((networkResponse) => {
-          return caches.open(DYNAMIC_CACHE).then((cache) => {
-            cache.put(event.request, networkResponse.clone());
-            return networkResponse;
-          });
-        });
-      }).catch(() => {
-        // If both cache and network fail, return a default offline response (optional)
-        return caches.match('/offline.html');
-      })
-    );
-  });
-
-
-
