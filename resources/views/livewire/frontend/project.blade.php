@@ -13,7 +13,7 @@
 
         <div class="hidden  md:flex justify-center border-spacing-4 items-center  w-60 h-48 rounded-md object-cover mb-3 mt-3 bg-center cursor-pointer
          bg-gray-800 hover:brightness-50 text-gray-50"
-
+         @csrf
          @click='$dispatch("getalldata")' >
          <a   @click.prevent='$dispatch("getalldata")'' class="text-center  cursor-pointe font-bold" style="font-size:28px!important"> {{__('welecome.all')}}</a>
 
@@ -22,9 +22,10 @@
 
         <div class=" md:hidden flex justify-center border-spacing-6 shadow-md items-center p-4 bg-gry-500   dark:bg-gray-700 dark:hover:bg-gray-800  hover:bg-gray-300 rounded-md  mb-3 mt-3  cursor-pointer
     "
+    @csrf
 
         @click='$dispatch("getalldata")' >
-        <a   @click.prevent='$dispatch("getalldata")' class="text-center  cursor-pointe font-bold text-gray-800   dark:text-white" > {{__('welecome.all')}}</a>
+        <a   @click.prevent='$dispatch("getalldata")' class="text-center  cursor-pointe font-bold text-gray-800   dark:text-white"   @csrf> {{__('welecome.all')}}</a>
 
        </div>
 
@@ -45,6 +46,7 @@
            wire:key="{{ $key}}"
              @click="$dispatch('getcat',{ getid: {{$value->id}}})"
              >
+             @csrf
              <a   @click.prevent="$dispatch('getcat',{ getid: {{$value->id}}})" class="text-center leading-none text-gray-50 cursor-pointe font-bold" style="font-size:28px!important">{{$value->name}}</a>
 
             </div>
@@ -57,6 +59,7 @@
            wire:key="{{ $key}}"
              @click="$dispatch('getcat',{ getid: {{$value->id}}})"
              >
+             @csrf
              <a    @click.prevent="$dispatch('getcat',{ getid: {{$value->id}}})" class="text-center  cursor-pointe text-gray-800   dark:text-white  font-bold" >{{$value->name}}</a>
 
             </div>
