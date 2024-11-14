@@ -5,8 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="author" content=" Ahmed Gabril">
+    <meta name="keywords" content="Ahmed Gabril, web development, website design, programming, digital marketing, SEO, e-commerce, web hosting,
+    AI, software development, freelance developer, Egypt, Arab world,احمد جبريل ,برمجه,العاب ,شركات برمجه ,احمد فتحي جبريل,تسويق,برمجه مواقع ,مصمم مواقع ,الذكاء الاصطناعي ,لارفيل,مصر,فيو,فيس بوك مبرمجين,تطبيقات موبايل,>
 
-    <title> gray-tec ahmed-gabril-compony-profile</title>
+    <title>  ahmed-gabril-web-site-profile</title>
 
     <link rel="manifest" href="/manifest.json" />
 
