@@ -15,7 +15,7 @@
          bg-gray-800 hover:brightness-50 text-gray-50"
 
          @click='$dispatch("getalldata")' >
-         <a   @click='$dispatch("getalldata")'' class="text-center  cursor-pointe font-bold" style="font-size:28px!important"> {{__('welecome.all')}}</a>
+         <a   @click.prevent='$dispatch("getalldata")'' class="text-center  cursor-pointe font-bold" style="font-size:28px!important"> {{__('welecome.all')}}</a>
 
         </div>
 
@@ -24,7 +24,7 @@
     "
 
         @click='$dispatch("getalldata")' >
-        <a   @click='$dispatch("getalldata")' class="text-center  cursor-pointe font-bold text-gray-800   dark:text-white" > {{__('welecome.all')}}</a>
+        <a   @click.prevent='$dispatch("getalldata")' class="text-center  cursor-pointe font-bold text-gray-800   dark:text-white" > {{__('welecome.all')}}</a>
 
        </div>
 
