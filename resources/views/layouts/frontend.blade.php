@@ -7,9 +7,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="author" content=" Ahmed Gabril">
     <meta name="keywords" content="Ahmed Gabril, web development, website design, programming, digital marketing, SEO, e-commerce, web hosting,
-    AI, software development, freelance developer, Egypt, Arab world,احمد جبريل ,برمجه,العاب ,شركات برمجه ,احمد فتحي جبريل,تسويق,برمجه مواقع ,مصمم مواقع ,الذكاء الاصطناعي ,لارفيل,مصر,فيو,فيس بوك مبرمجين,تطبيقات موبايل,>
+    AI, software development, freelance developer, Egypt, Arab world,احمد جبريل ,برمجه,العاب ,شركات برمجه ,احمد فتحي جبريل,تسويق,برمجه مواقع ,مصمم مواقع ,الذكاء الاصطناعي
+    ,لارفيل,مصر,فيو,فيس بوك مبرمجين,تطبيقات موبايل">
+    <meta name="description" content=" احمد جبريل  لخدمات المواقع  والتطبيقات برمجه تصميم  تحسين محركات البحث">
 
-    <title>  ahmed-gabril-web-site-profile</title>
+    <title>ahmed-gabril-web-site-profile</title>
 
     <link rel="manifest" href="/manifest.json" />
 
@@ -18,7 +20,6 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="PWA">
     <link rel="icon" sizes="512x512" href="/icons/android/android-launchericon-512-512.png">
-    <meta name="description" content="شركه جراي تك لخدمات المواقع  والتطبيقات برمجه تصميم  تحسين محركات البحث">
 
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
