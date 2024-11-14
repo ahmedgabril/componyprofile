@@ -1,5 +1,5 @@
 // const STATIC_CASHE = "my-app-static-cache-v2";
-const DYNAMIC_CASHE = "my-app-dynamic-cache-v5";
+const DYNAMIC_CASHE = "my-app-dynamic-cache-v1";
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
