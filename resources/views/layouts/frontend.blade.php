@@ -11,7 +11,9 @@
     ,لارفيل,مصر,فيو,فيس بوك مبرمجين,تطبيقات موبايل">
     <meta name="description" content=" احمد جبريل  لخدمات المواقع  والتطبيقات برمجه تصميم  تحسين محركات البحث">
 
-    <title>ahmed-gabril-web-site-profile</title>
+    <title>ahmed-gabril-web-site-profile
+
+    </title>
 
     <link rel="manifest" href="/manifest.json" />
 

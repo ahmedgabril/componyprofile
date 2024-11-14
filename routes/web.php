@@ -40,7 +40,7 @@ Route::group([
 
 
     Route::get('dashboard', Dashbord::class)
-        ->middleware(['auth', 'verified'])
+        ->middleware(['auth'])
         ->name('dashboard');
         Route::post('/upload',[HomeController::class,'upload'])->name('ckeditor.upload');
 
@@ -55,14 +55,14 @@ Route::group([
     Route::get('/getservdata/{gitid}', GetserviesData::class)->name('getservdata');
 
   // backend routes
-    Route::get('handelproject', Handelproject::class)->middleware(['auth', 'verified'])->name('handelproject');
-    Route::get('handelcat', Handelcat::class)->middleware(['auth', 'verified'])->name('handelcat') ;
-    Route::get('handelserveies', Hndelserveies::class)->middleware(['auth', 'verified'])->name('handelserveies');
-    Route::get('handelabout', Handelabout::class)->middleware(['auth', 'verified'])->name('handelabout');
-    Route::get('handelfact', Handelfacts::class)->middleware(['auth', 'verified'])->name('handelfact');
-    Route::get('handelteam', Handelteam::class)->middleware(['auth', 'verified'])->name('handelteam');
-    Route::get('handelsetting', Handelsetting::class)->middleware(['auth', 'verified'])->name('handelsetting');
-    Route::get('/handelcv', Handelcv::class)->middleware(['auth', 'verified'])->name('handelcv');
+    Route::get('handelproject', Handelproject::class)->middleware(['auth'])->name('handelproject');
+    Route::get('handelcat', Handelcat::class)->middleware(['auth'])->name('handelcat') ;
+    Route::get('handelserveies', Hndelserveies::class)->middleware(['auth'])->name('handelserveies');
+    Route::get('handelabout', Handelabout::class)->middleware(['auth'])->name('handelabout');
+    Route::get('handelfact', Handelfacts::class)->middleware(['auth'])->name('handelfact');
+    Route::get('handelteam', Handelteam::class)->middleware(['auth'])->name('handelteam');
+    Route::get('handelsetting', Handelsetting::class)->middleware(['auth'])->name('handelsetting');
+    Route::get('/handelcv', Handelcv::class)->middleware(['auth'])->name('handelcv');
 
     Route::view('profile', 'profile')->middleware(['auth']) ->name('profile');
 
