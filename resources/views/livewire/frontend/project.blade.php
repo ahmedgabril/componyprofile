@@ -13,9 +13,9 @@
 
         <div class="hidden  md:flex justify-center border-spacing-4 items-center  w-60 h-48 rounded-md object-cover mb-3 mt-3 bg-center cursor-pointer
          bg-gray-800 hover:brightness-50 text-gray-50"
-         @csrf
-         @click='$dispatch("getalldata")' >
-         <a   @click.prevent='$dispatch("getalldata")'' class="text-center  cursor-pointe font-bold" style="font-size:28px!important"> {{__('welecome.all')}}</a>
+
+         @click.prevent='getalldata' >
+         <a   @click.prevent='getalldata' class="text-center  cursor-pointe font-bold" style="font-size:28px!important"> {{__('welecome.all')}}</a>
 
         </div>
 
@@ -24,10 +24,10 @@
     "
 
 
-        @click.prevent='$dispatch("getalldata")' >
+        @click.prevent='getalldata' >
 
-        @csrf
-        <a   @click.prevent='$dispatch("getalldata")' class="text-center  cursor-pointe font-bold text-gray-800   dark:text-white" > {{__('welecome.all')}}</a>
+
+        <a   @click.prevent='getalldata' class="text-center  cursor-pointe font-bold text-gray-800   dark:text-white" > {{__('welecome.all')}}</a>
 
        </div>
 
@@ -46,10 +46,10 @@
              bg-gray-500 bg-blend-multiply" style="background-image: url('{{asset("storage/".$value?->icon) }}')"
 
            wire:key="{{ $key}}"
-             @click.prevent="$dispatch('getcat',{ getid: {{$value->id}}})"
+             @click.prevent="getcat,{ getid: {{$value->id}}})"
              >
              @csrf
-             <a   @click.prevent="$dispatch('getcat',{ getid: {{$value->id}}})" class="text-center leading-none text-gray-50 cursor-pointe font-bold" style="font-size:28px!important">{{$value->name}}</a>
+             <a   @click.prevent="getcat($value->id)" class="text-center leading-none text-gray-50 cursor-pointe font-bold" style="font-size:28px!important">{{$value->name}}</a>
 
             </div>
 
@@ -59,10 +59,10 @@
             <div class=" md:hidden flex justify-center flex-wrap border-spacing-6 shadow-md items-center p-4 bg-gry-500   rounded-md  mb-3 mt-3   cursor-pointer dark:bg-gray-700 dark:hover:bg-gray-900  hover:bg-gray-300"
 
            wire:key="{{ $key}}"
-             @click="$dispatch('getcat',{ getid: {{$value->id}}})"
+             @click="getcat($value->id)"
              >
              @csrf
-             <a    @click.prevent="$dispatch('getcat',{ getid: {{$value->id}}})" class="text-center  cursor-pointe text-gray-800   dark:text-white  font-bold" >{{$value->name}}</a>
+             <a    @click.prevent="getcat($value->id)" class="text-center  cursor-pointe text-gray-800   dark:text-white  font-bold" >{{$value->name}}</a>
 
             </div>
 

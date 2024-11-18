@@ -28,7 +28,7 @@ class Project extends Component
 
         ]);
     }
-       #[On('getcat')]
+
      public function getcat($getid){
          if($getid){
             return $this->getcatdata =  \App\Models\project::where('catogery_id',$getid)->orderby('id','DESC')->get();
@@ -41,7 +41,7 @@ class Project extends Component
     }
 
 
-    #[On('getalldata')]
+
     public function getalldata(){
 
 
